@@ -3,12 +3,14 @@ import Navbar from "./navbar";
 import { toast } from "react-toastify";
 import "../assets/css/bookAppointment.css";
 import axios from "axios";
+import Loader from "../components/loader";
 import { useNavigate } from "react-router-dom";
 import Select from "react-select";
 
 function BookAppointment() {
   const navigate = useNavigate();
   const [doctors, setDoctors] = useState([]);
+  const [loading, setLoading] = useState(false);
   const [values, setValues] = useState({
     firstname: "",
     lastname: "",
@@ -23,6 +25,7 @@ function BookAppointment() {
 
   useEffect(() => {
     const fetchDoctors = async () => {
+      setLoading(true);
       try {
         const response = await axios.get(`doctors`, {
           headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
@@ -31,8 +34,10 @@ function BookAppointment() {
           ? response.data.doctors
           : [];
         setDoctors(fetchedDoctors);
+        setLoading(false);
       } catch (error) {
         console.log("Error fetching doctors", error);
+        setLoading(false);
       }
     };
     fetchDoctors();
@@ -90,6 +95,7 @@ function BookAppointment() {
 
   return (
     <>
+      {loading && <Loader />}
       <Navbar />
       <h2 className="form-title">Book an Appointment</h2> <br />
       <div className="form-container">

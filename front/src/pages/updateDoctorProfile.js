@@ -5,11 +5,13 @@ import { UserContext } from "../App";
 import { toast } from "react-toastify";
 import { useNavigate, useParams } from "react-router-dom";
 import "../assets/css/addPatientProfile.css";
+import Loader from "../components/loader";
 
 function UpdateDoctorProfile() {
   const navigate = useNavigate();
   const { id } = useParams();
   const { user } = useContext(UserContext);
+  const [loading, setLoading] = useState(false);
   const [values, setValues] = useState({
     firstname: "",
     lastname: "",
@@ -26,6 +28,7 @@ function UpdateDoctorProfile() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    setLoading(true);
     const valuesData = { ...values, doctorId: user._id };
     axios
       .put("update-doctor/" + id, valuesData, {
@@ -40,10 +43,14 @@ function UpdateDoctorProfile() {
           navigate("/profile");
         }
       })
-      .catch((err) => console.log(err));
+      .catch((err) => console.log(err))
+      .finally(() => {
+        setLoading(false);
+      });
   };
 
   useEffect(() => {
+    setLoading(true);
     axios
       .get(`doctors`, {
         headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
@@ -53,14 +60,26 @@ function UpdateDoctorProfile() {
           const fetchedDoctor = response.data.doctors.find(
             (doc) => doc.doctorId === user._id
           );
-          setValues({
-            firstname: fetchedDoctor.firstname,
-            lastname: fetchedDoctor.lastname,
-            email: fetchedDoctor.email,
-            gender: fetchedDoctor.gender,
-            phone: fetchedDoctor.phone,
-            address: fetchedDoctor.address,
-            specialization: fetchedDoctor.specialization,
+          if (fetchedDoctor) {
+            setValues({
+              firstname: fetchedDoctor.firstname,
+              lastname: fetchedDoctor.lastname,
+              email: fetchedDoctor.email,
+              gender: fetchedDoctor.gender,
+              phone: fetchedDoctor.phone,
+              address: fetchedDoctor.address,
+              specialization: fetchedDoctor.specialization,
+            });
+          } else {
+            toast.error("Doctor not found", {
+              position: "top-right",
+              autoClose: 2000,
+            });
+          }
+        } else {
+          toast.error("Failed to fetch doctor data", {
+            position: "top-right",
+            autoClose: 2000,
           });
         }
       })
@@ -71,11 +90,15 @@ function UpdateDoctorProfile() {
           autoClose: 2000,
         });
         console.log(err);
+      })
+      .finally(() => {
+        setLoading(false);
       });
   }, [user._id]);
 
   return (
     <>
+      {loading && <Loader />}
       <Navbar />
       <div className="form-container">
         <form onSubmit={handleSubmit}>

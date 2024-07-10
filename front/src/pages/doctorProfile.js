@@ -5,19 +5,28 @@ import { Link } from "react-router-dom";
 import "../assets/css/profile.css";
 import AddDoctorProfile from "./addDoctorProfile";
 import { UserContext } from "../App";
+import Loader from "../components/loader";
 
 function DoctorProfile() {
   const { user } = useContext(UserContext);
   const [data, setData] = useState([]);
+  const [loading, setLoading] = useState(false);
 
   const fetchProfile = async () => {
-    const response = await axios.get("doctors", {
-      headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
-    });
-    const fetchedProfile = response.data.doctors.filter(
-      (doctor) => doctor.doctorId === user._id
-    );
-    setData(fetchedProfile);
+    setLoading(true);
+    try {
+      const response = await axios.get("doctors", {
+        headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
+      });
+      const fetchedProfile = response.data.doctors.filter(
+        (doctor) => doctor.doctorId === user._id
+      );
+      setData(fetchedProfile);
+    } catch (error) {
+      console.error("Error fetching patient profile:", error);
+    } finally {
+      setLoading(false);
+    }
   };
 
   useEffect(() => {
@@ -25,6 +34,7 @@ function DoctorProfile() {
   }, []);
   return (
     <>
+      {loading && <Loader />}
       <Navbar />
       <div className="profile-container">
         <h1>Doctor Profile</h1>

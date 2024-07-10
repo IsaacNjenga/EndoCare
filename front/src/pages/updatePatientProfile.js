@@ -5,11 +5,13 @@ import { UserContext } from "../App";
 import { toast } from "react-toastify";
 import { useNavigate, useParams } from "react-router-dom";
 import "../assets/css/addPatientProfile.css";
+import Loader from "../components/loader";
 
 function UpdatePatientProfile() {
   const navigate = useNavigate();
   const { id } = useParams();
   const { user } = useContext(UserContext);
+  const [loading, setLoading] = useState(false);
   const [values, setValues] = useState({
     firstname: "",
     lastname: "",
@@ -32,11 +34,9 @@ function UpdatePatientProfile() {
     setValues({ ...values, [e.target.name]: e.target.value || e.target.id });
   };
 
-  console.log("params id", id);
-  console.log("user._id", user._id);
-
   const handleSubmit = (e) => {
     e.preventDefault();
+    setLoading(true);
     const valuesData = { ...values, patientId: user._id };
     axios
       .put("update-patient/" + id, valuesData, {
@@ -51,10 +51,15 @@ function UpdatePatientProfile() {
           navigate("/profile");
         }
       })
-      .catch((err) => console.log(err));
+      .catch((err) => console.log(err))
+      .finally(() => {
+        setLoading(false);
+      });
   };
 
   useEffect(() => {
+    setLoading(true);
+
     axios
       .get("patients", {
         headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
@@ -65,14 +70,26 @@ function UpdatePatientProfile() {
             (pat) => pat.patientId === user._id
           );
 
-          setValues({
-            firstname: fetchedPatient.firstname,
-            lastname: fetchedPatient.lastname,
-            email: fetchedPatient.email,
-            gender: fetchedPatient.gender,
-            phone: fetchedPatient.phone,
-            address: fetchedPatient.address,
-            illness: fetchedPatient.illness,
+          if (fetchedPatient) {
+            setValues({
+              firstname: fetchedPatient.firstname,
+              lastname: fetchedPatient.lastname,
+              email: fetchedPatient.email,
+              gender: fetchedPatient.gender,
+              phone: fetchedPatient.phone,
+              address: fetchedPatient.address,
+              illness: fetchedPatient.illness,
+            });
+          } else {
+            toast.error("Patient not found", {
+              position: "top-right",
+              autoClose: 2000,
+            });
+          }
+        } else {
+          toast.error("Failed to fetch patient data", {
+            position: "top-right",
+            autoClose: 2000,
           });
         }
       })
@@ -82,12 +99,15 @@ function UpdatePatientProfile() {
           position: "top-right",
           autoClose: 2000,
         });
-        console.log(err);
+      })
+      .finally(() => {
+        setLoading(false);
       });
   }, [user._id]);
 
   return (
     <>
+      {loading && <Loader />}
       <Navbar />
       <div className="form-container">
         <form onSubmit={handleSubmit}>
@@ -118,7 +138,7 @@ function UpdatePatientProfile() {
                 <input
                   type="radio"
                   name="gender"
-                  id="male"
+                  id="Male"
                   value={values.gender || ""}
                   onChange={handleChange}
                   className="form-radio"
@@ -132,7 +152,7 @@ function UpdatePatientProfile() {
                   type="radio"
                   name="gender"
                   value={values.gender || ""}
-                  id="female"
+                  id="Female"
                   onChange={handleChange}
                   className="form-radio"
                 />

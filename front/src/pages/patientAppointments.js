@@ -4,6 +4,7 @@ import { toast } from "react-toastify";
 import Navbar from "../components/navbar";
 import { Link } from "react-router-dom";
 import DataTable from "react-data-table-component";
+import Loader from "../components/loader";
 import "../assets/css/appointment.css";
 
 const customStyles = {
@@ -82,6 +83,8 @@ function PatientAppointments() {
   ];
   return (
     <>
+      {" "}
+      {loading && <Loader />}
       <Navbar />
       <div className="content">
         <p>
@@ -94,8 +97,8 @@ function PatientAppointments() {
             data={data}
             customStyles={customStyles}
             pagination
-            progressPending={loading}
-            progressComponent={<div className="spinner">Loading...</div>}
+            /*progressPending={loading}
+            progressComponent={<div className="spinner">Loading...</div>}*/
           />
         </div>
       </div>

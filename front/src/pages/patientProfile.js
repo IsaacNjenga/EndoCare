@@ -4,16 +4,25 @@ import axios from "axios";
 import { Link } from "react-router-dom";
 import "../assets/css/profile.css";
 import AddPatientProfile from "./addPatientProfile";
+import Loader from "../components/loader";
 
 function PatientProfile() {
   const [data, setData] = useState([]);
+  const [loading, setLoading] = useState(false);
 
   const fetchProfile = async () => {
-    const response = await axios.get("patients", {
-      headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
-    });
-    const fetchedProfile = response.data.patients;
-    setData(fetchedProfile);
+    setLoading(true);
+    try {
+      const response = await axios.get("patients", {
+        headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
+      });
+      const fetchedProfile = response.data.patients;
+      setData(fetchedProfile);
+    } catch (error) {
+      console.error("Error fetching patient profile:", error);
+    } finally {
+      setLoading(false);
+    }
   };
 
   useEffect(() => {
@@ -22,6 +31,7 @@ function PatientProfile() {
 
   return (
     <>
+      {loading && <Loader />}
       <Navbar />
       <div className="profile-container">
         <h1>Patient Profile</h1>

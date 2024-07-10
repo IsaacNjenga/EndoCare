@@ -4,11 +4,13 @@ import { UserContext } from "../App";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
 import "../assets/css/addPatientProfile.css";
+import Loader from "../components/loader";
 
 function AddPatientProfile() {
   const navigate = useNavigate();
   const { user } = useContext(UserContext);
   const [values, setValues] = useState([]);
+  const [loading, setLoading] = useState(false);
 
   const options = [
     "Type-1 Diabetes",
@@ -23,6 +25,7 @@ function AddPatientProfile() {
   };
 
   const handleSubmit = (e) => {
+    setLoading(true);
     e.preventDefault();
     const valuesData = { ...values, patientId: user._id };
     axios
@@ -38,11 +41,15 @@ function AddPatientProfile() {
           navigate("/profile");
         }
       })
-      .catch((err) => console.log(err));
+      .catch((err) => console.log(err))
+      .finally(() => {
+        setLoading(false);
+      });
   };
 
   return (
     <>
+      {loading && <Loader />}
       <div className="form-container">
         <form onSubmit={handleSubmit}>
           <div className="form-group">
