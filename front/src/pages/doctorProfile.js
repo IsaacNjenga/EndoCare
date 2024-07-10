@@ -7,14 +7,16 @@ import AddDoctorProfile from "./addDoctorProfile";
 import { UserContext } from "../App";
 
 function DoctorProfile() {
-  const {user} = useContext(UserContext)
+  const { user } = useContext(UserContext);
   const [data, setData] = useState([]);
 
   const fetchProfile = async () => {
     const response = await axios.get("doctors", {
       headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
     });
-    const fetchedProfile = response.data.doctors.filter((doctor)=> doctor.doctorId === user._id);
+    const fetchedProfile = response.data.doctors.filter(
+      (doctor) => doctor.doctorId === user._id
+    );
     setData(fetchedProfile);
   };
 
@@ -34,6 +36,9 @@ function DoctorProfile() {
               </p>
               <p>
                 <strong>Last Name:</strong> {profile.lastname}
+              </p>
+              <p>
+                <strong>Gender:</strong> {profile.gender}
               </p>
               <p>
                 <strong>Email:</strong> {profile.email}
@@ -56,7 +61,7 @@ function DoctorProfile() {
             </div>
           ))
         ) : (
-         <AddDoctorProfile/>
+          <AddDoctorProfile />
         )}
       </div>
     </>

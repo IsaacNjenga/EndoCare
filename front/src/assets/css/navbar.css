@@ -26,6 +26,8 @@
   font-size: 1.8rem;
   margin-right: 20px;
   text-decoration: none;
+  display: flex;
+  align-items: center;
   color: white;
 }
 
@@ -37,4 +39,15 @@
 
 .navbar-link:hover {
   text-decoration: underline;
+}
+
+.navbar-brand-container {
+  display: flex;
+  align-items: center;
+}
+
+.navbar-icon {
+  width: 65px;
+  height: auto;
+  margin-right: 8px;
 }

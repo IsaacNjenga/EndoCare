@@ -3,14 +3,23 @@ import { PatientModel } from "../models/patient.js";
 
 const createPatient = async (req, res) => {
   try {
-    const { firstname, lastname, email, phone, address, patientId, illness } =
-      req.body;
+    const {
+      firstname,
+      lastname,
+      email,
+      phone,
+      gender,
+      address,
+      patientId,
+      illness,
+    } = req.body;
     const newPatient = new PatientModel({
       patientId,
       firstname,
       lastname,
       email,
       phone,
+      gender,
       address,
       illness,
       postedBy: req.user._id,

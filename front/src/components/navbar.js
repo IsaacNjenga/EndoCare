@@ -2,12 +2,25 @@ import React, { useContext } from "react";
 import "../assets/css/navbar.css";
 import { Link } from "react-router-dom";
 import { UserContext } from "../App";
+import diabetesIcon from "../assets/icons/diabetes.png";
+
 export default function Navbar() {
   const { user } = useContext(UserContext);
   return (
     <div className="navbar">
       <div className="navbar-left">
-        <Link className="navbar-brand">ENDOCARE</Link>
+        <Link to="/" className="navbar-brand">
+          <div className="navbar-brand-container">
+            <img
+              src={diabetesIcon}
+              alt="img-diabetes"
+              className="navbar-icon"
+            />
+          </div>
+          <span>
+            <u>ENDOCARE</u>
+          </span>
+        </Link>
       </div>
       <div className="navbar-right">
         {user ? (

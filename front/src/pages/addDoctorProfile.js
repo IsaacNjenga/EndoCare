@@ -3,6 +3,7 @@ import axios from "axios";
 import { UserContext } from "../App";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
+import "../assets/css/addDoctorProfile.css";
 
 function AddDoctorProfile() {
   const navigate = useNavigate();
@@ -10,7 +11,7 @@ function AddDoctorProfile() {
   const [values, setValues] = useState([]);
 
   const handleChange = (e) => {
-    setValues({ ...values, [e.target.name]: e.target.value });
+    setValues({ ...values, [e.target.name]: e.target.value || e.target.id });
   };
 
   const handleSubmit = (e) => {
@@ -33,53 +34,103 @@ function AddDoctorProfile() {
   };
 
   return (
-    <>
-      <form onSubmit={handleSubmit}>
-        <label htmlFor="firstname">First Name </label>
+    <div className="container">
+      <h2 className="title">Set Up Your Profile</h2>
+      <form onSubmit={handleSubmit} className="form">
+        <label htmlFor="firstname" className="form-label">
+          First Name
+        </label>
         <input
           type="text"
           placeholder="Enter first name"
           name="firstname"
           onChange={handleChange}
+          className="form-input"
         />
-        <label htmlFor="lastname">Last Name </label>
+        <label htmlFor="lastname" className="form-label">
+          Last Name
+        </label>
         <input
           type="text"
           placeholder="Enter last name"
           name="lastname"
           onChange={handleChange}
+          className="form-input"
         />
-        <label htmlFor="firstname">Email </label>
+        <label className="form-label">Gender</label>
+        <div className="gender-options">
+          <div>
+            <input
+              type="radio"
+              name="gender"
+              value="male"
+              id="male"
+              onChange={handleChange}
+              className="form-radio"
+            />
+            <label htmlFor="male" className="form-radio-label">
+              Male
+            </label>
+          </div>
+          <div>
+            <input
+              type="radio"
+              name="gender"
+              value="female"
+              id="female"
+              onChange={handleChange}
+              className="form-radio"
+            />
+            <label htmlFor="female" className="form-radio-label">
+              Female
+            </label>
+          </div>
+        </div>
+        <label htmlFor="email" className="form-label">
+          Email
+        </label>
         <input
-          type="text"
+          type="email"
           placeholder="Enter email address"
           name="email"
           onChange={handleChange}
+          className="form-input"
         />
-        <label htmlFor="phone">Phone </label>
+        <label htmlFor="phone" className="form-label">
+          Phone
+        </label>
         <input
           type="text"
           placeholder="Enter phone number"
           name="phone"
           onChange={handleChange}
+          className="form-input"
         />
-        <label htmlFor="address">Address</label>
+        <label htmlFor="address" className="form-label">
+          Address
+        </label>
         <input
           type="text"
           placeholder="Enter your address"
           name="address"
           onChange={handleChange}
+          className="form-input"
         />
-        <label htmlFor="illness">Specialization</label>
+        <label htmlFor="specialization" className="form-label">
+          Specialization
+        </label>
         <input
           type="text"
           placeholder="Enter your current specialization"
           name="specialization"
           onChange={handleChange}
+          className="form-input"
         />
-        <button type="submit">Save</button>
+        <button type="submit" className="form-button">
+          Save
+        </button>
       </form>
-    </>
+    </div>
   );
 }
 

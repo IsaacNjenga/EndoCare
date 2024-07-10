@@ -35,6 +35,9 @@ function PatientProfile() {
                 <strong>Last Name:</strong> {profile.lastname}
               </p>
               <p>
+                <strong>Gender:</strong> {profile.gender}
+              </p>
+              <p>
                 <strong>Email:</strong> {profile.email}
               </p>
               <p>

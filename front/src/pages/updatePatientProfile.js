@@ -15,6 +15,7 @@ function UpdatePatientProfile() {
     lastname: "",
     email: "",
     phone: "",
+    gender: "",
     address: "",
     illness: "",
   });
@@ -28,7 +29,7 @@ function UpdatePatientProfile() {
   ];
 
   const handleChange = (e) => {
-    setValues({ ...values, [e.target.name]: e.target.value });
+    setValues({ ...values, [e.target.name]: e.target.value || e.target.id });
   };
 
   console.log("params id", id);
@@ -68,6 +69,7 @@ function UpdatePatientProfile() {
             firstname: fetchedPatient.firstname,
             lastname: fetchedPatient.lastname,
             email: fetchedPatient.email,
+            gender: fetchedPatient.gender,
             phone: fetchedPatient.phone,
             address: fetchedPatient.address,
             illness: fetchedPatient.illness,

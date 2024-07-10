@@ -15,12 +15,13 @@ function UpdateDoctorProfile() {
     lastname: "",
     email: "",
     phone: "",
+    gender: "",
     address: "",
     specialization: "",
   });
 
   const handleChange = (e) => {
-    setValues({ ...values, [e.target.name]: e.target.value });
+    setValues({ ...values, [e.target.name]: e.target.value || e.target.id });
   };
 
   const handleSubmit = (e) => {
@@ -56,6 +57,7 @@ function UpdateDoctorProfile() {
             firstname: fetchedDoctor.firstname,
             lastname: fetchedDoctor.lastname,
             email: fetchedDoctor.email,
+            gender: fetchedDoctor.gender,
             phone: fetchedDoctor.phone,
             address: fetchedDoctor.address,
             specialization: fetchedDoctor.specialization,
@@ -97,6 +99,35 @@ function UpdateDoctorProfile() {
                 onChange={handleChange}
                 value={values.lastname || ""}
               />
+            </div>
+            <label className="form-label">Gender</label>
+            <div className="gender-options">
+              <div>
+                <input
+                  type="radio"
+                  name="gender"
+                  id="male"
+                  value={values.gender || ""}
+                  onChange={handleChange}
+                  className="form-radio"
+                />
+                <label htmlFor="male" className="form-radio-label">
+                  Male
+                </label>
+              </div>
+              <div>
+                <input
+                  type="radio"
+                  name="gender"
+                  value={values.gender || ""}
+                  id="female"
+                  onChange={handleChange}
+                  className="form-radio"
+                />
+                <label htmlFor="female" className="form-radio-label">
+                  Female
+                </label>
+              </div>
             </div>
             <div>
               <label htmlFor="email">Email</label>

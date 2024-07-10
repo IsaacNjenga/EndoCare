@@ -8,6 +8,7 @@ const createDoctor = async (req, res) => {
       lastname,
       email,
       phone,
+      gender,
       address,
       specialization,
       doctorId,
@@ -17,6 +18,7 @@ const createDoctor = async (req, res) => {
       lastname,
       email,
       phone,
+      gender,
       address,
       specialization,
       doctorId,
@@ -42,8 +44,8 @@ const getDoctors = async (req, res) => {
 const updateDoctor = async (req, res) => {
   const { id } = req.params;
   try {
-    const result = await DoctorModel.findByIdAndUpdate(
-      { _id: id },
+    const result = await DoctorModel.findOneAndUpdate(
+      { doctorId: id },
       { ...req.body },
       { new: true }
     );
