@@ -112,6 +112,35 @@ function UpdatePatientProfile() {
                 value={values.lastname || ""}
               />
             </div>
+            <label className="form-label">Gender</label>
+            <div className="gender-options">
+              <div>
+                <input
+                  type="radio"
+                  name="gender"
+                  id="male"
+                  value={values.gender || ""}
+                  onChange={handleChange}
+                  className="form-radio"
+                />
+                <label htmlFor="male" className="form-radio-label">
+                  Male
+                </label>
+              </div>
+              <div>
+                <input
+                  type="radio"
+                  name="gender"
+                  value={values.gender || ""}
+                  id="female"
+                  onChange={handleChange}
+                  className="form-radio"
+                />
+                <label htmlFor="female" className="form-radio-label">
+                  Female
+                </label>
+              </div>
+            </div>
             <div>
               <label htmlFor="email">Email</label>
               <input
