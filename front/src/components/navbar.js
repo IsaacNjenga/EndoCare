@@ -15,6 +15,9 @@ export default function Navbar() {
             <Link to="/profile" className="navbar-link">
               {user.name}
             </Link>
+            <Link to="/diary" className="navbar-link">
+              My Journal
+            </Link>
             <Link to="/resources" className="navbar-link">
               Resources
             </Link>

@@ -22,6 +22,7 @@ import AddPatientProfile from "./pages/addPatientProfile";
 import AddDoctorProfile from "./pages/addDoctorProfile";
 import UpdatePatientProfile from "./pages/updatePatientProfile";
 import UpdateDoctorProfile from "./pages/updateDoctorProfile";
+import Diary from "./components/diary";
 
 export const UserContext = createContext(null);
 
@@ -110,6 +111,7 @@ const router = createBrowserRouter([
       </ProtectedRoutes>
     ),
   },
+  { path: "/diary", element: <Diary /> },
   { path: "/logout", element: <Logout /> },
   { path: "*", element: <NotFound /> },
 ]);
