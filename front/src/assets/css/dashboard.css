@@ -1,0 +1,33 @@
+.dashboard {
+  display: flex;
+  height: 100vh;
+  /*background-image: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)),
+    url("contacts.jpg");*/
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.dashboard .sidebar-container {
+  width: 300px;
+  border-right: 2px solid rgb(141, 141, 141);
+  background-color: rgba(250, 235, 215, 0.427);
+}
+
+.dashboard .contact-container {
+  width: 100%;
+}
+
+.not-found {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  background-color: black;
+  color: yellow;
+  align-items: center;
+  justify-content: center;
+}
+
+/*.logout {
+  background-image: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)),
+      url("contacts.jpg");
+}*/
