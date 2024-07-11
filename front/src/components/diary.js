@@ -42,7 +42,6 @@ function Diary() {
       fetchDiary();
     }
   }, [user._id]);
-
   return (
     <>
       {loading && <Loader />}

@@ -79,12 +79,14 @@ function UpdateDiary() {
       if (response.data.success) {
         console.log("Fetch success");
         console.log("Fetched Entries:", response.data.results);
+        console.log(response.data.results[0]._id);
 
         const fetchedDiary = response.data.results.find(
           (diary) => id && diary.patientId === user._id
         );
 
         console.log("Fetched Diary Entry:", fetchedDiary);
+        console.log("Fetched Diary using params:", id);
         if (fetchedDiary) {
           console.log("Diary Entry ID:", fetchedDiary._id);
           setValues({
