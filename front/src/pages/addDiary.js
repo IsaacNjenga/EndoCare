@@ -41,7 +41,7 @@ function AddDiary() {
             position: "top-right",
             autoClose: 2000,
           });
-          navigate("/dashboard");
+          navigate("/diary");
         }
       })
       .catch((err) => console.log(err))
@@ -86,13 +86,13 @@ function AddDiary() {
               <input
                 type="text"
                 placeholder="Pre-Lunch"
-                name="pre-lunch"
+                name="prelunch"
                 onChange={handleChange}
               />
               <input
                 type="text"
                 placeholder="Post-Lunch"
-                name="post-lunch"
+                name="postlunch"
                 onChange={handleChange}
               />
               <input

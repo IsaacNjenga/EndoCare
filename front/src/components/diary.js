@@ -44,88 +44,102 @@ function Diary() {
   }, [user._id]);
   return (
     <>
-      {loading && <Loader />}
-      <Navbar />
-      <div className="diary-container">
-        <div className="header">
-          <h1>Your Health Journal</h1>
-          <Link to="/add-diary" className="add-entry-link">
-            Add an entry
-          </Link>
-        </div>
-        {data.length > 0 ? (
-          data.map((diary, index) => (
-            <div key={index} className="diary-entry">
-              <div className="entry-section">
-                <p>{diary._id}</p>
-                <h2>Fasting</h2>
-                <p>{diary.fasting}</p>
-              </div>
-              <div className="entry-section">
-                <h2>Pre-Lunch</h2>
-                <p>{diary.prelunch}</p>
-              </div>
-              <div className="entry-section">
-                <h2>Post-Lunch</h2>
-                <p>{diary.postlunch}</p>
-              </div>
-              <div className="entry-section">
-                <h2>Night</h2>
-                <p>{diary.night}</p>
-              </div>
-              <div className="entry-section">
-                <h2>Morning</h2>
-                <p>{diary.morning}</p>
-              </div>
-              <div className="entry-section">
-                <h2>Evening</h2>
-                <p>{diary.evening}</p>
-              </div>
-              <div className="entry-section">
-                <h2>Breakfast</h2>
-                <p>{diary.breakfast}</p>
-              </div>
-              <div className="entry-section">
-                <h2>Lunch</h2>
-                <p>{diary.lunch}</p>
-              </div>
-              <div className="entry-section">
-                <h2>Snack</h2>
-                <p>{diary.snack}</p>
-              </div>
-              <div className="entry-section">
-                <h2>Dinner</h2>
-                <p>{diary.dinner}</p>
-              </div>
-              <div className="entry-section">
-                <h2>Exercise</h2>
-                <p>{diary.exercise}</p>
-              </div>
-              <div className="entry-section">
-                <h2>Symptoms</h2>
-                <p>{diary.symptoms}</p>
-              </div>
-              <div className="entry-section">
-                <h2>Mood</h2>
-                <p>{diary.mood}</p>
-              </div>
-              <div className="entry-section">
-                <h2>Stress</h2>
-                <p>{diary.stress}</p>
-              </div>{" "}
-              <Link
-                to={`/update-diary/:${diary._id}`}
-                className="add-entry-link"
-              >
-                Update this entry
-              </Link>
-            </div>
-          ))
-        ) : (
-          <div>No entries found.</div>
-        )}
+    {loading && <Loader />}
+    <Navbar />
+    <div className="diary-container">
+      <div className="header">
+        <h1>Your Health Journal</h1>
+        <Link to="/add-diary" className="add-entry-link">
+          Add an entry
+        </Link>
       </div>
-    </>
+      {data.length > 0 ? (
+        <div className="diary-grid">
+          {data.map((diary, index) => (
+            <div key={index} className="diary-card">
+              <div className="entry-header">
+                <Link to={`/update-diary/${diary._id}`} className="update-entry-link">
+                  Update
+                </Link>
+              </div>
+              <div className="entry-content">
+                <div className="entry-row">
+                  <div className="entry-section">
+                    <h3>Fasting</h3>
+                    <p>{diary.fasting}</p>
+                  </div>
+                  <div className="entry-section">
+                    <h3>Pre-Lunch</h3>
+                    <p>{diary.prelunch}</p>
+                  </div>
+                  <div className="entry-section">
+                    <h3>Post-Lunch</h3>
+                    <p>{diary.postlunch}</p>
+                  </div>
+                </div>
+                <div className="entry-row">
+                  <div className="entry-section">
+                    <h3>Night</h3>
+                    <p>{diary.night}</p>
+                  </div>
+                  <div className="entry-section">
+                    <h3>Morning</h3>
+                    <p>{diary.morning}</p>
+                  </div>
+                  <div className="entry-section">
+                    <h3>Evening</h3>
+                    <p>{diary.evening}</p>
+                  </div>
+                </div>
+                <div className="entry-row">
+                  <div className="entry-section">
+                    <h3>Breakfast</h3>
+                    <p>{diary.breakfast}</p>
+                  </div>
+                  <div className="entry-section">
+                    <h3>Lunch</h3>
+                    <p>{diary.lunch}</p>
+                  </div>
+                  <div className="entry-section">
+                    <h3>Snack</h3>
+                    <p>{diary.snack}</p>
+                  </div>
+                </div>
+                <div className="entry-row">
+                  <div className="entry-section">
+                    <h3>Dinner</h3>
+                    <p>{diary.dinner}</p>
+                  </div>
+                  <div className="entry-section">
+                    <h3>Exercise</h3>
+                    <p>{diary.exercise}</p>
+                  </div>
+                </div>
+                <div className="entry-row">
+                  <div className="entry-section">
+                    <h3>Symptoms</h3>
+                    <p>{diary.symptoms}</p>
+                  </div>
+                  <div className="entry-section">
+                    <h3>Mood</h3>
+                    <p>{diary.mood}</p>
+                  </div>
+                  <div className="entry-section">
+                    <h3>Stress</h3>
+                    <p>{diary.stress}</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+      ) : (
+        <div>No entries found.</div>
+      )}
+    </div>
+  </>
+  
+  
   );
 }
 

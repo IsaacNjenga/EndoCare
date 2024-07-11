@@ -1,12 +1,9 @@
-/* General Styles */
 .diary-container {
   padding: 20px;
-  max-width: 800px;
-  margin: auto;
   font-family: Arial, sans-serif;
+  background-color: #f0f4f8;
 }
 
-/* Header Styles */
 .header {
   display: flex;
   justify-content: space-between;
@@ -15,57 +12,93 @@
 }
 
 .header h1 {
-  font-size: 2em;
+  font-size: 2rem;
   color: #333;
 }
 
 .add-entry-link {
-  background-color: #4caf50;
-  color: white;
   padding: 10px 20px;
-  text-decoration: none;
+  background-color: #007bff;
+  color: #fff;
   border-radius: 5px;
-  font-weight: bold;
+  text-decoration: none;
+  font-size: 1rem;
+  transition: background-color 0.3s ease;
 }
 
 .add-entry-link:hover {
-  background-color: #45a049;
+  background-color: #0056b3;
 }
 
-/* Diary Entry Styles */
-.diary-entry {
+.diary-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 20px;
+}
+
+.diary-card {
   background-color: #fff;
-  border: 1px solid #ddd;
-  border-radius: 5px;
-  padding: 15px;
-  margin-bottom: 20px;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
   display: flex;
-  flex-wrap: wrap; /* Allow entries to wrap on smaller screens */
+  flex-direction: column;
+  justify-content: space-between;
 }
 
-/* Section Styles */
+.entry-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 15px;
+}
+
+.entry-header h2 {
+  font-size: 1.25rem;
+  color: #007bff;
+}
+
+.update-entry-link {
+  padding: 5px 10px;
+  background-color: #28a745;
+  color: #fff;
+  border-radius: 5px;
+  text-decoration: none;
+  font-size: 0.9rem;
+  transition: background-color 0.3s ease;
+}
+
+.update-entry-link:hover {
+  background-color: #218838;
+}
+
+.entry-content {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.entry-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
 .entry-section {
-  margin-bottom: 10px;
-  flex: 1 0 33%; /* Set a minimum width for sections and allow them to grow */
+  flex: 1;
+  min-width: 120px;
+  background-color: #f9f9f9;
+  padding: 10px;
+  border-radius: 5px;
 }
 
-.entry-section h2 {
-  font-size: 1.2em;
+.entry-section h3 {
+  font-size: 1rem;
   color: #555;
   margin-bottom: 5px;
 }
 
 .entry-section p {
-  font-size: 1em;
-  color: #333;
-  margin: 0;
-}
-
-/* Color Coding (Example) */
-.food .entry-section h2 {
-  color: lightgreen;
-}
-
-.wellbeing .entry-section h2 {
-  color: lightblue;
+  font-size: 0.9rem;
+  color: #777;
 }

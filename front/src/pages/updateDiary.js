@@ -65,6 +65,7 @@ function UpdateDiary() {
     }
   };
 
+
   const fetchDiary = async () => {
     setLoading(true);
     try {
@@ -77,16 +78,13 @@ function UpdateDiary() {
       });
 
       if (response.data.success) {
-        console.log("Fetch success");
         console.log("Fetched Entries:", response.data.results);
-        console.log(response.data.results[0]._id);
 
         const fetchedDiary = response.data.results.find(
-          (diary) => id && diary.patientId === user._id
+          (diary) => id === diary._id && diary.patientId === user._id
         );
+        console.log("the id", response.data.results._id);
 
-        console.log("Fetched Diary Entry:", fetchedDiary);
-        console.log("Fetched Diary using params:", id);
         if (fetchedDiary) {
           console.log("Diary Entry ID:", fetchedDiary._id);
           setValues({
@@ -105,7 +103,6 @@ function UpdateDiary() {
             mood: fetchedDiary.mood || "",
             stress: fetchedDiary.stress || "",
           });
-          console.log("Fetched Diary Values:", fetchedDiary);
         } else {
           console.log("No matching diary entry found");
         }
@@ -123,7 +120,7 @@ function UpdateDiary() {
     if (user && user._id) {
       fetchDiary();
     }
-  }, [user._id]);
+  }, [user._id, id]);
 
   const formattedTime = new Intl.DateTimeFormat("en-US", {
     day: "numeric",

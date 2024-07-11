@@ -16,6 +16,7 @@ const diarySchema = new mongoose.Schema(
     symptoms: { type: String },
     mood: { type: String },
     stress: { type: String },
+    postedBy: { type: mongoose.Schema.Types.ObjectId, ref: "user" },
     patientId: { type: String },
   },
   { collection: "diary" }

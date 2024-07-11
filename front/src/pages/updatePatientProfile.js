@@ -66,6 +66,7 @@ function UpdatePatientProfile() {
       })
       .then((response) => {
         if (response.data.success) {
+          console.log(response.data.patients);
           const fetchedPatient = response.data.patients.find(
             (pat) => pat.patientId === user._id
           );

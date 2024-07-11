@@ -36,6 +36,7 @@ const addEntry = async (req, res) => {
       mood,
       stress,
       patientId,
+      postedBy: req.user._id,
     });
 
     const result = await newEntry.save();
@@ -47,7 +48,7 @@ const addEntry = async (req, res) => {
 
 const getEntries = async (req, res) => {
   try {
-    const results = await DiaryModel.find({});
+    const results = await DiaryModel.find({ postedBy: req.user._id });
     if (!results) {
       return res.status(404).json({ error: "Journal entry not found" });
     }
@@ -64,9 +65,10 @@ const getEntries = async (req, res) => {
 
 const updateEntry = async (req, res) => {
   const { id } = req.params;
+  console.log("the id from req.params:", id);
   try {
     const result = await DiaryModel.findOneAndUpdate(
-      { patientId: id },
+      { id },
       { ...req.body },
       { new: true }
     );

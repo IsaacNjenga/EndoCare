@@ -74,29 +74,53 @@ const router = createBrowserRouter([
       { index: true, element: <Profile /> },
       {
         path: "doctor-profile",
-        element: <DoctorProfile />,
+        element: (
+          <ProtectedRoutes>
+            <DoctorProfile />
+          </ProtectedRoutes>
+        ),
       },
       {
         path: "patient-profile",
-        element: <PatientProfile />,
+        element: (
+          <ProtectedRoutes>
+            <PatientProfile />
+          </ProtectedRoutes>
+        ),
       },
       {
         path: "add-doctor-profile",
-        element: <AddDoctorProfile />,
+        element: (
+          <ProtectedRoutes>
+            <AddDoctorProfile />
+          </ProtectedRoutes>
+        ),
       },
       {
         path: "add-patient-profile",
-        element: <AddPatientProfile />,
+        element: (
+          <ProtectedRoutes>
+            <AddPatientProfile />
+          </ProtectedRoutes>
+        ),
       },
     ],
   },
   {
     path: "update-doctor-profile/:id",
-    element: <UpdateDoctorProfile />,
+    element: (
+      <ProtectedRoutes>
+        <UpdateDoctorProfile />
+      </ProtectedRoutes>
+    ),
   },
   {
     path: "update-patient-profile/:id",
-    element: <UpdatePatientProfile />,
+    element: (
+      <ProtectedRoutes>
+        <UpdatePatientProfile />
+      </ProtectedRoutes>
+    ),
   },
   {
     path: "/book-appointment",
@@ -114,9 +138,30 @@ const router = createBrowserRouter([
       </ProtectedRoutes>
     ),
   },
-  { path: "/diary", element: <Diary /> },
-  { path: "/add-diary", element: <AddDiary /> },
-  { path: "/update-diary/:id", element: <UpdateDiary /> },
+  {
+    path: "/diary",
+    element: (
+      <ProtectedRoutes>
+        <Diary />
+      </ProtectedRoutes>
+    ),
+  },
+  {
+    path: "/add-diary",
+    element: (
+      <ProtectedRoutes>
+        <AddDiary />
+      </ProtectedRoutes>
+    ),
+  },
+  {
+    path: "/update-diary/:id",
+    element: (
+      <ProtectedRoutes>
+        <UpdateDiary />
+      </ProtectedRoutes>
+    ),
+  },
   { path: "/logout", element: <Logout /> },
   { path: "*", element: <NotFound /> },
 ]);
