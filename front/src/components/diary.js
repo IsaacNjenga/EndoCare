@@ -1,195 +1,130 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import Navbar from "./navbar";
+import { Link } from "react-router-dom";
 import "../assets/css/diary.css";
+import axios from "axios";
+import Loader from "./loader";
+import { UserContext } from "../App";
 
 function Diary() {
-  const [currentDateTime, setCurrentDateTime] = useState(new Date());
-  const [values, setValues] = useState({});
+  const { user } = useContext(UserContext);
+  const [data, setData] = useState([]);
+  const [loading, setLoading] = useState(false);
+
+  const fetchDiary = async () => {
+    setLoading(true);
+    try {
+      const token = localStorage.getItem("token");
+      if (!token) {
+        throw new Error("No token found");
+      }
+      const response = await axios.get("entries", {
+        headers: { Authorization: `Bearer ${token}` },
+      });
+
+      if (response.data.success) {
+        const fetchedDiary = response.data.results.filter(
+          (diary) => diary.patientId === user._id
+        );
+        if (fetchedDiary) {
+          setData(fetchedDiary);
+        }
+      }
+    } catch (error) {
+      console.error("Error fetching diary entries:", error);
+    } finally {
+      setLoading(false);
+    }
+  };
 
   useEffect(() => {
-    const timer = setInterval(() => {
-      setCurrentDateTime(new Date());
-    }, 1000);
-    return () => clearInterval(timer);
-  }, []);
-
-  const handleChange = (e) => {
-    setValues({ ...values, [e.target.name]: e.target.value });
-  };
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    console.log(values);
-  };
-
-  const formattedTime = new Intl.DateTimeFormat("en-us", {
-    day: "numeric",
-    weekday: "long",
-    month: "long",
-    year: "numeric",
-  }).format(currentDateTime);
+    if (user._id) {
+      fetchDiary();
+    }
+  }, [user._id]);
 
   return (
     <>
+      {loading && <Loader />}
       <Navbar />
       <div className="diary-container">
-        <form onSubmit={handleSubmit} className="diary-form">
-          <div className="section">
-            <p>{formattedTime}</p>
-            <br />
-            <hr />
-            <br />
-            <h1 className="section-title">Daily Log</h1>
-            <div className="form-group">
-              <label>Diagnosis:</label>
-              <p>Type-2 Diabetes</p>
+        <div className="header">
+          <h1>Your Health Journal</h1>
+          <Link to="/add-diary" className="add-entry-link">
+            Add an entry
+          </Link>
+        </div>
+        {data.length > 0 ? (
+          data.map((diary, index) => (
+            <div key={index} className="diary-entry">
+              <div className="entry-section">
+                <p>{diary._id}</p>
+                <h2>Fasting</h2>
+                <p>{diary.fasting}</p>
+              </div>
+              <div className="entry-section">
+                <h2>Pre-Lunch</h2>
+                <p>{diary.prelunch}</p>
+              </div>
+              <div className="entry-section">
+                <h2>Post-Lunch</h2>
+                <p>{diary.postlunch}</p>
+              </div>
+              <div className="entry-section">
+                <h2>Night</h2>
+                <p>{diary.night}</p>
+              </div>
+              <div className="entry-section">
+                <h2>Morning</h2>
+                <p>{diary.morning}</p>
+              </div>
+              <div className="entry-section">
+                <h2>Evening</h2>
+                <p>{diary.evening}</p>
+              </div>
+              <div className="entry-section">
+                <h2>Breakfast</h2>
+                <p>{diary.breakfast}</p>
+              </div>
+              <div className="entry-section">
+                <h2>Lunch</h2>
+                <p>{diary.lunch}</p>
+              </div>
+              <div className="entry-section">
+                <h2>Snack</h2>
+                <p>{diary.snack}</p>
+              </div>
+              <div className="entry-section">
+                <h2>Dinner</h2>
+                <p>{diary.dinner}</p>
+              </div>
+              <div className="entry-section">
+                <h2>Exercise</h2>
+                <p>{diary.exercise}</p>
+              </div>
+              <div className="entry-section">
+                <h2>Symptoms</h2>
+                <p>{diary.symptoms}</p>
+              </div>
+              <div className="entry-section">
+                <h2>Mood</h2>
+                <p>{diary.mood}</p>
+              </div>
+              <div className="entry-section">
+                <h2>Stress</h2>
+                <p>{diary.stress}</p>
+              </div>{" "}
+              <Link
+                to={`/update-diary/:${diary._id}`}
+                className="add-entry-link"
+              >
+                Update this entry
+              </Link>
             </div>
-            <div className="form-group">
-              <label htmlFor="glucose-level">
-                Blood Glucose Levels (in mg/dL)
-              </label>
-              <input
-                type="text"
-                placeholder="Fasting"
-                name="fasting"
-                onChange={handleChange}
-              />
-              <input
-                type="text"
-                placeholder="Pre-Lunch"
-                name="pre-lunch"
-                onChange={handleChange}
-              />
-              <input
-                type="text"
-                placeholder="Post-Lunch"
-                name="post-lunch"
-                onChange={handleChange}
-              />
-              <input
-                type="text"
-                placeholder="Night"
-                name="night"
-                onChange={handleChange}
-              />
-            </div>
-            <div className="form-group">
-              <label htmlFor="medication">Medications</label>
-              <input
-                type="text"
-                placeholder="Morning"
-                name="morning"
-                onChange={handleChange}
-              />
-              <input
-                type="text"
-                placeholder="Evening"
-                name="evening"
-                onChange={handleChange}
-              />
-            </div>
-            <div className="form-group">
-              <label htmlFor="dietary-intake">Dietary Intake</label>
-              <textarea
-                placeholder="Breakfast"
-                name="breakfast"
-                onChange={handleChange}
-              />
-              <textarea
-                placeholder="Lunch"
-                name="lunch"
-                onChange={handleChange}
-              />
-              <textarea
-                placeholder="Snack"
-                name="snack"
-                onChange={handleChange}
-              />
-              <textarea
-                placeholder="Dinner"
-                name="dinner"
-                onChange={handleChange}
-              />
-            </div>
-            <div className="form-group">
-              <label htmlFor="physical-activity">Physical Activity</label>
-              <textarea
-                placeholder="Exercise"
-                name="exercise"
-                onChange={handleChange}
-              />
-            </div>
-            <div className="form-group">
-              <label htmlFor="symptoms">Symptoms Today</label>
-              <textarea
-                placeholder="Symptoms"
-                name="symptoms"
-                onChange={handleChange}
-              />
-            </div>
-          </div>
-          <br />
-          <hr />
-          <br />
-          <div className="section">
-            <h1 className="section-title">Medical Information</h1>
-            <br />
-            <br />
-            <div className="form-group">
-              <label>Treatment Plan</label>
-              <p>The doctor will fill these on their end</p>
-            </div>
-          </div>
-          <br />
-          <hr />
-          <br />
-          <div className="section">
-            <h1 className="section-title">Mental and Emotional Health</h1>
-            <br />
-            <br />
-            <div className="form-group">
-              <label htmlFor="mood">Mood today</label>
-              <textarea
-                placeholder="Mood"
-                name="mood"
-                onChange={handleChange}
-              />
-            </div>
-            <div className="form-group">
-              <label htmlFor="stress">Stress Management</label>
-              <textarea
-                placeholder="Stress Management"
-                name="stress"
-                onChange={handleChange}
-              />
-            </div>
-            <br />
-            <hr />
-            <br />
-            <div className="form-group">
-              <label>Support</label>
-              <p>
-                Local diabetes support group meets every{" "}
-                <b>
-                  <u>first Monday</u>
-                </b>{" "}
-                of the month
-              </p>
-            </div>
-            <div className="form-group">
-              <label>Counselling Session</label>
-              <p>
-                Your next session scheduled for{" "}
-                <u>
-                  <b> July 15, 2024</b>
-                </u>
-              </p>
-            </div>
-          </div>
-          <button type="submit" className="submit-button">
-            Upload
-          </button>
-        </form>
+          ))
+        ) : (
+          <div>No entries found.</div>
+        )}
       </div>
     </>
   );

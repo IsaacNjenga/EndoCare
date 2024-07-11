@@ -1,67 +1,71 @@
-
+/* General Styles */
 .diary-container {
   padding: 20px;
-  font-family: Arial, sans-serif;
-  background-color: #fafafa;
-}
-
-.diary-form {
   max-width: 800px;
-  margin: 0 auto;
-  background-color: #fff;
-  padding: 20px;
-  border-radius: 10px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  margin: auto;
+  font-family: Arial, sans-serif;
 }
 
-.section {
+/* Header Styles */
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
   margin-bottom: 20px;
 }
 
-.section-title {
-  font-size: 24px;
+.header h1 {
+  font-size: 2em;
   color: #333;
+}
+
+.add-entry-link {
+  background-color: #4caf50;
+  color: white;
+  padding: 10px 20px;
+  text-decoration: none;
+  border-radius: 5px;
+  font-weight: bold;
+}
+
+.add-entry-link:hover {
+  background-color: #45a049;
+}
+
+/* Diary Entry Styles */
+.diary-entry {
+  background-color: #fff;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  padding: 15px;
+  margin-bottom: 20px;
+  display: flex;
+  flex-wrap: wrap; /* Allow entries to wrap on smaller screens */
+}
+
+/* Section Styles */
+.entry-section {
   margin-bottom: 10px;
-  border-bottom: 2px solid #f0a500;
-  display: inline-block;
+  flex: 1 0 33%; /* Set a minimum width for sections and allow them to grow */
 }
 
-.form-group {
-  margin-bottom: 15px;
-}
-
-.form-group label {
-  display: block;
-  font-size: 18px;
+.entry-section h2 {
+  font-size: 1.2em;
+  color: #555;
   margin-bottom: 5px;
+}
+
+.entry-section p {
+  font-size: 1em;
   color: #333;
+  margin: 0;
 }
 
-.form-group input,
-.form-group textarea {
-  width: 100%;
-  padding: 10px;
-  font-size: 16px;
-  border: 1px solid #ccc;
-  border-radius: 5px;
-  margin-bottom: 10px;
+/* Color Coding (Example) */
+.food .entry-section h2 {
+  color: lightgreen;
 }
 
-.form-group textarea {
-  height: 60px;
-}
-
-.submit-button {
-  background-color: #f0a500;
-  color: #fff;
-  padding: 15px 20px;
-  border: none;
-  border-radius: 5px;
-  font-size: 18px;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
-}
-
-.submit-button:hover {
-  background-color: #d99000;
+.wellbeing .entry-section h2 {
+  color: lightblue;
 }

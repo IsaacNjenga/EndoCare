@@ -23,10 +23,12 @@ import AddDoctorProfile from "./pages/addDoctorProfile";
 import UpdatePatientProfile from "./pages/updatePatientProfile";
 import UpdateDoctorProfile from "./pages/updateDoctorProfile";
 import Diary from "./components/diary";
+import AddDiary from "./pages/addDiary";
+import UpdateDiary from "./pages/updateDiary";
 
 export const UserContext = createContext(null);
 
-axios.defaults.baseURL = "https://endo-care-back.vercel.app/endocare/";
+axios.defaults.baseURL = "http://localhost:3001/endocare/";
 axios.defaults.withCredentials = true;
 
 //"https://endo-care-back.vercel.app/endocare/";
@@ -113,6 +115,8 @@ const router = createBrowserRouter([
     ),
   },
   { path: "/diary", element: <Diary /> },
+  { path: "/add-diary", element: <AddDiary /> },
+  { path: "/update-diary/:id", element: <UpdateDiary /> },
   { path: "/logout", element: <Logout /> },
   { path: "*", element: <NotFound /> },
 ]);
