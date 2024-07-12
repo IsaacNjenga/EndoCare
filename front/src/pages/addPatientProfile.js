@@ -71,6 +71,33 @@ function AddPatientProfile() {
                 onChange={handleChange}
               />
             </div>
+            <div className="input-group">
+              <label className="form-label">Gender</label>
+              <div className="gender-options">
+                <div>
+                  <input
+                    type="radio"
+                    id="male"
+                    name="gender"
+                    value="Male"
+                    checked={values.gender === "Male"}
+                    onChange={handleChange}
+                  />
+                  <label htmlFor="male">Male</label>
+                </div>
+                <div>
+                  <input
+                    type="radio"
+                    id="female"
+                    name="gender"
+                    value="Female"
+                    checked={values.gender === "Female"}
+                    onChange={handleChange}
+                  />
+                  <label htmlFor="female">Female</label>
+                </div>
+              </div>
+            </div>
             <div>
               <label htmlFor="email">Email</label>
               <input
