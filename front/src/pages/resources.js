@@ -12,6 +12,7 @@ import AdrenalFatigue from "../diagnosis/adrenalFatigue";
 function Resources() {
   const { user } = useContext(UserContext);
   const [data, setData] = useState(null);
+  const [doctorData, setDoctorData] = useState(null);
   const [loading, setLoading] = useState(true);
 
   const fetchProfile = async () => {
@@ -28,8 +29,26 @@ function Resources() {
     }
   };
 
+  const fetchDoctorProfile = async () => {
+    setLoading(true);
+    try {
+      const response = await axios.get("doctors", {
+        headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
+      });
+      const fetchedProfile = response.data.doctors.filter(
+        (doctor) => doctor.doctorId === user._id
+      );
+      setDoctorData(fetchedProfile);
+    } catch (error) {
+      console.error("Error fetching patient profile:", error);
+    } finally {
+      setLoading(false);
+    }
+  };
+
   useEffect(() => {
     fetchProfile();
+    fetchDoctorProfile();
   }, []);
 
   if (loading) {
