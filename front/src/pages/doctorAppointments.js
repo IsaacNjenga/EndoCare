@@ -91,9 +91,11 @@ function DoctorAppointments() {
       {loading && <Loader />}
       <Navbar />
       <div className="content">
-        <p>
-          Manage appointments <Link to="/book-appointment">here</Link>
-        </p>
+      {user.role === "patient" ? (
+          <p>
+            Book an appointment <Link to="/book-appointment">here</Link>
+          </p>
+        ) : null}
         <h1>Your appointments</h1>
         <div className="list">
           <DataTable

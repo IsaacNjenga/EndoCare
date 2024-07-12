@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import axios from "axios";
 import { toast } from "react-toastify";
 import Navbar from "../components/navbar";
@@ -6,6 +6,7 @@ import { Link } from "react-router-dom";
 import DataTable from "react-data-table-component";
 import Loader from "../components/loader";
 import "../assets/css/appointment.css";
+import { UserContext } from "../App";
 
 const customStyles = {
   headCells: {
@@ -42,6 +43,7 @@ const customStyles = {
 };
 
 function PatientAppointments() {
+  const { user } = useContext(UserContext);
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(false);
 
@@ -87,9 +89,11 @@ function PatientAppointments() {
       {loading && <Loader />}
       <Navbar />
       <div className="content">
-        <p>
-          Book an appointment <Link to="/book-appointment">here</Link>
-        </p>
+        {user.role === "patient" ? (
+          <p>
+            Book an appointment <Link to="/book-appointment">here</Link>
+          </p>
+        ) : null}
         <h1>Your appointments</h1>
         <div className="list">
           <DataTable
