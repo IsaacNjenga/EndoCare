@@ -1,10 +1,12 @@
-/* form.css */
+/* addPatientProfile.css */
+
 .form-container {
   display: flex;
   justify-content: center;
   align-items: center;
   min-height: 100vh;
   background-color: #f0f0f0;
+  padding: 20px;
 }
 
 form {
@@ -34,7 +36,8 @@ label {
   color: #333;
 }
 
-input {
+input[type="text"],
+select {
   width: 100%;
   padding: 10px;
   margin-top: 5px;
@@ -42,12 +45,35 @@ input {
   border-radius: 5px;
 }
 
-input:focus {
+input:focus,
+select:focus {
   outline: none;
   border-color: #007bff;
 }
 
-button {
+.gender-options {
+  display: flex;
+  margin-top: 5px;
+}
+
+.gender-options > div {
+  margin-right: 10px;
+}
+
+
+.form-radio-label {
+  cursor: pointer;
+  padding: 8px 16px;
+  border-radius: 5px;
+  background-color: #eee;
+}
+
+.form-radio:checked + .form-radio-label {
+  background-color: #007bff;
+  color: white;
+}
+
+button[type="submit"] {
   width: 100%;
   padding: 10px;
   background-color: #007bff;
@@ -56,9 +82,10 @@ button {
   border-radius: 5px;
   font-size: 16px;
   cursor: pointer;
+  margin-top: 10px;
 }
 
-button:hover {
+button[type="submit"]:hover {
   background-color: #0056b3;
 }
 

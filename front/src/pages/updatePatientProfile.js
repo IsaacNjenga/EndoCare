@@ -31,7 +31,7 @@ function UpdatePatientProfile() {
   ];
 
   const handleChange = (e) => {
-    setValues({ ...values, [e.target.name]: e.target.value || e.target.id });
+    setValues({ ...values, [e.target.name]: e.target.value });
   };
 
   const handleSubmit = (e) => {
@@ -39,7 +39,7 @@ function UpdatePatientProfile() {
     setLoading(true);
     const valuesData = { ...values, patientId: user._id };
     axios
-      .put("update-patient/" + id, valuesData, {
+      .put(`update-patient/${id}`, valuesData, {
         headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
       })
       .then((result) => {
@@ -51,7 +51,13 @@ function UpdatePatientProfile() {
           navigate("/profile");
         }
       })
-      .catch((err) => console.log(err))
+      .catch((err) => {
+        console.error("Error updating profile:", err);
+        toast.error("Failed to update profile", {
+          position: "top-right",
+          autoClose: 2000,
+        });
+      })
       .finally(() => {
         setLoading(false);
       });
@@ -111,99 +117,99 @@ function UpdatePatientProfile() {
       {loading && <Loader />}
       <Navbar />
       <div className="form-container">
-        <form onSubmit={handleSubmit}>
+        <form onSubmit={handleSubmit} className="update-patient-form">
           <div className="form-group">
-            <div>
+            <div className="input-group">
               <label htmlFor="firstname">First Name</label>
               <input
                 type="text"
-                placeholder="Enter first name"
+                id="firstname"
                 name="firstname"
+                value={values.firstname}
                 onChange={handleChange}
-                value={values.firstname || ""}
+                required
               />
             </div>
-            <div>
+            <div className="input-group">
               <label htmlFor="lastname">Last Name</label>
               <input
                 type="text"
-                placeholder="Enter last name"
+                id="lastname"
                 name="lastname"
+                value={values.lastname}
                 onChange={handleChange}
-                value={values.lastname || ""}
+                required
               />
             </div>
-            <label className="form-label">Gender</label>
-            <div className="gender-options">
-              <div>
-                <input
-                  type="radio"
-                  name="gender"
-                  id="Male"
-                  value={values.gender || ""}
-                  onChange={handleChange}
-                  className="form-radio"
-                />
-                <label htmlFor="male" className="form-radio-label">
-                  Male
-                </label>
-              </div>
-              <div>
-                <input
-                  type="radio"
-                  name="gender"
-                  value={values.gender || ""}
-                  id="Female"
-                  onChange={handleChange}
-                  className="form-radio"
-                />
-                <label htmlFor="female" className="form-radio-label">
-                  Female
-                </label>
+            <div className="input-group">
+              <label className="form-label">Gender</label>
+              <div className="gender-options">
+                <div>
+                  <input
+                    type="radio"
+                    id="male"
+                    name="gender"
+                    value="Male"
+                    checked={values.gender === "Male"}
+                    onChange={handleChange}
+                  />
+                  <label htmlFor="male">Male</label>
+                </div>
+                <div>
+                  <input
+                    type="radio"
+                    id="female"
+                    name="gender"
+                    value="Female"
+                    checked={values.gender === "Female"}
+                    onChange={handleChange}
+                  />
+                  <label htmlFor="female">Female</label>
+                </div>
               </div>
             </div>
-            <div>
+            <div className="input-group">
               <label htmlFor="email">Email</label>
               <input
-                type="text"
-                placeholder="Enter email address"
+                type="email"
+                id="email"
                 name="email"
+                value={values.email}
                 onChange={handleChange}
-                value={values.email || ""}
+                required
               />
             </div>
-            <div>
+            <div className="input-group">
               <label htmlFor="phone">Phone</label>
               <input
-                type="text"
-                placeholder="Enter phone number"
+                type="tel"
+                id="phone"
                 name="phone"
+                value={values.phone}
                 onChange={handleChange}
-                value={values.phone || ""}
+                required
               />
             </div>
-            <div>
+            <div className="input-group">
               <label htmlFor="address">Address</label>
               <input
                 type="text"
-                placeholder="Enter your address"
+                id="address"
                 name="address"
+                value={values.address}
                 onChange={handleChange}
-                value={values.address || ""}
+                required
               />
             </div>
-            <div>
+            <div className="input-group">
               <label htmlFor="illness">Illness</label>
-              <input
-                type="text"
-                placeholder="Enter your current illness"
+              <select
+                id="illness"
                 name="illness"
+                value={values.illness}
                 onChange={handleChange}
-                value={values.illness || ""}
-              />
-            </div>
-            <div>
-              <select name="illness" onChange={handleChange}>
+                required
+              >
                 <option value="" disabled>
                   Select Condition
                 </option>
@@ -215,7 +221,9 @@ function UpdatePatientProfile() {
               </select>
             </div>
           </div>
-          <button type="submit">Save</button>
+          <button type="submit" className="btn-save">
+            Save
+          </button>
         </form>
       </div>
     </>
