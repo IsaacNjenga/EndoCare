@@ -1,0 +1,58 @@
+.pcos-container {
+  font-family: Arial, sans-serif;
+  color: #333;
+  background-color: #f9f9f9;
+  padding: 20px;
+  border-radius: 10px;
+  max-width: 800px;
+  margin: 20px auto;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.pcos-section {
+  margin-bottom: 20px;
+}
+
+.pcos-section h2,
+.pcos-section h3 {
+  color: #4a90e2;
+  margin-bottom: 10px;
+}
+
+.pcos-section h4 {
+  color: #333;
+  margin-bottom: 5px;
+}
+
+.pcos-section ul {
+  list-style-type: none;
+  padding-left: 20px;
+}
+
+.pcos-section ul li {
+  margin-bottom: 5px;
+  position: relative;
+  padding-left: 20px;
+}
+
+.pcos-section ul li:before {
+  content: "•";
+  color: #4a90e2;
+  position: absolute;
+  left: 0;
+  top: 0;
+}
+
+.pcos-section div {
+  margin-bottom: 15px;
+}
+
+@media (max-width: 600px) {
+  .pcos-container {
+    padding: 15px;
+  }
+
+  .pcos-section {
+    margin-bottom: 15px;
+  }
+}

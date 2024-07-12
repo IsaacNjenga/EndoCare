@@ -5,21 +5,21 @@
   justify-content: center;
   align-items: center;
   height: 90vh;
-  /*background-image: url(contacts.jpg);*/
+  background-image: url("../../consult.jpg");
   background-repeat: no-repeat;
   background-size: 100%;
   padding-inline: 30px;
 }
 
 .home-title {
-  font-size: 2 rem;
+  font-size: 90px;
   margin-bottom: 10px;
-  color: rgba(255, 0, 0, 0.813);
+  color: rgba(230, 221, 221, 0.813);
   word-spacing: 1%;
 }
 
 .home-description {
-  font-size: 1.2rem;
+  font-size: 30px;
   margin-bottom: 20px;
-  color: rgba(88, 7, 7, 0.722);
+  color: rgba(230, 221, 221, 0.813);
 }
