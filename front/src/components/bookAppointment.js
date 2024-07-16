@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import Navbar from "./navbar";
 import { toast } from "react-toastify";
 import "../assets/css/bookAppointment.css";
@@ -6,10 +6,13 @@ import axios from "axios";
 import Loader from "../components/loader";
 import { useNavigate } from "react-router-dom";
 import Select from "react-select";
+import { UserContext } from "../App";
 
 function BookAppointment() {
+  const { user } = useContext(UserContext);
   const navigate = useNavigate();
   const [doctors, setDoctors] = useState([]);
+  const [profile, setProfile] = useState([]);
   const [loading, setLoading] = useState(false);
   const [values, setValues] = useState({
     firstname: "",
@@ -24,8 +27,8 @@ function BookAppointment() {
   });
 
   useEffect(() => {
+    setLoading(true);
     const fetchDoctors = async () => {
-      setLoading(true);
       try {
         const response = await axios.get(`doctors`, {
           headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
@@ -40,9 +43,24 @@ function BookAppointment() {
         setLoading(false);
       }
     };
+    const fetchUserProfile = async () => {
+      try {
+        const response = await axios.get("patients", {
+          headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
+        });
+        const fetchedProfile = response.data.patients;
+        setProfile(fetchedProfile);
+      } catch (error) {
+        console.error("Error fetching patient profile:", error);
+      } finally {
+        setLoading(false);
+      }
+    };
     fetchDoctors();
+    fetchUserProfile();
   }, []);
 
+  console.log(profile);
   const handleChange = (e) => {
     setValues({ ...values, [e.target.name]: e.target.value });
   };
@@ -58,14 +76,21 @@ function BookAppointment() {
         doctorId: selectedDoctor.doctorId,
         doctorfirstname: selectedDoctor.firstname,
         doctorlastname: selectedDoctor.lastname,
+        doctoremail: selectedDoctor.email,
       }));
     }
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    const valuesData = {
+      ...values,
+      email: user.email,
+      firstname: profile[0].firstname,
+      lastname: profile[0].lastname,
+    };
     axios
-      .post("/createAppointment", values, {
+      .post("/createAppointment", valuesData, {
         headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
       })
       .then((result) => {
@@ -85,12 +110,13 @@ function BookAppointment() {
       ...provided,
       display: "flex",
       alignItems: "center",
+      width: "600px",
     }),
   };
 
   const doctorsOptions = doctors.map((doctor) => ({
     value: doctor.doctorId,
-    label: `${doctor.firstname} ${doctor.lastname} - (${doctor.specialization})`,
+    label: `${doctor.firstname} ${doctor.lastname} | ${doctor.email} - (${doctor.specialization})`,
   }));
 
   return (
@@ -100,36 +126,40 @@ function BookAppointment() {
       <h2 className="form-title">Book an Appointment</h2> <br />
       <div className="form-container">
         <form onSubmit={handleSubmit} className="appointment-form">
-          <div className="form-group">
-            <label htmlFor="firstname">First Name</label>
-            <input
-              type="text"
-              placeholder="First Name"
-              name="firstname"
-              onChange={handleChange}
-              value={values.firstname}
-            />
-          </div>
-          <div className="form-group">
-            <label htmlFor="lastname">Last Name</label>
-            <input
-              type="text"
-              placeholder="Last Name"
-              name="lastname"
-              onChange={handleChange}
-              value={values.lastname}
-            />
-          </div>
-          <div className="form-group">
-            <label htmlFor="email">E-mail Address</label>
-            <input
-              type="email"
-              placeholder="E-mail Address"
-              name="email"
-              onChange={handleChange}
-              value={values.email}
-            />
-          </div>
+          {profile.map((person, index) => (
+            <div key={index}>
+              {" "}
+              <div className="form-group">
+                <label htmlFor="firstname">First Name:</label>
+                <p>{person.firstname}</p>
+              </div>{" "}
+              <div className="form-group">
+                <label htmlFor="lastname">Last Name:</label>
+                <p>{person.lastname}</p>
+              </div>{" "}
+              <div className="form-group">
+                <label htmlFor="gender">Gender:</label>
+                <p>{person.gender}</p>
+              </div>
+              <div className="form-group">
+                <label htmlFor="email">E-mail Address:</label>
+                <p>{user.email}</p>
+              </div>
+              <div className="form-group">
+                <label htmlFor="phone">Phone Number:</label>
+                <p>{person.phone}</p>
+              </div>
+              <div className="form-group">
+                <label htmlFor="address">Address:</label>
+                <p>{person.address}</p>
+              </div>
+              <div className="form-group">
+                <label htmlFor="illness">Diagnosis:</label>
+                <p>{person.illness}</p>
+              </div>
+            </div>
+          ))}
+
           <div className="form-group">
             <label htmlFor="date">Set Appointment Date</label>
             <input
@@ -154,16 +184,15 @@ function BookAppointment() {
             <label htmlFor="service">
               What services are you interested in?
             </label>
-            <input
-              type="text"
-              placeholder="Services Interested"
+            <textarea
+              placeholder="Type here"
               name="service"
               onChange={handleChange}
               value={values.service}
             />
           </div>
           <div className="form-group">
-            <label htmlFor="doctor">Which doctor would you prefer?</label>
+            <label htmlFor="doctor">Preferred Doctor</label>
             <Select
               styles={customStyles}
               options={doctorsOptions}
@@ -174,7 +203,7 @@ function BookAppointment() {
             />
           </div>
           <button type="submit" className="submit-button">
-            Create Appointment
+            Book Appointment
           </button>
         </form>
       </div>

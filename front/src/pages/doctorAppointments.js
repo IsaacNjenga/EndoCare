@@ -8,7 +8,6 @@ import Loader from "../components/loader";
 import "../assets/css/appointment.css";
 import { UserContext } from "../App";
 
-
 const customStyles = {
   headCells: {
     style: {
@@ -76,8 +75,9 @@ function DoctorAppointments() {
     {
       name: "Patient Name",
       selector: (row) => `${row.firstname} ${row.lastname}`,
+      grow: 2,
     },
-    { name: "E-mail", selector: (row) => row.email, grow: 1 },
+    { name: "Patient's E-mail", selector: (row) => row.email, grow: 2 },
     { name: "Date", selector: (row) => row.date },
     { name: "Time", selector: (row) => row.time },
     { name: "Service", selector: (row) => row.service },
@@ -85,15 +85,19 @@ function DoctorAppointments() {
       name: "Doctor",
       selector: (row) => `${row.doctorfirstname} ${row.doctorlastname}`,
     },
+    { name: "E-mail", selector: (row) => row.doctoremail, grow: 2 },
   ];
   return (
     <>
       {loading && <Loader />}
       <Navbar />
       <div className="content">
-      {user.role === "patient" ? (
+        {user.role === "patient" ? (
           <p>
-            Book an appointment <Link to="/book-appointment">here</Link>
+            Book an appointment{" "}
+            <button className="appointment-btn">
+              <Link to="/book-appointment">here</Link>
+            </button>
           </p>
         ) : null}
         <h1>Your appointments</h1>

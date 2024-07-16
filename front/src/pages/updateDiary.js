@@ -9,6 +9,7 @@ import { UserContext } from "../App";
 
 function UpdateDiary() {
   const { id } = useParams();
+  console.log(id)
   const { user } = useContext(UserContext);
   const navigate = useNavigate();
   const [currentDateTime, setCurrentDateTime] = useState(new Date());
@@ -48,7 +49,7 @@ function UpdateDiary() {
     const valuesData = { ...values, patientId: user._id };
 
     try {
-      const result = await axios.put(`update-entry/${user._id}`, valuesData, {
+      const result = await axios.put(`update-entry/${id}`, valuesData, {
         headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
       });
       if (result.data.success) {
@@ -60,6 +61,7 @@ function UpdateDiary() {
       }
     } catch (err) {
       console.error(err);
+      alert('Error updating!')
     } finally {
       setLoading(false);
     }

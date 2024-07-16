@@ -65,10 +65,9 @@ const getEntries = async (req, res) => {
 
 const updateEntry = async (req, res) => {
   const { id } = req.params;
-  console.log("the id from req.params:", id);
   try {
-    const result = await DiaryModel.findOneAndUpdate(
-      { id },
+    const result = await DiaryModel.findByIdAndUpdate(
+      { _id: id },
       { ...req.body },
       { new: true }
     );

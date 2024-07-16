@@ -25,30 +25,44 @@ export default function Navbar() {
       <div className="navbar-right">
         {user ? (
           <>
-            <Link to="/profile" className="navbar-link">
-              {user.name}
-            </Link>
-            <Link to="/diary" className="navbar-link">
-              My Journal
-            </Link>
-            <Link to="/resources" className="navbar-link">
-              Resources
-            </Link>
-            <Link to="/appointments" className="navbar-link">
-              Appointments
-            </Link>
-            <Link to="/logout" className="navbar-link">
-              Logout
-            </Link>
+            <button className="link-btn">
+              <Link to="/profile" className="navbar-link">
+                {user.name}
+              </Link>
+            </button>
+            <button className="link-btn">
+              <Link to="/diary" className="navbar-link">
+                My Journal
+              </Link>
+            </button>
+            <button className="link-btn">
+              <Link to="/resources" className="navbar-link">
+                Resources
+              </Link>
+            </button>
+            <button className="link-btn">
+              <Link to="/appointments" className="navbar-link">
+                Appointments
+              </Link>
+            </button>
+            <button className="link-btn">
+              <Link to="/logout" className="navbar-link">
+                Logout
+              </Link>
+            </button>
           </>
         ) : (
           <>
-            <Link to="/register" className="navbar-link">
-              Register
-            </Link>
-            <Link to="/login" className="navbar-link">
-              Login
-            </Link>
+            <button className="link-btn">
+              <Link to="/register" className="navbar-link">
+                Register
+              </Link>
+            </button>
+            <button className="link-btn">
+              <Link to="/login" className="navbar-link">
+                Login
+              </Link>
+            </button>
           </>
         )}
       </div>

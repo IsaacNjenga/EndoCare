@@ -6,6 +6,7 @@ import { Register, Login, Auth } from "../controllers/userController.js";
 
 import {
   createAppointment,
+  deleteAppointment,
   getAppointments,
 } from "../controllers/appointmentController.js";
 
@@ -76,6 +77,7 @@ router.get("/verify", VerifyUser, Auth);
 //route for appointments
 router.post("/createAppointment", VerifyUser, createAppointment);
 router.get("/appointments", VerifyUser, getAppointments);
+router.delete("/appointment/:id", VerifyUser, deleteAppointment);
 
 //route for doctors
 router.post("/createDoctor", VerifyUser, createDoctor);

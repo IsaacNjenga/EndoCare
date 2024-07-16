@@ -31,6 +31,7 @@ export const UserContext = createContext(null);
 axios.defaults.baseURL = "https://endo-care-back.vercel.app/endocare/";
 axios.defaults.withCredentials = true;
 
+//http://localhost:3001/endocare/
 //"https://endo-care-back.vercel.app/endocare/";
 const router = createBrowserRouter([
   { path: "/", element: <Home /> },
