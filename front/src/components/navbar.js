@@ -2,12 +2,19 @@ import React, { useContext } from "react";
 import "../assets/css/navbar.css";
 import { Link } from "react-router-dom";
 import { UserContext } from "../App";
+import userProfile from "../assets/icons/profile.png";
+import appointmentIcon from "../assets/icons/appointment.png";
+import logoutIcon from "../assets/icons/logout.png";
+import journalIcon from "../assets/icons/journal.png";
+import loginIcon from "../assets/icons/login.png";
+import resourcesIcon from "../assets/icons/resources.png";
+import signupIcon from "../assets/icons/signup.png";
 import diabetesIcon from "../assets/icons/diabetes.png";
 
 export default function Navbar() {
   const { user } = useContext(UserContext);
   return (
-    <div className="navbar">
+    <nav className="navbar">
       <div className="navbar-left">
         <Link to="/" className="navbar-brand">
           <div className="navbar-brand-container">
@@ -16,56 +23,55 @@ export default function Navbar() {
               alt="img-diabetes"
               className="navbar-icon"
             />
+            <span className="navbar-title">ENDOCARE</span>
           </div>
-          <span>
-            <u>ENDOCARE</u>
-          </span>
         </Link>
       </div>
       <div className="navbar-right">
         {user ? (
           <>
-            <button className="link-btn">
-              <Link to="/profile" className="navbar-link">
-                {user.name}
-              </Link>
-            </button>
-            <button className="link-btn">
-              <Link to="/diary" className="navbar-link">
-                My Journal
-              </Link>
-            </button>
-            <button className="link-btn">
-              <Link to="/resources" className="navbar-link">
-                Resources
-              </Link>
-            </button>
-            <button className="link-btn">
-              <Link to="/appointments" className="navbar-link">
-                Appointments
-              </Link>
-            </button>
-            <button className="link-btn">
-              <Link to="/logout" className="navbar-link">
-                Logout
-              </Link>
-            </button>
+            <Link to="/profile" className="navbar-link navbar-item">
+              <img src={userProfile} alt="user" className="navbar-user-icon" />
+              <span>{user.name}</span>
+            </Link>
+            <Link to="/diary" className="navbar-link">
+              <img src={journalIcon} alt="user" className="navbar-user-icon" />
+              My Journal
+            </Link>
+            <Link to="/resources" className="navbar-link">
+              <img
+                src={resourcesIcon}
+                alt="user"
+                className="navbar-user-icon"
+              />
+              Resources
+            </Link>
+            <Link to="/appointments" className="navbar-link">
+              <img
+                src={appointmentIcon}
+                alt="user"
+                className="navbar-user-icon"
+              />
+              Appointments
+            </Link>
+            <Link to="/logout" className="navbar-link">
+              <img src={logoutIcon} alt="user" className="navbar-user-icon" />
+              Logout
+            </Link>
           </>
         ) : (
           <>
-            <button className="link-btn">
-              <Link to="/register" className="navbar-link">
-                Register
-              </Link>
-            </button>
-            <button className="link-btn">
-              <Link to="/login" className="navbar-link">
-                Login
-              </Link>
-            </button>
+            <Link to="/register" className="navbar-link">
+              <img src={signupIcon} alt="user" className="navbar-user-icon" />
+              Register
+            </Link>
+            <Link to="/login" className="navbar-link">
+              <img src={loginIcon} alt="user" className="navbar-user-icon" />
+              Login
+            </Link>
           </>
         )}
       </div>
-    </div>
+    </nav>
   );
 }
