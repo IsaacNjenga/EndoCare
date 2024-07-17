@@ -18,6 +18,10 @@ const diarySchema = new mongoose.Schema(
     stress: { type: String },
     postedBy: { type: mongoose.Schema.Types.ObjectId, ref: "user" },
     patientId: { type: String },
+    doctorId: { type: String },
+    doctorfirstname: { type: String },
+    doctorlastname: { type: String },
+    doctoremail: { type: String },
     createdAt: { type: Date, default: Date.now },
   },
   { collection: "diary" }

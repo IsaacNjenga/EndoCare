@@ -34,18 +34,36 @@ export default function Navbar() {
               <img src={userProfile} alt="user" className="navbar-user-icon" />
               <span>{user.name}</span>
             </Link>
-            <Link to="/diary" className="navbar-link">
-              <img src={journalIcon} alt="user" className="navbar-user-icon" />
-              My Journal
-            </Link>
-            <Link to="/resources" className="navbar-link">
-              <img
-                src={resourcesIcon}
-                alt="user"
-                className="navbar-user-icon"
-              />
-              Resources
-            </Link>
+            {user.role === "patient" ? (
+              <Link to="/diary" className="navbar-link">
+                <img
+                  src={journalIcon}
+                  alt="user"
+                  className="navbar-user-icon"
+                />
+                My Journal
+              </Link>
+            ) : (
+              <Link to="/diary" className="navbar-link">
+                <img
+                  src={journalIcon}
+                  alt="user"
+                  className="navbar-user-icon"
+                />
+                Journals
+              </Link>
+            )}
+            {user.role === "patient" ? (
+              <Link to="/resources" className="navbar-link">
+                <img
+                  src={resourcesIcon}
+                  alt="user"
+                  className="navbar-user-icon"
+                />
+                Resources
+              </Link>
+            ) : null}
+
             <Link to="/appointments" className="navbar-link">
               <img
                 src={appointmentIcon}

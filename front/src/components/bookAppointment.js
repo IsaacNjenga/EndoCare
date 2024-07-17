@@ -60,7 +60,6 @@ function BookAppointment() {
     fetchUserProfile();
   }, []);
 
-  console.log(profile);
   const handleChange = (e) => {
     setValues({ ...values, [e.target.name]: e.target.value });
   };

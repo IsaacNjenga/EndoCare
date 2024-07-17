@@ -12,6 +12,10 @@ const createPatient = async (req, res) => {
       address,
       patientId,
       illness,
+      doctorfirstname,
+      doctorlastname,
+      doctorId,
+      doctoremail,
     } = req.body;
     const newPatient = new PatientModel({
       patientId,
@@ -22,6 +26,10 @@ const createPatient = async (req, res) => {
       gender,
       address,
       illness,
+      doctorfirstname,
+      doctorlastname,
+      doctorId,
+      doctoremail,
       postedBy: req.user._id,
     });
     const result = await newPatient.save();
@@ -82,6 +90,10 @@ const getPatient = async (req, res) => {
         phone: patient.phone,
         address: patient.address,
         illness: patient.illness,
+        doctorfirstname: patient.doctorfirstname,
+        doctorlastname: patient.doctorlastname,
+        doctoremail: patient.doctoremail,
+        doctorId: patient.doctorId,
       },
     });
   } catch (error) {

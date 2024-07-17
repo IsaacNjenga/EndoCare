@@ -18,7 +18,9 @@ function AddDiary() {
   const navigate = useNavigate();
   const [currentDateTime, setCurrentDateTime] = useState(new Date());
   const [values, setValues] = useState({});
+  const [data, setData] = useState([]);
   const [loading, setLoading] = useState(false);
+  const [doctorId, setDoctorId] = useState(0);
 
   useEffect(() => {
     const timer = setInterval(() => {
@@ -27,15 +29,37 @@ function AddDiary() {
     return () => clearInterval(timer);
   }, []);
 
+  const fetchProfile = async () => {
+    setLoading(true);
+    try {
+      const response = await axios.get("patients", {
+        headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
+      });
+      const fetchedProfile = response.data.patients;
+      setData(fetchedProfile);
+      setDoctorId(fetchedProfile[0].doctorId.toString());
+    } catch (error) {
+      alert("Error fetching profile");
+      console.error("Error fetching patient profile:", error);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  useEffect(() => {
+    fetchProfile();
+  }, []);
+
   const handleChange = (e) => {
     setValues({ ...values, [e.target.name]: e.target.value });
   };
   const patientId = user._id;
+
   const handleSubmit = (e) => {
     e.preventDefault();
     setLoading(true);
 
-    const valuesData = { ...values, patientId };
+    const valuesData = { ...values, patientId, doctorId };
 
     axios
       .post("addEntry", valuesData, {
@@ -43,7 +67,7 @@ function AddDiary() {
       })
       .then((result) => {
         if (result.data.success) {
-          toast.success("Profile Saved!", {
+          toast.success("Journal Entry Saved!", {
             position: "top-right",
             autoClose: 2000,
           });
@@ -74,11 +98,32 @@ function AddDiary() {
             <br />
             <hr />
             <br />
+            {data.map((profile, index) => (
+              <div key={index}>
+                <p>
+                  <strong>First Name:</strong> {profile.firstname}
+                </p>
+                <p>
+                  <strong>Last Name:</strong> {profile.lastname}
+                </p>
+                <p>
+                  <strong>Gender:</strong> {profile.gender}
+                </p>
+                <p>
+                  <strong>Diagnosis:</strong>
+                  {profile.illness}
+                </p>
+                <p>
+                  <strong>Assigned Doctor:</strong>
+                  {profile.doctorfirstname} {profile.doctorlastname}
+                </p>
+              </div>
+            ))}
+            <br />
+            <hr />
+            <br />
             <h1 className="section-title">Daily Log</h1>
-            <div className="form-group">
-              <label>Diagnosis:</label>
-              <p>Type-2 Diabetes</p>
-            </div>
+
             <div className="form-group">
               <label htmlFor="glucose-level">
                 <img src={bloodSugarIcon} alt="icon" className="icon" />
@@ -174,18 +219,6 @@ function AddDiary() {
                 name="symptoms"
                 onChange={handleChange}
               />
-            </div>
-          </div>
-          <br />
-          <hr />
-          <br />
-          <div className="section">
-            <h1 className="section-title">Medical Information</h1>
-            <br />
-            <br />
-            <div className="form-group">
-              <label>Treatment Plan</label>
-              <p>The doctor will fill these on their end</p>
             </div>
           </div>
           <br />

@@ -6,11 +6,13 @@ import { toast } from "react-toastify";
 import { useNavigate, useParams } from "react-router-dom";
 import "../assets/css/addPatientProfile.css";
 import Loader from "../components/loader";
+import Select from "react-select";
 
 function UpdatePatientProfile() {
   const navigate = useNavigate();
   const { id } = useParams();
   const { user } = useContext(UserContext);
+  const [doctors, setDoctors] = useState([]);
   const [loading, setLoading] = useState(false);
   const [values, setValues] = useState({
     firstname: "",
@@ -30,10 +32,46 @@ function UpdatePatientProfile() {
     "Cortisol & Aldosterone Deficiency",
   ];
 
+  useEffect(() => {
+    setLoading(true);
+    const fetchDoctors = async () => {
+      try {
+        const response = await axios.get(`doctors`, {
+          headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
+        });
+        const fetchedDoctors = Array.isArray(response.data.doctors)
+          ? response.data.doctors
+          : [];
+        setDoctors(fetchedDoctors);
+        setLoading(false);
+      } catch (error) {
+        console.log("Error fetching doctors", error);
+        setLoading(false);
+      }
+    };
+    fetchDoctors();
+  }, []);
+
   const handleChange = (e) => {
     setValues({ ...values, [e.target.name]: e.target.value });
   };
+  
+  const handleDoctorSelection = (selectedOption) => {
+    const selectedDoctor = doctors.find(
+      (doctor) => doctor.doctorId === selectedOption.value
+    );
 
+    if (selectedDoctor) {
+      setValues((prev) => ({
+        ...prev,
+        doctorId: selectedDoctor.doctorId,
+        doctorfirstname: selectedDoctor.firstname,
+        doctorlastname: selectedDoctor.lastname,
+        doctoremail: selectedDoctor.email,
+      }));
+    }
+  };
+  
   const handleSubmit = (e) => {
     e.preventDefault();
     setLoading(true);
@@ -111,6 +149,20 @@ function UpdatePatientProfile() {
         setLoading(false);
       });
   }, [user._id]);
+
+  const customStyles = {
+    option: (provided) => ({
+      ...provided,
+      display: "flex",
+      alignItems: "center",
+      width: "600px",
+    }),
+  };
+
+  const doctorsOptions = doctors.map((doctor) => ({
+    value: doctor.doctorId,
+    label: `${doctor.firstname} ${doctor.lastname} | ${doctor.email} - (${doctor.specialization})`,
+  }));
 
   return (
     <>
@@ -219,6 +271,17 @@ function UpdatePatientProfile() {
                   </option>
                 ))}
               </select>
+            </div>
+            <div className="input-group">
+              <label htmlFor="doctor">Preferred Doctor</label>
+              <Select
+                styles={customStyles}
+                options={doctorsOptions}
+                onChange={handleDoctorSelection}
+                value={doctorsOptions.find(
+                  (option) => option.value === values.doctorId
+                )}
+              />
             </div>
           </div>
           <button type="submit" className="btn-save">

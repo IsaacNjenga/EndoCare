@@ -57,7 +57,11 @@ function PatientProfile() {
                 <strong>Address:</strong> {profile.address}
               </p>
               <p>
-                <strong>Illness:</strong> {profile.illness}
+                <strong>Diagnosis:</strong> {profile.illness}
+              </p>
+              <p>
+                <strong>Assigned Doctor:</strong> {profile.doctorfirstname}{" "}
+                {profile.doctorlastname} - {profile.doctoremail}
               </p>
               <Link
                 className="edit-link"

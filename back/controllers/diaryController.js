@@ -18,6 +18,10 @@ const addEntry = async (req, res) => {
       symptoms,
       patientId,
       mood,
+      doctorId,
+      doctorfirstname,
+      doctorlastname,
+      doctoremail,
       stress,
     } = req.body;
     const newEntry = new DiaryModel({
@@ -34,6 +38,10 @@ const addEntry = async (req, res) => {
       exercise,
       symptoms,
       mood,
+      doctorId,
+      doctorfirstname,
+      doctorlastname,
+      doctoremail,
       stress,
       patientId,
       postedBy: req.user._id,
@@ -81,6 +89,23 @@ const updateEntry = async (req, res) => {
   }
 };
 
-const deleteEntry = () => {};
+const deleteEntry = async (req, res) => {
+  const { id } = req.params;
+  if (!id) {
+    return res.status(400).json({ error: "No ID specified" });
+  }
+  try {
+    const diary = await DiaryModel.findById(id);
+    if (!diary) {
+      return res.status(404).json({ error: "No matching diary entry" });
+    }
+    const deleteDiary = await DiaryModel.findByIdAndDelete({ _id: id });
+    const diaries = await DiaryModel.find({ postedBy: req.user._id });
+    return res.status(200).json({ success: true, diaries });
+  } catch (error) {
+    console.error("Error deleting this appointment:", error);
+    return res.status(500).json({ error: error.message });
+  }
+};
 
-export { addEntry, getEntries, updateEntry };
+export { addEntry, getEntries, updateEntry, deleteEntry };
