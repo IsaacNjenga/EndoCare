@@ -29,3 +29,41 @@ ol {
 strong {
   color: #2980b9;
 }
+
+.tablink {
+  background-color: #555;
+  color: white;
+  float: left;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  padding: 14px 16px;
+  font-size: 17px;
+  width: 25%;
+}
+
+.tablink:hover {
+  background-color: #777;
+}
+
+.tabcontent {
+  color: white;
+  display: none;
+  padding: 100px 20px;
+  height: 100%;
+}
+
+#definition {
+  display: block;
+  background-color: rgba(255, 0, 0, 0.305);
+}
+
+#meal-plan {
+  background-color: rgba(0, 128, 0, 0.344);
+}
+#workout-plan {
+  background-color: rgba(15, 15, 183, 0.285);
+}
+#tips {
+  background-color: rgba(255, 166, 0, 0.543);
+}

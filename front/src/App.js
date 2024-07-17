@@ -28,7 +28,7 @@ import UpdateDiary from "./pages/updateDiary";
 
 export const UserContext = createContext(null);
 
-axios.defaults.baseURL = "https://endo-care-back.vercel.app/endocare/";
+axios.defaults.baseURL = "http://localhost:3001/endocare/";
 axios.defaults.withCredentials = true;
 
 //http://localhost:3001/endocare/
