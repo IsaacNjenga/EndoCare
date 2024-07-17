@@ -3,6 +3,12 @@ import Navbar from "../components/navbar";
 import { toast } from "react-toastify";
 import "../assets/css/addDiary.css";
 import axios from "axios";
+import bloodSugarIcon from "../assets/icons/blood-sugar.png";
+import symptomsIcon from "../assets/icons/symptoms.png";
+import medicationIcon from "../assets/icons/medication.png";
+import exerciseIcon from "../assets/icons/exercise.png";
+import dietIcon from "../assets/icons/diet.png";
+import mentalIcon from "../assets/icons/mental.png";
 import { useNavigate } from "react-router-dom";
 import Loader from "../components/loader";
 import { UserContext } from "../App";
@@ -75,7 +81,8 @@ function AddDiary() {
             </div>
             <div className="form-group">
               <label htmlFor="glucose-level">
-                Blood Glucose Levels (in mg/dL)
+                <img src={bloodSugarIcon} alt="icon" className="icon" />
+                <span>Blood Glucose Levels (in mg/dL)</span>
               </label>
               <input
                 type="text"
@@ -103,7 +110,10 @@ function AddDiary() {
               />
             </div>
             <div className="form-group">
-              <label htmlFor="medication">Medications</label>
+              <label htmlFor="medication">
+                <img src={medicationIcon} alt="icon" className="icon" />
+                <span>Medications</span>
+              </label>
               <input
                 type="text"
                 placeholder="Morning"
@@ -118,7 +128,10 @@ function AddDiary() {
               />
             </div>
             <div className="form-group">
-              <label htmlFor="dietary-intake">Dietary Intake</label>
+              <label htmlFor="dietary-intake">
+                <img src={dietIcon} alt="icon" className="icon" />
+                <span>Dietary Intake</span>
+              </label>
               <textarea
                 placeholder="Breakfast"
                 name="breakfast"
@@ -141,7 +154,10 @@ function AddDiary() {
               />
             </div>
             <div className="form-group">
-              <label htmlFor="physical-activity">Physical Activity</label>
+              <label htmlFor="physical-activity">
+                <img src={exerciseIcon} alt="icon" className="icon" />
+                <span>Physical Activity</span>
+              </label>
               <textarea
                 placeholder="Exercise"
                 name="exercise"
@@ -149,7 +165,10 @@ function AddDiary() {
               />
             </div>
             <div className="form-group">
-              <label htmlFor="symptoms">Symptoms Today</label>
+              <label htmlFor="symptoms">
+                <img src={symptomsIcon} alt="icon" className="icon" />
+                <span>Symptoms Today</span>
+              </label>
               <textarea
                 placeholder="Symptoms"
                 name="symptoms"
@@ -173,11 +192,16 @@ function AddDiary() {
           <hr />
           <br />
           <div className="section">
-            <h1 className="section-title">Mental and Emotional Health</h1>
+            <h1 className="section-title">
+              <span>Mental and Emotional Health</span>
+            </h1>
             <br />
             <br />
             <div className="form-group">
-              <label htmlFor="mood">Mood today</label>
+              <label htmlFor="mood">
+                <img src={mentalIcon} alt="icon" className="icon" />
+                Mood today
+              </label>
               <textarea
                 placeholder="Mood"
                 name="mood"

@@ -1,4 +1,3 @@
-
 .diary-container {
   padding: 20px;
   font-family: Arial, sans-serif;
@@ -23,7 +22,8 @@
   color: #333;
   margin-bottom: 10px;
   border-bottom: 2px solid #f0a500;
-  display: inline-block;
+  display: flex;
+  align-items: center;
 }
 
 .form-group {
@@ -31,10 +31,17 @@
 }
 
 .form-group label {
-  display: block;
+  display: flex;
+  align-items: center;
   font-size: 18px;
   margin-bottom: 5px;
   color: #333;
+}
+
+.form-group label img.icon {
+  width: 30px;
+  height: auto;
+  margin-right: 8px;
 }
 
 .form-group input,
@@ -54,14 +61,13 @@
 .submit-button {
   background-color: #f0a500;
   color: #fff;
-  padding: 15px 20px;
+  padding: 10px 20px;
   border: none;
   border-radius: 5px;
   font-size: 18px;
   cursor: pointer;
-  transition: background-color 0.3s ease;
 }
 
 .submit-button:hover {
-  background-color: #d99000;
+  background-color: #d18e00;
 }
