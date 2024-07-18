@@ -21,6 +21,8 @@ function UpdateDiary() {
   const [currentDateTime, setCurrentDateTime] = useState(new Date());
   const [data, setData] = useState([]);
   const [doctorId, setDoctorId] = useState(0);
+  const [firstname, setFirstname] = useState("");
+  const [lastname, setLastname] = useState("");
   const [values, setValues] = useState({
     fasting: "",
     prelunch: "",
@@ -55,6 +57,8 @@ function UpdateDiary() {
       const fetchedProfile = response.data.patients;
       setData(fetchedProfile);
       setDoctorId(fetchedProfile[0].doctorId.toString());
+      setFirstname(fetchedProfile[0].firstname.toString());
+      setLastname(fetchedProfile[0].lastname.toString());
     } catch (error) {
       alert("Error fetching profile");
       console.error("Error fetching patient profile:", error);
@@ -75,7 +79,13 @@ function UpdateDiary() {
     e.preventDefault();
     setLoading(true);
 
-    const valuesData = { ...values, patientId: user._id, doctorId };
+    const valuesData = {
+      ...values,
+      patientId: user._id,
+      doctorId,
+      firstname,
+      lastname,
+    };
 
     try {
       const result = await axios.put(`update-entry/${id}`, valuesData, {

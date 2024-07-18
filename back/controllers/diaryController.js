@@ -21,6 +21,8 @@ const addEntry = async (req, res) => {
       doctorId,
       doctorfirstname,
       doctorlastname,
+      firstname,
+      lastname,
       doctoremail,
       stress,
     } = req.body;
@@ -41,6 +43,8 @@ const addEntry = async (req, res) => {
       doctorId,
       doctorfirstname,
       doctorlastname,
+      firstname,
+      lastname,
       doctoremail,
       stress,
       patientId,
@@ -61,6 +65,22 @@ const getEntries = async (req, res) => {
       return res.status(404).json({ error: "Journal entry not found" });
     }
 
+    return res.status(200).json({
+      success: true,
+      results,
+    });
+  } catch (error) {
+    console.error("Error:", error);
+    return res.status(500).json({ error: error.message });
+  }
+};
+
+const getAllEntries = async (req, res) => {
+  try {
+    const results = await DiaryModel.find({});
+    if (!results) {
+      return res.status(404).json({ error: "empty" });
+    }
     return res.status(200).json({
       success: true,
       results,
@@ -108,4 +128,4 @@ const deleteEntry = async (req, res) => {
   }
 };
 
-export { addEntry, getEntries, updateEntry, deleteEntry };
+export { addEntry, getEntries, updateEntry, deleteEntry, getAllEntries };

@@ -38,7 +38,7 @@ function Login() {
             setUser(res.data.user);
             toast.success(`Welcome ${res.data.user.name}`, {
               position: "top-right",
-              autoClose: 5000,
+              autoClose: 1000,
             });
 
             navigate("/dashboard");

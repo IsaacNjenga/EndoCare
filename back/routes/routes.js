@@ -29,6 +29,7 @@ import {
   getEntries,
   updateEntry,
   deleteEntry,
+  getAllEntries,
 } from "../controllers/diaryController.js";
 
 router.post(
@@ -95,7 +96,9 @@ router.put("/update-patient/:id", VerifyUser, updatePatient);
 //route for journals
 router.post("/addEntry", VerifyUser, addEntry);
 router.get("/entries", VerifyUser, getEntries);
+router.get("/allEntries", VerifyUser, getAllEntries);
 router.put("/update-entry/:id", VerifyUser, updateEntry);
 router.delete("/diary/:id", VerifyUser, deleteEntry);
 
 export { router as Router };
+
