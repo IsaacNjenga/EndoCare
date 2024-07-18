@@ -3,16 +3,24 @@ import Navbar from "../components/navbar";
 import { toast } from "react-toastify";
 import "../assets/css/addDiary.css";
 import axios from "axios";
+import bloodSugarIcon from "../assets/icons/blood-sugar.png";
+import symptomsIcon from "../assets/icons/symptoms.png";
+import medicationIcon from "../assets/icons/medication.png";
+import exerciseIcon from "../assets/icons/exercise.png";
+import dietIcon from "../assets/icons/diet.png";
+import mentalIcon from "../assets/icons/mental.png";
 import { useNavigate, useParams } from "react-router-dom";
 import Loader from "../components/loader";
 import { UserContext } from "../App";
 
 function UpdateDiary() {
   const { id } = useParams();
-  console.log(id)
+  console.log(id);
   const { user } = useContext(UserContext);
   const navigate = useNavigate();
   const [currentDateTime, setCurrentDateTime] = useState(new Date());
+  const [data, setData] = useState([]);
+  const [doctorId, setDoctorId] = useState(0);
   const [values, setValues] = useState({
     fasting: "",
     prelunch: "",
@@ -38,6 +46,27 @@ function UpdateDiary() {
     return () => clearInterval(timer);
   }, []);
 
+  const fetchProfile = async () => {
+    setLoading(true);
+    try {
+      const response = await axios.get("patients", {
+        headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
+      });
+      const fetchedProfile = response.data.patients;
+      setData(fetchedProfile);
+      setDoctorId(fetchedProfile[0].doctorId.toString());
+    } catch (error) {
+      alert("Error fetching profile");
+      console.error("Error fetching patient profile:", error);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  useEffect(() => {
+    fetchProfile();
+  }, []);
+
   const handleChange = (e) => {
     setValues({ ...values, [e.target.name]: e.target.value });
   };
@@ -46,7 +75,7 @@ function UpdateDiary() {
     e.preventDefault();
     setLoading(true);
 
-    const valuesData = { ...values, patientId: user._id };
+    const valuesData = { ...values, patientId: user._id, doctorId };
 
     try {
       const result = await axios.put(`update-entry/${id}`, valuesData, {
@@ -61,12 +90,11 @@ function UpdateDiary() {
       }
     } catch (err) {
       console.error(err);
-      alert('Error updating!')
+      alert("Error updating!");
     } finally {
       setLoading(false);
     }
   };
-
 
   const fetchDiary = async () => {
     setLoading(true);
@@ -142,13 +170,34 @@ function UpdateDiary() {
             <br />
             <hr />
             <br />
+            {data.map((profile, index) => (
+              <div key={index}>
+                <p>
+                  <strong>First Name:</strong> {profile.firstname}
+                </p>
+                <p>
+                  <strong>Last Name:</strong> {profile.lastname}
+                </p>
+                <p>
+                  <strong>Gender:</strong> {profile.gender}
+                </p>
+                <p>
+                  <strong>Diagnosis:</strong>
+                  {profile.illness}
+                </p>
+                <p>
+                  <strong>Assigned Doctor:</strong>
+                  {profile.doctorfirstname} {profile.doctorlastname}
+                </p>
+              </div>
+            ))}
+            <br />
+            <hr />
+            <br />
             <h1 className="section-title">Daily Log</h1>
             <div className="form-group">
-              <label>Diagnosis:</label>
-              <p>Type-2 Diabetes</p>
-            </div>
-            <div className="form-group">
               <label htmlFor="glucose-level">
+                <img src={bloodSugarIcon} alt="icon" className="icon" />
                 Blood Glucose Levels (in mg/dL)
               </label>
               <input
@@ -181,7 +230,10 @@ function UpdateDiary() {
               />
             </div>
             <div className="form-group">
-              <label htmlFor="medication">Medications</label>
+              <label htmlFor="medication">
+                <img src={medicationIcon} alt="icon" className="icon" />
+                <span>Medications</span>
+              </label>
               <input
                 type="text"
                 placeholder="Morning"
@@ -198,7 +250,10 @@ function UpdateDiary() {
               />
             </div>
             <div className="form-group">
-              <label htmlFor="dietary-intake">Dietary Intake</label>
+              <label htmlFor="dietary-intake">
+                <img src={dietIcon} alt="icon" className="icon" />
+                <span>Dietary Intake</span>
+              </label>
               <textarea
                 placeholder="Breakfast"
                 name="breakfast"
@@ -225,7 +280,10 @@ function UpdateDiary() {
               />
             </div>
             <div className="form-group">
-              <label htmlFor="physical-activity">Physical Activity</label>
+              <label htmlFor="physical-activity">
+                <img src={exerciseIcon} alt="icon" className="icon" />
+                <span>Physical Activity</span>
+              </label>
               <textarea
                 placeholder="Exercise"
                 name="exercise"
@@ -234,7 +292,10 @@ function UpdateDiary() {
               />
             </div>
             <div className="form-group">
-              <label htmlFor="symptoms">Symptoms Today</label>
+              <label htmlFor="symptoms">
+                <img src={symptomsIcon} alt="icon" className="icon" />
+                <span>Symptoms Today</span>
+              </label>
               <textarea
                 placeholder="Symptoms"
                 name="symptoms"
@@ -247,23 +308,14 @@ function UpdateDiary() {
           <hr />
           <br />
           <div className="section">
-            <h1 className="section-title">Medical Information</h1>
-            <br />
-            <br />
-            <div className="form-group">
-              <label>Treatment Plan</label>
-              <p>The doctor will fill these on their end</p>
-            </div>
-          </div>
-          <br />
-          <hr />
-          <br />
-          <div className="section">
             <h1 className="section-title">Mental and Emotional Health</h1>
             <br />
             <br />
             <div className="form-group">
-              <label htmlFor="mood">Mood today</label>
+              <label htmlFor="mood">
+                <img src={mentalIcon} alt="icon" className="icon" />
+                Mood today
+              </label>
               <textarea
                 placeholder="Mood"
                 name="mood"
