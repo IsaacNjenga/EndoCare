@@ -23,6 +23,7 @@ function UpdateDiary() {
   const [doctorId, setDoctorId] = useState(0);
   const [firstname, setFirstname] = useState("");
   const [lastname, setLastname] = useState("");
+  const [diagnosis, setDiagnosis] = useState("");
   const [values, setValues] = useState({
     fasting: "",
     prelunch: "",
@@ -59,6 +60,7 @@ function UpdateDiary() {
       setDoctorId(fetchedProfile[0].doctorId.toString());
       setFirstname(fetchedProfile[0].firstname.toString());
       setLastname(fetchedProfile[0].lastname.toString());
+      setDiagnosis(fetchedProfile[0].illness.toString());
     } catch (error) {
       alert("Error fetching profile");
       console.error("Error fetching patient profile:", error);
@@ -85,6 +87,7 @@ function UpdateDiary() {
       doctorId,
       firstname,
       lastname,
+      illness: diagnosis,
     };
 
     try {

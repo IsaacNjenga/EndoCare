@@ -24,6 +24,7 @@ const diarySchema = new mongoose.Schema(
     doctoremail: { type: String },
     firstname: { type: String },
     lastname: { type: String },
+    illness: { type: String },
     createdAt: { type: Date, default: Date.now },
   },
   { collection: "diary" }

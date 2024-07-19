@@ -4,11 +4,16 @@ import Loader from "../components/loader";
 import { UserContext } from "../App";
 import axios from "axios";
 import "../assets/css/doctorFeedback.css";
+import { useParams } from "react-router-dom";
 
 function DoctorFeedback() {
+  const { id } = useParams();
   const { user } = useContext(UserContext);
   const [values, setValues] = useState({});
   const [data, setData] = useState([]);
+  const [doctorProfile, setDoctorProfile] = useState([]);
+  const [firstname, setFirstname] = useState("");
+  const [lastname, setLastname] = useState("");
   const [loading, setLoading] = useState(false);
 
   const fetchDiary = async () => {
@@ -18,13 +23,13 @@ function DoctorFeedback() {
       if (!token) {
         throw new Error("No token found");
       }
-      const response = await axios.get("/api/allEntries", {
+      const response = await axios.get("allEntries", {
         headers: { Authorization: `Bearer ${token}` },
       });
 
       if (response.data.success) {
         const fetchedDiary = response.data.results.filter(
-          (diary) => diary.doctorId === user._id
+          (diary) => diary.doctorId === user._id && diary._id === id
         );
         if (fetchedDiary) {
           setData(fetchedDiary);
@@ -37,10 +42,30 @@ function DoctorFeedback() {
     }
   };
 
+  const fetchDoctorProfile = async () => {
+    setLoading(true);
+    try {
+      const response = await axios.get("doctors", {
+        headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
+      });
+      const fetchedProfile = response.data.doctors.filter(
+        (doctor) => doctor.doctorId === user._id
+      );
+      setDoctorProfile(fetchedProfile);
+      setFirstname(fetchedProfile[0].firstname.toString());
+      setLastname(fetchedProfile[0].lastname.toString());
+    } catch (error) {
+      console.error("Error fetching patient profile:", error);
+    } finally {
+      setLoading(false);
+    }
+  };
+
   useEffect(() => {
     if (user._id) {
       fetchDiary();
     }
+    fetchDoctorProfile();
   }, [user._id]);
 
   const handleChange = (event) => {
@@ -49,7 +74,12 @@ function DoctorFeedback() {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    console.log("Feedback submitted:", values);
+    const valuesData = {
+      ...values,
+      doctorfirstname: firstname,
+      doctorlastname: lastname,
+    };
+    console.log("Feedback submitted:", valuesData);
     // Submit feedback logic here
   };
 
@@ -76,13 +106,13 @@ function DoctorFeedback() {
                   <h2>Blood Sugar Levels</h2>
                   <div className="section-content">
                     <h3>Fasting</h3>
-                    <p>{content.fasting}</p>
+                    <p>{content.fasting}mg/dL</p>
                     <h3>Pre-Lunch</h3>
-                    <p>{content.prelunch}</p>
+                    <p>{content.prelunch}mg/dL</p>
                     <h3>Post-Lunch</h3>
-                    <p>{content.postlunch}</p>
+                    <p>{content.postlunch}mg/dL</p>
                     <h3>Night</h3>
-                    <p>{content.night}</p>
+                    <p>{content.night}mg/dL</p>
                   </div>
                   <div className="feedback-section">
                     <h3>Observations</h3>

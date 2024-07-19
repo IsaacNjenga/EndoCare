@@ -23,6 +23,7 @@ function AddDiary() {
   const [doctorId, setDoctorId] = useState(0);
   const [firstname, setFirstname] = useState("");
   const [lastname, setLastname] = useState("");
+  const [diagnosis, setDiagnosis] = useState("");
   useEffect(() => {
     const timer = setInterval(() => {
       setCurrentDateTime(new Date());
@@ -41,6 +42,7 @@ function AddDiary() {
       setDoctorId(fetchedProfile[0].doctorId.toString());
       setFirstname(fetchedProfile[0].firstname.toString());
       setLastname(fetchedProfile[0].lastname.toString());
+      setDiagnosis(fetchedProfile[0].illness.toString());
     } catch (error) {
       alert("Error fetching profile");
       console.error("Error fetching patient profile:", error);
@@ -62,7 +64,14 @@ function AddDiary() {
     e.preventDefault();
     setLoading(true);
 
-    const valuesData = { ...values, patientId, doctorId, firstname, lastname };
+    const valuesData = {
+      ...values,
+      patientId,
+      doctorId,
+      firstname,
+      lastname,
+      illness: diagnosis,
+    };
 
     axios
       .post("addEntry", valuesData, {
