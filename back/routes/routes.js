@@ -32,6 +32,13 @@ import {
   getAllEntries,
 } from "../controllers/diaryController.js";
 
+import {
+  createFeedback,
+  deleteFeedback,
+  getFeedback,
+  updateFeedback,
+} from "../controllers/feedbackController.js";
+
 router.post(
   "/register",
   [
@@ -100,5 +107,10 @@ router.get("/allEntries", VerifyUser, getAllEntries);
 router.put("/update-entry/:id", VerifyUser, updateEntry);
 router.delete("/diary/:id", VerifyUser, deleteEntry);
 
-export { router as Router };
+//routes for feedback
+router.post("/createFeedback", VerifyUser, createFeedback);
+router.get("/feedback", VerifyUser, getFeedback);
+router.put("/update-feedback/:id", VerifyUser, updateFeedback);
+router.delete("/feedback/:id", VerifyUser, deleteFeedback);
 
+export { router as Router };

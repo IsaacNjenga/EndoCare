@@ -128,7 +128,7 @@ function PatientDiary() {
                     onClick={() => viewEntry(diaryTable)}
                     className="view-entry-btn"
                   >
-                    View this entry
+                    View 
                   </button>
                 </div>
               </div>

@@ -26,6 +26,7 @@ import Diary from "./components/diary";
 import AddDiary from "./pages/addDiary";
 import UpdateDiary from "./pages/updateDiary";
 import DoctorFeedback from "./pages/doctorFeedback";
+import UpdateDoctorFeedback from "./pages/updateFeedback";
 
 export const UserContext = createContext(null);
 
@@ -169,6 +170,14 @@ const router = createBrowserRouter([
     element: (
       <ProtectedRoutes>
         <DoctorFeedback />
+      </ProtectedRoutes>
+    ),
+  },
+  {
+    path: "/update-feedback/:id",
+    element: (
+      <ProtectedRoutes>
+        <UpdateDoctorFeedback />
       </ProtectedRoutes>
     ),
   },

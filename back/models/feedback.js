@@ -11,6 +11,7 @@ const feedbackSchema = new mongoose.Schema(
     wellBeingRecommendation: { type: String },
     overallAssessment: { type: String },
     postedBy: { type: mongoose.Schema.Types.ObjectId, ref: "user" },
+    diaryId: { type: String },
     doctorfirstname: { type: String },
     doctorlastname: { type: String },
   },

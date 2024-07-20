@@ -11,18 +11,19 @@ import axios from "axios";
 import { format } from "date-fns";
 import Loader from "./loader";
 import { UserContext } from "../App";
-import Swal from "sweetalert2";
-import withReactContent from "sweetalert2-react-content";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faPenToSquare } from "@fortawesome/free-solid-svg-icons";
+import {
+  faPenToSquare,
+  faTrash as faSolidTrash,
+} from "@fortawesome/free-solid-svg-icons";
 
-const MySwal = withReactContent(Swal);
 
 function DoctorDiary() {
   const { user } = useContext(UserContext);
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(false);
   const [selectedEntry, setSelectedEntry] = useState(null);
+  const [feedbackContent, setFeedbackContent] = useState(false);
 
   const fetchDiary = async () => {
     setLoading(true);
@@ -50,19 +51,31 @@ function DoctorDiary() {
     }
   };
 
+  const fetchFeedback = async (id) => {
+    const result = await axios.get("feedback", {
+      headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
+    });
+    const fetchedFeedback = result.data.feedback.find(
+      (feedback) => id === feedback.diaryId
+    );
+    return !!fetchedFeedback;
+  };
+
   useEffect(() => {
     if (user._id) {
       fetchDiary();
     }
   }, [user._id]);
 
-  const viewEntry = (entry) => {
+  const viewEntry = async (entry) => {
+    const hasFeedback = await fetchFeedback(entry._id);
+    setFeedbackContent(hasFeedback);
     setSelectedEntry(entry);
   };
 
   const closeModal = () => {
     setSelectedEntry(null);
-  };
+  };  
 
   return (
     <>
@@ -92,9 +105,8 @@ function DoctorDiary() {
                     onClick={() => viewEntry(diaryTable)}
                     className="view-entry-btn"
                   >
-                    View this entry
+                    View
                   </button>
-                 
                 </div>
               </div>
             ))}
@@ -114,12 +126,21 @@ function DoctorDiary() {
             <br />
             <div className="diary-entry-details">
               <div className="entry-header">
-                <Link
-                  to={`/doctors-feedback/${selectedEntry._id}`}
-                  className="update-entry-link"
-                >Give Feedback{" "}
-                  <FontAwesomeIcon icon={faPenToSquare} />
-                </Link>
+                {feedbackContent ? (
+                  <Link
+                    to={`/update-feedback/${selectedEntry._id}`}
+                    className="update-entry-link"
+                  >
+                    <FontAwesomeIcon icon={faPenToSquare} />
+                  </Link>
+                ) : (
+                  <Link
+                    to={`/doctors-feedback/${selectedEntry._id}`}
+                    className="update-entry-link"
+                  >
+                    Give Feedback
+                  </Link>
+                )}{" "}
               </div>
               <div className="entry-content">
                 <h2>
@@ -204,36 +225,18 @@ function DoctorDiary() {
                 <div className="entry-section-group">
                   <img src={symptomsIcon} alt="icon" className="icon" />
                   <h2>
-                    • <u>Symptoms Today</u>
+                    • <u>Symptoms</u>
                   </h2>
-                  <div className="entry-row">
-                    <div className="entry-section">
-                      <h3>Symptoms</h3>
-                      <p>{selectedEntry.symptoms}</p>
-                    </div>
-                  </div>
+                  <p>{selectedEntry.symptoms}</p>
                 </div>
                 <br /> <hr />
                 <br />
                 <div className="entry-section-group">
                   <img src={exerciseIcon} alt="icon" className="icon" />
                   <h2>
-                    • <u>Well-Being & Physical Health</u>
+                    • <u>Exercise</u>
                   </h2>
-                  <div className="entry-row">
-                    <div className="entry-section">
-                      <h3>Exercise</h3>
-                      <p>{selectedEntry.exercise}</p>
-                    </div>
-                    <div className="entry-section">
-                      <h3>Mood</h3>
-                      <p>{selectedEntry.mood}</p>
-                    </div>
-                    <div className="entry-section">
-                      <h3>Stress</h3>
-                      <p>{selectedEntry.stress}</p>
-                    </div>
-                  </div>
+                  <p>{selectedEntry.exercise}</p>
                 </div>
               </div>
             </div>

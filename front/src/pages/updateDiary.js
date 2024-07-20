@@ -121,15 +121,12 @@ function UpdateDiary() {
       });
 
       if (response.data.success) {
-        console.log("Fetched Entries:", response.data.results);
 
         const fetchedDiary = response.data.results.find(
           (diary) => id === diary._id && diary.patientId === user._id
         );
-        console.log("the id", response.data.results._id);
 
         if (fetchedDiary) {
-          console.log("Diary Entry ID:", fetchedDiary._id);
           setValues({
             fasting: fetchedDiary.fasting || "",
             prelunch: fetchedDiary.prelunch || "",

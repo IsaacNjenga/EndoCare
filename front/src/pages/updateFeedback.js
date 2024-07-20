@@ -6,12 +6,30 @@ import axios from "axios";
 import "../assets/css/doctorFeedback.css";
 import { toast } from "react-toastify";
 import { useNavigate, useParams } from "react-router-dom";
+import Swal from "sweetalert2";
+import withReactContent from "sweetalert2-react-content";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faTrash as faSolidTrash } from "@fortawesome/free-solid-svg-icons";
 
-function DoctorFeedback() {
+const MySwal = withReactContent(Swal);
+
+function UpdateDoctorFeedback() {
   const { id } = useParams();
   const navigate = useNavigate();
   const { user } = useContext(UserContext);
-  const [values, setValues] = useState({});
+  const [values, setValues] = useState({
+    bloodSugarObservation: "",
+    bloodSugarRecommendation: "",
+    medicationFeedback: "",
+    mealsFeedback: "",
+    symptomsFeedback: "",
+    wellBeingObservation: "",
+    wellBeingRecommendation: "",
+    overallAssessment: "",
+    doctorfirstname: "",
+    doctorlastname: "",
+    diaryId: "",
+  });
   const [data, setData] = useState([]);
   const [doctorProfile, setDoctorProfile] = useState([]);
   const [firstname, setFirstname] = useState("");
@@ -63,18 +81,40 @@ function DoctorFeedback() {
     }
   };
 
+  const fetchFeedback = async () => {
+    const result = await axios.get("feedback", {
+      headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
+    });
+    const fetchedFeedback = result.data.feedback.find(
+      (feedback) => id === feedback.diaryId
+    );
+    setValues({
+      bloodSugarObservation: fetchedFeedback.bloodSugarObservation || "",
+      bloodSugarRecommendation: fetchedFeedback.bloodSugarRecommendation || "",
+      medicationFeedback: fetchedFeedback.medicationFeedback || "",
+      mealsFeedback: fetchedFeedback.mealsFeedback || "",
+      symptomsFeedback: fetchedFeedback.symptomsFeedback || "",
+      wellBeingObservation: fetchedFeedback.wellBeingObservation || "",
+      wellBeingRecommendation: fetchedFeedback.wellBeingRecommendation || "",
+      overallAssessment: fetchedFeedback.overallAssessment || "",
+      doctorfirstname: fetchedFeedback.doctorfirstname || "",
+      doctorlastname: fetchedFeedback.doctorlastname || "",
+      diaryId: fetchedFeedback.diaryId || "",
+      id: fetchedFeedback._id,
+    });
+  };
+
   useEffect(() => {
     if (user._id) {
       fetchDiary();
     }
     fetchDoctorProfile();
+    fetchFeedback();
   }, [user._id]);
 
   const handleChange = (event) => {
     setValues({ ...values, [event.target.name]: event.target.value });
   };
-
-  const diaryId = id
 
   const handleSubmit = (event) => {
     setLoading(true);
@@ -83,17 +123,15 @@ function DoctorFeedback() {
       ...values,
       doctorfirstname: firstname,
       doctorlastname: lastname,
-      diaryId
     };
-    console.log(valuesData)
     axios
-      .post("createFeedback", valuesData, {
+      .put(`update-feedback/${id}`, valuesData, {
         headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
       })
-      .then((res) => {
-        if (res.data.success) {
+      .then((result) => {
+        if (result.data.success) {
           setLoading(false);
-          toast.success("Feedback Saved!", {
+          toast.success("Feedback Updated!", {
             position: "top-right",
             autoClose: 2000,
           });
@@ -103,8 +141,46 @@ function DoctorFeedback() {
       .catch((error) => {
         setLoading(false);
         console.log(error);
-        alert("Error saving the feedback");
+        alert("Error updating the feedback");
       });
+  };
+
+  const deleteRecord = (id) => {
+    MySwal.fire({
+      title: "Are you sure you want to delete the feedback for this entry?",
+      text: "You will lose this data forever!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        axios
+          .delete(`feedback/${id}`, {
+            headers: {
+              Authorization: `Bearer ${localStorage.getItem("token")}`,
+            },
+          })
+          .then((response) => {
+            const fetchedFeedback = response.data.feedbacks;
+            setData(fetchedFeedback);
+            MySwal.fire({
+              title: "Deleted!",
+              text: "Deleted successfully",
+              icon: "success",
+            });
+            navigate("/diary");
+          })
+          .catch((err) => {
+            MySwal.fire({
+              title: "Error!",
+              text: "An error occurred",
+              icon: "error",
+            });
+          });
+      }
+    });
   };
 
   return (
@@ -114,6 +190,12 @@ function DoctorFeedback() {
       <div className="doctor-feedback">
         <div className="container">
           <h1 className="title">Doctor Feedback</h1>
+          <button
+            className="cancel-btn"
+            onClick={() => deleteRecord(values.id)}
+          >
+            <FontAwesomeIcon icon={faSolidTrash} />
+          </button>
           <form onSubmit={handleSubmit} className="feedback-form">
             {data.map((content, index) => (
               <div key={index} className="entry">
@@ -143,11 +225,13 @@ function DoctorFeedback() {
                     <textarea
                       name="bloodSugarObservation"
                       onChange={handleChange}
+                      value={values.bloodSugarObservation}
                     />
                     <h3>Recommendations</h3>
                     <textarea
                       name="bloodSugarRecommendation"
                       onChange={handleChange}
+                      value={values.bloodSugarRecommendation}
                     />
                   </div>
                 </div>
@@ -164,6 +248,7 @@ function DoctorFeedback() {
                     <textarea
                       name="medicationFeedback"
                       onChange={handleChange}
+                      value={values.medicationFeedback}
                     />
                   </div>
                 </div>
@@ -181,7 +266,11 @@ function DoctorFeedback() {
                   </div>
                   <div className="feedback-section">
                     <h3>Feedback</h3>
-                    <textarea name="mealsFeedback" onChange={handleChange} />
+                    <textarea
+                      name="mealsFeedback"
+                      onChange={handleChange}
+                      value={values.mealsFeedback}
+                    />
                   </div>
                 </div>
                 <div className="entry-section">
@@ -192,7 +281,11 @@ function DoctorFeedback() {
                   </div>
                   <div className="feedback-section">
                     <h3>Feedback</h3>
-                    <textarea name="symptomsFeedback" onChange={handleChange} />
+                    <textarea
+                      name="symptomsFeedback"
+                      onChange={handleChange}
+                      value={values.symptomsFeedback}
+                    />
                   </div>
                 </div>
                 <div className="entry-section">
@@ -210,17 +303,23 @@ function DoctorFeedback() {
                     <textarea
                       name="wellBeingObservation"
                       onChange={handleChange}
+                      value={values.wellBeingObservation}
                     />
                     <h3>Recommendations</h3>
                     <textarea
                       name="wellBeingRecommendation"
                       onChange={handleChange}
+                      value={values.wellBeingRecommendation}
                     />
                   </div>
                 </div>
                 <div className="entry-section">
                   <h2>Overall Assessment & Next Steps</h2>
-                  <textarea name="overallAssessment" onChange={handleChange} />
+                  <textarea
+                    name="overallAssessment"
+                    onChange={handleChange}
+                    value={values.overallAssessment}
+                  />
                 </div>
               </div>
             ))}
@@ -234,4 +333,4 @@ function DoctorFeedback() {
   );
 }
 
-export default DoctorFeedback;
+export default UpdateDoctorFeedback;
