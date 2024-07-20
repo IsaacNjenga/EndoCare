@@ -10,7 +10,7 @@ import Select from "react-select";
 function AddPatientProfile() {
   const navigate = useNavigate();
   const { user } = useContext(UserContext);
-  const [values, setValues] = useState([]);
+  const [values, setValues] = useState({});
   const [doctors, setDoctors] = useState([]);
   const [loading, setLoading] = useState(false);
 
@@ -90,7 +90,7 @@ function AddPatientProfile() {
       ...provided,
       display: "flex",
       alignItems: "center",
-      width: "600px",
+      width: "800px",
     }),
   };
 
@@ -104,6 +104,10 @@ function AddPatientProfile() {
       {loading && <Loader />}
       <div className="form-container">
         <form onSubmit={handleSubmit}>
+          <h2>Patient's Profile</h2>
+          <br />
+          <hr />
+          <br />
           <div className="form-group">
             <div>
               <label htmlFor="firstname">First Name</label>
@@ -124,7 +128,7 @@ function AddPatientProfile() {
               />
             </div>
             <div className="input-group">
-              <label className="form-label">Gender</label>
+              <label className="form-label">Gender:</label>
               <div className="gender-options">
                 <div>
                   <input
@@ -135,7 +139,9 @@ function AddPatientProfile() {
                     checked={values.gender === "Male"}
                     onChange={handleChange}
                   />
-                  <label htmlFor="male">Male</label>
+                  <label htmlFor="male" className="form-radio-label">
+                    Male
+                  </label>
                 </div>
                 <div>
                   <input
@@ -146,7 +152,9 @@ function AddPatientProfile() {
                     checked={values.gender === "Female"}
                     onChange={handleChange}
                   />
-                  <label htmlFor="female">Female</label>
+                  <label htmlFor="female" className="form-radio-label">
+                    Female
+                  </label>
                 </div>
               </div>
             </div>
@@ -177,37 +185,33 @@ function AddPatientProfile() {
                 onChange={handleChange}
               />
             </div>
+
             <div>
-              <label htmlFor="illness">Illness</label>
-              <input
-                type="text"
-                placeholder="Enter your current illness"
-                name="illness"
-                onChange={handleChange}
-              />
-            </div>
-            <div>
-              <select name="illness" onChange={handleChange}>
-                <option value="" disabled>
-                  Select Condition
-                </option>
-                {options.map((option, index) => (
-                  <option key={index} value={option}>
-                    {option}
+              <div>
+                <label htmlFor="illness">Condition</label>
+                <select name="illness" onChange={handleChange}>
+                  <option value="" disabled>
+                    Select Condition
                   </option>
-                ))}
-              </select>
-            </div>
-            <div className="input-group">
-              <label htmlFor="doctor">Preferred Doctor</label>
-              <Select
-                styles={customStyles}
-                options={doctorsOptions}
-                onChange={handleDoctorSelection}
-                value={doctorsOptions.find(
-                  (option) => option.value === values.doctorId
-                )}
-              />
+                  {options.map((option, index) => (
+                    <option key={index} value={option}>
+                      {option}
+                    </option>
+                  ))}
+                </select>
+              </div>
+              <br />
+              <div className="input-group">
+                <label htmlFor="doctor">Preferred Doctor</label>
+                <Select
+                  styles={customStyles}
+                  options={doctorsOptions}
+                  onChange={handleDoctorSelection}
+                  value={doctorsOptions.find(
+                    (option) => option.value === values.doctorId
+                  )}
+                />
+              </div>
             </div>
           </div>
           <button type="submit">Save</button>

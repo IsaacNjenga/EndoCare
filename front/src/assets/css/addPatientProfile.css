@@ -1,22 +1,30 @@
 /* addPatientProfile.css */
 
+body {
+  font-family: Arial, sans-serif;
+  background-color: #f8f9fa;
+}
+
 .form-container {
   display: flex;
   justify-content: center;
   align-items: center;
   min-height: 100vh;
-  background-color: #f0f0f0;
+  background-color: #f8f9fa;
   padding: 20px;
+  max-width: 1000px;
 }
 
 form {
-  background: #fff;
-  padding: 20px;
+  background: #ffffff;
+  padding: 40px;
   border-radius: 10px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
   width: 100%;
   max-width: 800px;
+  transition: transform 0.2s ease-in-out;
 }
+
 
 .form-group {
   display: flex;
@@ -26,29 +34,32 @@ form {
 
 .form-group > div {
   flex: 0 0 48%;
-  margin-bottom: 15px;
+  margin-bottom: 20px;
 }
 
 label {
   display: block;
-  margin-bottom: 5px;
+  margin-bottom: 10px;
   font-weight: 600;
   color: #333;
+  font-size: 1rem;
 }
 
 input[type="text"],
 select {
   width: 100%;
-  padding: 10px;
+  padding: 12px;
   margin-top: 5px;
-  border: 1px solid #ddd;
+  border: 1px solid #ced4da;
   border-radius: 5px;
+  transition: border-color 0.2s ease-in-out;
 }
 
 input:focus,
 select:focus {
   outline: none;
   border-color: #007bff;
+  box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
 }
 
 .gender-options {
@@ -60,28 +71,29 @@ select:focus {
   margin-right: 10px;
 }
 
-
 .form-radio-label {
   cursor: pointer;
-  padding: 8px 16px;
+  padding: 8px 18px;
   border-radius: 5px;
-  background-color: #eee;
+  background-color: #c0b8b8bc;
+  transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out;
 }
 
-.form-radio:checked + .form-radio-label {
+input[type="radio"]:checked + .form-radio-label {
   background-color: #007bff;
   color: white;
 }
 
 button[type="submit"] {
   width: 100%;
-  padding: 10px;
+  padding: 15px;
   background-color: #007bff;
   color: #fff;
   border: none;
   border-radius: 5px;
-  font-size: 16px;
+  font-size: 1rem;
   cursor: pointer;
+  transition: background-color 0.2s ease-in-out;
   margin-top: 10px;
 }
 
@@ -96,7 +108,7 @@ label[for]:after {
 
 .error {
   color: red;
-  font-size: 12px;
+  font-size: 0.875rem;
   margin-top: -10px;
   margin-bottom: 10px;
 }

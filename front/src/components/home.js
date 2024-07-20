@@ -8,7 +8,7 @@ function Home() {
       <Navbar />
       <div className="home">
         <h1 className="home-title">ENDOCARE</h1>
-        <p className="home-description">Get your information here</p>
+        <p className="home-description">With you every step of the way</p>
       </div>
     </>
   );

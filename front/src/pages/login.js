@@ -1,5 +1,6 @@
 import React, { useContext, useState } from "react";
 import "../assets/css/form.css";
+import "../assets/css/login.css";
 import { Link } from "react-router-dom";
 import axios from "axios";
 import { toast } from "react-toastify";
@@ -62,46 +63,51 @@ function Login() {
   return (
     <>
       {loading && <Loader />}
-      <div className="form-container">
-        <form className="form" onSubmit={handleSubmit}>
-          <h2>Sign In</h2>
-          <div className="form-group">
-            <label htmlFor="email" className="form-label">
-              E-mail:
-            </label>
-            <input
-              type="email"
-              className="form-control"
-              name="email"
-              autoComplete="off"
-              placeholder="E-mail Address"
-              onChange={handleChange}
-            />
-            {errors.email && <span className="error">{errors.email}</span>}
-            <label htmlFor="name" className="form-label">
-              Password:
-            </label>
-            <input
-              type="password"
-              className="form-control"
-              name="password"
-              onChange={handleChange}
-            />
-            {errors.password && (
-              <span className="error">{errors.password}</span>
-            )}
-          </div>
-          {serverErrors.length > 0 &&
-            serverErrors.map((error, index) => (
-              <p className="error" key={index}>
-                {error.msg}
-              </p>
-            ))}
-          <button className="form-btn">Sign in</button>
-          <p>
-            Don't have an account? <Link to="/register" className="login-link">Sign up!</Link>
-          </p>
-        </form>
+      <div className="body">
+        <div className="form-container">
+          <form className="form" onSubmit={handleSubmit}>
+            <h2>Sign In</h2>
+            <div className="form-group">
+              <label htmlFor="email" className="form-label">
+                E-mail:
+              </label>
+              <input
+                type="email"
+                className="form-control"
+                name="email"
+                autoComplete="off"
+                placeholder="E-mail Address"
+                onChange={handleChange}
+              />
+              {errors.email && <span className="error">{errors.email}</span>}
+              <label htmlFor="name" className="form-label">
+                Password:
+              </label>
+              <input
+                type="password"
+                className="form-control"
+                name="password"
+                onChange={handleChange}
+              />
+              {errors.password && (
+                <span className="error">{errors.password}</span>
+              )}
+            </div>
+            {serverErrors.length > 0 &&
+              serverErrors.map((error, index) => (
+                <p className="error" key={index}>
+                  {error.msg}
+                </p>
+              ))}
+            <button className="form-btn">Sign in</button>
+            <p>
+              Don't have an account?{" "}
+              <Link to="/register" className="login-link">
+                Sign up!
+              </Link>
+            </p>
+          </form>
+        </div>
       </div>
     </>
   );

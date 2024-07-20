@@ -6,16 +6,12 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  /*background-image: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)),
-    url("contacts.jpg");*/
-  background-repeat: no-repeat;
-  background-size: cover;
   height: 100vh;
 }
 
 .form,
 .add-form {
-  background-color: rgba(255, 255, 255, 0.7);
+  background-color: rgba(219, 15, 15, 0);
   border-radius: 8px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
   padding: 20px;
@@ -86,11 +82,14 @@
   margin-bottom: 6px;
 }
 
+.form-control {
+  margin: 10px;
+}
+
 .error {
   color: rgb(185, 0, 0);
 }
 
-.login-link{
+.login-link {
   color: blue;
-  
 }
