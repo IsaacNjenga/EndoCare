@@ -1,5 +1,6 @@
 import express from "express";
 import { DoctorModel } from "../models/doctor.js";
+import mongoose from "mongoose";
 
 const createDoctor = async (req, res) => {
   try {
@@ -86,4 +87,33 @@ const getDoctor = async (req, res) => {
   }
 };
 
-export { getDoctor, getDoctors, createDoctor, updateDoctor };
+const deleteDoctor = async (req, res) => {
+  const { id } = req.params;
+
+  if (!id) {
+    return res.status(400).json({ error: "No ID specified" });
+  }
+
+  if (!mongoose.Types.ObjectId.isValid(id)) {
+    return res.status(400).json({ error: "Invalid ID format" });
+  }
+
+  try {
+    const doctor = await DoctorModel.findOne({ doctorId: id });
+    if (!doctor) {
+      //console.log(`Patient with ID ${id} not found`);
+      return res.status(404).json({ error: "Patient not found" });
+    }
+
+    await DoctorModel.findOneAndDelete({ doctorId: id });
+    //console.log(`Patient with ID ${id} deleted successfully`);
+    return res
+      .status(200)
+      .json({ success: true, message: "Doctor deleted successfully" });
+  } catch (error) {
+    console.error("Error during deletion:", error);
+    return res.status(500).json({ error: error.message });
+  }
+};
+
+export { getDoctor, getDoctors, createDoctor, updateDoctor, deleteDoctor };

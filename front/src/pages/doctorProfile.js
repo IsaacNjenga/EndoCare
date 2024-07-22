@@ -1,13 +1,16 @@
 import React, { useContext, useEffect, useState } from "react";
 import Navbar from "../components/navbar";
 import axios from "axios";
-import { Link } from "react-router-dom";
+import { Link,useNavigate } from "react-router-dom";
 import "../assets/css/profile.css";
 import AddDoctorProfile from "./addDoctorProfile";
 import { UserContext } from "../App";
 import Loader from "../components/loader";
+import Swal from "sweetalert2";
+import withReactContent from "sweetalert2-react-content";
+const MySwal = withReactContent(Swal);
 
-function DoctorProfile() {
+function DoctorProfile() { const navigate = useNavigate();
   const { user } = useContext(UserContext);
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(false);
@@ -32,6 +35,45 @@ function DoctorProfile() {
   useEffect(() => {
     fetchProfile();
   }, []);
+
+  const deleteRecord = (id) => {
+    MySwal.fire({
+      title: "Are you sure you want to delete your profile?",
+      text: "You will lose this data!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        axios
+          .delete(`doctor/${id}`, {
+            headers: {
+              Authorization: `Bearer ${localStorage.getItem("token")}`,
+            },
+          })
+          .then((response) => {
+            /*const fetchedPatient = response.data.patients;
+            setData(fetchedPatient);*/
+            MySwal.fire({
+              title: "Deleted!",
+              text: "Deleted successfully",
+              icon: "success",
+            });
+            navigate("/dashboard");
+          })
+          .catch((err) => {
+            MySwal.fire({
+              title: "Error!",
+              text: "An error occurred",
+              icon: "error",
+            });
+          });
+      }
+    });
+  };
+
   return (
     <>
       {loading && <Loader />}
@@ -62,12 +104,20 @@ function DoctorProfile() {
               <p>
                 <strong>specialization:</strong> {profile.specialization}
               </p>
-              <Link
-                className="edit-link"
-                to={`/update-doctor-profile/${profile.doctorId}`}
-              >
-                Edit
-              </Link>
+              <div className="links">
+                <Link
+                  className="edit-link"
+                  to={`/update-patient-profile/${profile.doctorId}`}
+                >
+                  Edit your profile
+                </Link>
+                <Link
+                  className="delete-link"
+                  onClick={() => deleteRecord(profile.doctorId)}
+                >
+                  Delete your profile
+                </Link>
+              </div>
             </div>
           ))
         ) : (

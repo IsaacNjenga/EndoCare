@@ -44,5 +44,27 @@ h1 {
 }
 
 .edit-link:hover {
+  text-decoration: none;
   background-color: #0056b3;
+}
+
+.delete-link {
+  display: inline-block;
+  padding: 10px 20px;
+  background-color: #e20f0f;
+  color: #fff;
+  border-radius: 5px;
+  text-decoration: none;
+  font-size: 16px;
+  margin-top: 20px;
+}
+
+.delete-link:hover {
+  text-decoration: none;
+  background-color: #b30000;
+}
+
+.links {
+  justify-content: space-between;
+  display: flex;
 }

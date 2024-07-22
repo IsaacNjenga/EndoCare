@@ -56,7 +56,12 @@ function Resources() {
   }
 
   if (!data) {
-    return <div>Error loading data or no data available</div>;
+    return (
+      <>
+        <Navbar />
+        <div>Error loading data or no data available</div>
+      </>
+    );
   }
 
   return (

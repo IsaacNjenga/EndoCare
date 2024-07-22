@@ -15,6 +15,7 @@ import {
   getDoctors,
   getDoctor,
   updateDoctor,
+  deleteDoctor,
 } from "../controllers/doctorController.js";
 
 import {
@@ -22,6 +23,7 @@ import {
   getPatients,
   updatePatient,
   getPatient,
+  deletePatient,
 } from "../controllers/patientController.js";
 
 import {
@@ -93,12 +95,14 @@ router.post("/createDoctor", VerifyUser, createDoctor);
 router.get("/doctors", VerifyUser, getDoctors);
 router.get("/doctor/:id", VerifyUser, getDoctor);
 router.put("/update-doctor/:id", VerifyUser, updateDoctor);
+router.delete("/doctor/:id", VerifyUser, deleteDoctor);
 
 //route for patients
 router.post("/createPatient", VerifyUser, createPatient);
 router.get("/patients", VerifyUser, getPatients);
 router.get("/getPatient/:id", VerifyUser, getPatient);
 router.put("/update-patient/:id", VerifyUser, updatePatient);
+router.delete("/patient/:id", VerifyUser, deletePatient);
 
 //route for journals
 router.post("/addEntry", VerifyUser, addEntry);
