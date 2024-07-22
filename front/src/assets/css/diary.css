@@ -182,3 +182,63 @@ body {
   border-radius: 5px;
   outline: 1px solid slategrey;
 }
+
+.feedback-entry-details {
+  font-family: Arial, sans-serif;
+  line-height: 1.6;
+  color: #333;
+  padding: 20px;
+  background-color: #f9f9f9;
+  border-radius: 10px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.feedback-entry-details h2 {
+  font-size: 1.5em;
+  color: #2c3e50;
+  margin-top: 20px;
+}
+
+.feedback-entry-details p {
+  margin: 10px 0;
+}
+
+.feedback-entry-details hr {
+  border: 0;
+  height: 1px;
+  background: #ddd;
+  margin: 20px 0;
+}
+
+.feedback-entry-details .feedback-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid #ddd;
+  padding-bottom: 10px;
+}
+
+.feedback-entry-details .feedback-header h2 {
+  margin: 0;
+  font-size: 1.8em;
+  color: #2980b9;
+}
+
+.feedback-entry-details .appointment-btn {
+  background-color: #2980b9;
+  color: white;
+  border: none;
+  padding: 5px 10px;
+  border-radius: 5px;
+  cursor: pointer;
+  text-decoration: none;
+}
+
+.feedback-entry-details .appointment-btn a {
+  color: white;
+  text-decoration: none;
+}
+
+.feedback-entry-details .appointment-btn:hover {
+  background-color: #3498db;
+}

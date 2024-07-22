@@ -25,7 +25,7 @@ function Cortisol() {
         className="tablink"
         onClick={(e) => openPage("definition", e, "red")}
       >
-        What it is
+        Overview
       </button>
       <button
         className="tablink"

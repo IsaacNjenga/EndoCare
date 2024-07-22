@@ -22,16 +22,28 @@ function AdrenalFatigue() {
   return (
     <div className="adrenal-container">
       <h1>Adrenal Fatigue</h1>
-      <button className="tablink" onClick={(e) => openPage("definition", e, "red")}>
-        What it is
+      <button
+        className="tablink"
+        onClick={(e) => openPage("definition", e, "red")}
+      >
+        Overview
       </button>
-      <button className="tablink" onClick={(e) => openPage("meal-plan", e, "green")}>
+      <button
+        className="tablink"
+        onClick={(e) => openPage("meal-plan", e, "green")}
+      >
         Meal plan
       </button>
-      <button className="tablink" onClick={(e) => openPage("workout-plan", e, "blue")}>
+      <button
+        className="tablink"
+        onClick={(e) => openPage("workout-plan", e, "blue")}
+      >
         Workout plan
       </button>
-      <button className="tablink" onClick={(e) => openPage("tips", e, "orange")}>
+      <button
+        className="tablink"
+        onClick={(e) => openPage("tips", e, "orange")}
+      >
         Tips for success
       </button>
 

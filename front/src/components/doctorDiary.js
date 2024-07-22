@@ -189,8 +189,8 @@ function DoctorDiary() {
             {typeof feedbackContent === "string" ? (
               <p>{feedbackContent}</p>
             ) : (
-              <div className="diary-entry-details">
-                <div className="entry-header">
+              <div className="feedback-entry-details">
+                <div className="feedback-header">
                   {" "}
                   <Link
                     to={`/update-feedback/${selectedFeedbackEntry._id}`}

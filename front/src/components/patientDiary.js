@@ -28,6 +28,8 @@ function PatientDiary() {
   const [selectedEntry, setSelectedEntry] = useState(null);
   const [selectedFeedbackEntry, setSelectedFeedbackEntry] = useState(null);
   const [feedbackContent, setFeedbackContent] = useState(false);
+  const [doctorProfile, setDoctorProfile] = useState({});
+  const [doctorsId, setDoctorsId] = useState("");
   const [values, setValues] = useState({
     bloodSugarObservation: "",
     bloodSugarRecommendation: "",
@@ -97,6 +99,7 @@ function PatientDiary() {
           doctorId: fetchedFeedback.doctorId,
           createdAt: fetchedFeedback.createdAt,
         });
+        setDoctorsId(fetchedFeedback.doctorId);
         return true;
       }
       return false;
@@ -106,11 +109,36 @@ function PatientDiary() {
     }
   };
 
+  const fetchDoctorProfile = async (doctorId) => {
+    try {
+      const response = await axios.get(`doctors`, {
+        headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
+      });
+      const fetchedProfile = response.data.doctors.find(
+        (doc) => doc.doctorId === doctorId
+      );
+      if (fetchedProfile) {
+        setDoctorProfile(fetchedProfile);
+      } else {
+        setDoctorProfile({});
+      }
+    } catch (error) {
+      alert("An error occurred. Try refreshing or logging in again");
+      console.log(error);
+    }
+  };
+
   useEffect(() => {
     if (user._id) {
       fetchDiary();
     }
   }, [user._id]);
+
+  useEffect(() => {
+    if (doctorsId) {
+      fetchDoctorProfile(doctorsId);
+    }
+  }, [doctorsId]);
 
   const deleteRecord = (id) => {
     MySwal.fire({
@@ -232,29 +260,45 @@ function PatientDiary() {
             {typeof feedbackContent === "string" ? (
               <p>{feedbackContent}</p>
             ) : (
-              <div className="diary-entry-details">
-                <div className="entry-header"></div>
+              <div className="feedback-entry-details">
+                <div className="feedback-header"></div>
                 <h2>
                   {format(new Date(values.createdAt), "EEEE, MMM do, yyyy")}
                 </h2>
-                <h2>Observation on the patient's Blood Sugar Levels</h2>
-                <p>{values.bloodSugarObservation}</p> <h2>Recommendation</h2>
-                <p>{values.bloodSugarRecommendation}</p> <h2>The Medication</h2>
-                <p>{values.medicationFeedback}</p> <h2>Patient Meals & Diet</h2>
+                <h2>Observation from your Blood Sugar Levels</h2>
+                <p>{values.bloodSugarObservation}</p>
+                <h2>Recommendation</h2>
+                <p>{values.bloodSugarRecommendation}</p>
+                <hr />
+                <h2>The Medication</h2>
+                <p>{values.medicationFeedback}</p>
+                <hr />
+                <h2>Patient Meals & Diet</h2>
                 <p>{values.mealsFeedback}</p>
                 <h2>Experienced Symptoms & Solution</h2>
-                <p>{values.symptomsFeedback}</p> <h2>Well-Being</h2>
+                <p>{values.symptomsFeedback}</p>
+                <hr />
+                <h2>Well-Being</h2>
                 <p>{values.wellBeingObservation}</p>{" "}
-                <h2>Recommendation for patient's well-being</h2>
+                <h2>Recommendation for your well-being</h2>
                 <p>{values.wellBeingRecommendation}</p>{" "}
-                <h2>Overall Assessment for Patient</h2>
-                <p>{values.overallAssessment}</p> <h2></h2>
-                <hr/>
+                <br/><hr/>
+                <h2>Overall Assessment & Next Steps</h2>
+                <p>{values.overallAssessment}</p>
+                <br /><hr/>
+                <div>
+                  <p><u>Don't hesitate to reach out</u></p>
+                  <p>
+                    Dr. {values.doctorfirstname} {values.doctorlastname} - {doctorProfile.specialization}
+                  </p>
+                  <p>Email: {doctorProfile?.email || "N/A"}</p>
+                  <p>Contact: {doctorProfile?.phone || "N/A"}</p>
+                </div>
                 <div>
                   <p>
-                    Need more clarification? Book an appointment{" "}
+                    Need more clarification? {" "}
                     <button className="appointment-btn">
-                      <Link to="/book-appointment">here</Link>
+                      <Link to="/book-appointment">Book an appointment</Link>
                     </button>
                   </p>
                 </div>
