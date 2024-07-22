@@ -233,20 +233,9 @@ function PatientDiary() {
               <p>{feedbackContent}</p>
             ) : (
               <div className="diary-entry-details">
-                <div className="entry-header">
-                  {" "}
-                  <Link
-                    to={`/update-feedback/${selectedFeedbackEntry._id}`}
-                    className="update-entry-link"
-                  >
-                    <FontAwesomeIcon icon={faPenToSquare} />
-                  </Link>
-                </div>
+                <div className="entry-header"></div>
                 <h2>
-                  {format(
-                    new Date(values.createdAt),
-                    "EEEE, MMM do, yyyy"
-                  )}
+                  {format(new Date(values.createdAt), "EEEE, MMM do, yyyy")}
                 </h2>
                 <h2>Observation on the patient's Blood Sugar Levels</h2>
                 <p>{values.bloodSugarObservation}</p> <h2>Recommendation</h2>
@@ -260,6 +249,15 @@ function PatientDiary() {
                 <p>{values.wellBeingRecommendation}</p>{" "}
                 <h2>Overall Assessment for Patient</h2>
                 <p>{values.overallAssessment}</p> <h2></h2>
+                <hr/>
+                <div>
+                  <p>
+                    Need more clarification? Book an appointment{" "}
+                    <button className="appointment-btn">
+                      <Link to="/book-appointment">here</Link>
+                    </button>
+                  </p>
+                </div>
               </div>
             )}
           </div>
