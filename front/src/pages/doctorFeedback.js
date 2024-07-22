@@ -16,6 +16,7 @@ function DoctorFeedback() {
   const [doctorProfile, setDoctorProfile] = useState([]);
   const [firstname, setFirstname] = useState("");
   const [lastname, setLastname] = useState("");
+  const [patientId, setPatientId] = useState("");
   const [loading, setLoading] = useState(false);
 
   const fetchDiary = async () => {
@@ -35,6 +36,7 @@ function DoctorFeedback() {
         );
         if (fetchedDiary) {
           setData(fetchedDiary);
+          setPatientId(fetchedDiary[0].patientId.toString());
         }
       }
     } catch (error) {
@@ -74,7 +76,7 @@ function DoctorFeedback() {
     setValues({ ...values, [event.target.name]: event.target.value });
   };
 
-  const diaryId = id
+  const diaryId = id;
 
   const handleSubmit = (event) => {
     setLoading(true);
@@ -83,9 +85,10 @@ function DoctorFeedback() {
       ...values,
       doctorfirstname: firstname,
       doctorlastname: lastname,
-      diaryId
+      diaryId,
+      doctorId: user._id,
+      patientId,
     };
-    console.log(valuesData)
     axios
       .post("createFeedback", valuesData, {
         headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },

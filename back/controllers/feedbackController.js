@@ -14,6 +14,8 @@ const createFeedback = async (req, res) => {
       doctorfirstname,
       doctorlastname,
       diaryId,
+      patientId,
+      doctorId,
     } = req.body;
 
     const newFeedbackBody = new FeedbackModel({
@@ -28,6 +30,8 @@ const createFeedback = async (req, res) => {
       doctorfirstname,
       doctorlastname,
       diaryId,
+      doctorId,
+      patientId,
       postedBy: req.user._id,
     });
 

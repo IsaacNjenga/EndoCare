@@ -29,10 +29,12 @@ function UpdateDoctorFeedback() {
     doctorfirstname: "",
     doctorlastname: "",
     diaryId: "",
+    doctorId: "",
   });
   const [data, setData] = useState([]);
   const [doctorProfile, setDoctorProfile] = useState([]);
   const [firstname, setFirstname] = useState("");
+  const [patientId, setPatientId] = useState("");
   const [lastname, setLastname] = useState("");
   const [loading, setLoading] = useState(false);
 
@@ -53,6 +55,7 @@ function UpdateDoctorFeedback() {
         );
         if (fetchedDiary) {
           setData(fetchedDiary);
+          setPatientId(fetchedDiary[0].patientId.toString());
         }
       }
     } catch (error) {
@@ -101,6 +104,7 @@ function UpdateDoctorFeedback() {
       doctorlastname: fetchedFeedback.doctorlastname || "",
       diaryId: fetchedFeedback.diaryId || "",
       id: fetchedFeedback._id,
+      doctorId: fetchedFeedback.doctorId,
     });
   };
 
@@ -123,6 +127,8 @@ function UpdateDoctorFeedback() {
       ...values,
       doctorfirstname: firstname,
       doctorlastname: lastname,
+      doctorId: user._id,
+      patientId,
     };
     axios
       .put(`update-feedback/${id}`, valuesData, {

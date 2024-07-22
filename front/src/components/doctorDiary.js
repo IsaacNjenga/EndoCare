@@ -12,18 +12,29 @@ import { format } from "date-fns";
 import Loader from "./loader";
 import { UserContext } from "../App";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import {
-  faPenToSquare,
-  faTrash as faSolidTrash,
-} from "@fortawesome/free-solid-svg-icons";
-
+import { faPenToSquare } from "@fortawesome/free-solid-svg-icons";
 
 function DoctorDiary() {
   const { user } = useContext(UserContext);
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(false);
   const [selectedEntry, setSelectedEntry] = useState(null);
+  const [selectedFeedbackEntry, setSelectedFeedbackEntry] = useState(null);
   const [feedbackContent, setFeedbackContent] = useState(false);
+  const [values, setValues] = useState({
+    bloodSugarObservation: "",
+    bloodSugarRecommendation: "",
+    medicationFeedback: "",
+    mealsFeedback: "",
+    symptomsFeedback: "",
+    wellBeingObservation: "",
+    wellBeingRecommendation: "",
+    overallAssessment: "",
+    doctorfirstname: "",
+    doctorlastname: "",
+    diaryId: "",
+    doctorId: "",
+  });
 
   const fetchDiary = async () => {
     setLoading(true);
@@ -51,14 +62,41 @@ function DoctorDiary() {
     }
   };
 
-  const fetchFeedback = async (id) => {
-    const result = await axios.get("feedback", {
-      headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
-    });
-    const fetchedFeedback = result.data.feedback.find(
-      (feedback) => id === feedback.diaryId
-    );
-    return !!fetchedFeedback;
+  const fetchFeedback = async (diaryId) => {
+    try {
+      const result = await axios.get("feedback", {
+        headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
+      });
+      const fetchedFeedback = result.data.feedback.find(
+        (feedback) =>
+          feedback.doctorId === user._id && feedback.diaryId === diaryId
+      );
+      if (fetchedFeedback) {
+        setValues({
+          bloodSugarObservation: fetchedFeedback.bloodSugarObservation || "",
+          bloodSugarRecommendation:
+            fetchedFeedback.bloodSugarRecommendation || "",
+          medicationFeedback: fetchedFeedback.medicationFeedback || "",
+          mealsFeedback: fetchedFeedback.mealsFeedback || "",
+          symptomsFeedback: fetchedFeedback.symptomsFeedback || "",
+          wellBeingObservation: fetchedFeedback.wellBeingObservation || "",
+          wellBeingRecommendation:
+            fetchedFeedback.wellBeingRecommendation || "",
+          overallAssessment: fetchedFeedback.overallAssessment || "",
+          doctorfirstname: fetchedFeedback.doctorfirstname || "",
+          doctorlastname: fetchedFeedback.doctorlastname || "",
+          diaryId: diaryId,
+          id: fetchedFeedback._id,
+          doctorId: fetchedFeedback.doctorId,
+          createdAt:fetchedFeedback.createdAt
+        });
+        return true;
+      }
+      return false;
+    } catch (error) {
+      console.error("Error fetching feedback:", error);
+      return false;
+    }
   };
 
   useEffect(() => {
@@ -75,7 +113,26 @@ function DoctorDiary() {
 
   const closeModal = () => {
     setSelectedEntry(null);
-  };  
+  };
+
+  const viewFeedback = async (feedbackEntry) => {
+    try {
+      const hasFeedback = await fetchFeedback(feedbackEntry._id);
+      if (!hasFeedback) {
+        setFeedbackContent("Feedback pending...");
+      } else {
+        setFeedbackContent(hasFeedback);
+      }
+      setSelectedFeedbackEntry(feedbackEntry);
+    } catch (error) {
+      console.error("Error fetching feedback:", error);
+      setFeedbackContent("Error fetching feedback. Please try again later.");
+    }
+  };
+
+  const closeFeedbackModal = () => {
+    setSelectedFeedbackEntry(null);
+  };
 
   return (
     <>
@@ -96,16 +153,21 @@ function DoctorDiary() {
                       "EEEE, MMM do, yyyy"
                     )}
                   </h3>{" "}
-                  |
                   <h3>
-                    {diaryTable.firstname} {diaryTable.lastname}
+                    Patient: {diaryTable.firstname} {diaryTable.lastname}
                   </h3>
-                  |
                   <button
                     onClick={() => viewEntry(diaryTable)}
                     className="view-entry-btn"
                   >
-                    View
+                    View Journal
+                  </button>{" "}
+                  |
+                  <button
+                    onClick={() => viewFeedback(diaryTable)}
+                    className="view-feedback-btn"
+                  >
+                    View Feedback
                   </button>
                 </div>
               </div>
@@ -115,6 +177,51 @@ function DoctorDiary() {
           <div>No entries found.</div>
         )}
       </div>
+      {selectedFeedbackEntry && (
+        <div className="modal-overlay" onClick={closeFeedbackModal}>
+          <div className="modal-content" onClick={(e) => e.stopPropagation()}>
+            <div className="close-btn-div">
+              <button className="close-btn" onClick={closeFeedbackModal}>
+                Close
+              </button>
+            </div>
+            <br />
+            {typeof feedbackContent === "string" ? (
+              <p>{feedbackContent}</p>
+            ) : (
+              <div className="diary-entry-details">
+                <div className="entry-header">
+                  {" "}
+                  <Link
+                    to={`/update-feedback/${selectedFeedbackEntry._id}`}
+                    className="update-entry-link"
+                  >
+                    <FontAwesomeIcon icon={faPenToSquare} />
+                  </Link>
+                </div>
+                <h2>
+                  {format(
+                    new Date(values.createdAt),
+                    "EEEE, MMM do, yyyy"
+                  )}
+                </h2>
+                <h2>Observation on the patient's Blood Sugar Levels</h2>
+                <p>{values.bloodSugarObservation}</p> <h2>Recommendation</h2>
+                <p>{values.bloodSugarRecommendation}</p> <h2>The Medication</h2>
+                <p>{values.medicationFeedback}</p> <h2>Patient Meals & Diet</h2>
+                <p>{values.mealsFeedback}</p>
+                <h2>Experienced Symptoms & Solution</h2>
+                <p>{values.symptomsFeedback}</p> <h2>Well-Being</h2>
+                <p>{values.wellBeingObservation}</p>{" "}
+                <h2>Recommendation for patient's well-being</h2>
+                <p>{values.wellBeingRecommendation}</p>{" "}
+                <h2>Overall Assessment for Patient</h2>
+                <p>{values.overallAssessment}</p> <h2></h2>
+              </div>
+            )}
+          </div>
+        </div>
+      )}
       {selectedEntry && (
         <div className="modal-overlay" onClick={closeModal}>
           <div className="modal-content" onClick={(e) => e.stopPropagation()}>
@@ -159,20 +266,32 @@ function DoctorDiary() {
                   </h2>
                   <div className="entry-row">
                     <div className="entry-section">
-                      <h3>Fasting</h3>
-                      <p>{selectedEntry.fasting}mg/dL</p>
+                      <h3>Before Breakfast</h3>
+                      <p>{selectedEntry.bloodsugarfasting}</p>
                     </div>
                     <div className="entry-section">
-                      <h3>Pre-Lunch</h3>
-                      <p>{selectedEntry.prelunch}mg/dL</p>
+                      <h3>After Breakfast</h3>
+                      <p>{selectedEntry.afterbreakfast}</p>
                     </div>
                     <div className="entry-section">
-                      <h3>Post-Lunch</h3>
-                      <p>{selectedEntry.postlunch}mg/dL</p>
+                      <h3>Before Lunch</h3>
+                      <p>{selectedEntry.beforelunch}</p>
                     </div>
                     <div className="entry-section">
-                      <h3>Night</h3>
-                      <p>{selectedEntry.night}mg/dL</p>
+                      <h3>After Lunch</h3>
+                      <p>{selectedEntry.afterlunch}</p>
+                    </div>
+                    <div className="entry-section">
+                      <h3>Before Dinner</h3>
+                      <p>{selectedEntry.beforedinner}</p>
+                    </div>
+                    <div className="entry-section">
+                      <h3>After Dinner</h3>
+                      <p>{selectedEntry.afterdinner}</p>
+                    </div>
+                    <div className="entry-section">
+                      <h3>Other</h3>
+                      <p>{selectedEntry.other}</p>
                     </div>
                   </div>
                 </div>
@@ -186,11 +305,19 @@ function DoctorDiary() {
                   <div className="entry-row">
                     <div className="entry-section">
                       <h3>Morning</h3>
-                      <p>{selectedEntry.morning}</p>
+                      <p>{selectedEntry.morningdose}</p>
+                    </div>
+                    <div className="entry-section">
+                      <h3>Afternoon</h3>
+                      <p>{selectedEntry.afternoon}</p>
                     </div>
                     <div className="entry-section">
                       <h3>Evening</h3>
                       <p>{selectedEntry.evening}</p>
+                    </div>
+                    <div className="entry-section">
+                      <h3>Night</h3>
+                      <p>{selectedEntry.nightdose}</p>
                     </div>
                   </div>
                 </div>
@@ -199,7 +326,7 @@ function DoctorDiary() {
                 <div className="entry-section-group">
                   <img src={dietIcon} alt="icon" className="icon" />
                   <h2>
-                    • <u>Meals</u>
+                    • <u>Diet</u>
                   </h2>
                   <div className="entry-row">
                     <div className="entry-section">
@@ -211,12 +338,12 @@ function DoctorDiary() {
                       <p>{selectedEntry.lunch}</p>
                     </div>
                     <div className="entry-section">
-                      <h3>Snack</h3>
-                      <p>{selectedEntry.snack}</p>
-                    </div>
-                    <div className="entry-section">
                       <h3>Dinner</h3>
                       <p>{selectedEntry.dinner}</p>
+                    </div>
+                    <div className="entry-section">
+                      <h3>Snack</h3>
+                      <p>{selectedEntry.snack}</p>
                     </div>
                   </div>
                 </div>
@@ -227,7 +354,11 @@ function DoctorDiary() {
                   <h2>
                     • <u>Symptoms</u>
                   </h2>
-                  <p>{selectedEntry.symptoms}</p>
+                  <div className="entry-row">
+                    <div className="entry-section">
+                      <p>{selectedEntry.symptoms}</p>
+                    </div>
+                  </div>
                 </div>
                 <br /> <hr />
                 <br />
@@ -236,8 +367,55 @@ function DoctorDiary() {
                   <h2>
                     • <u>Exercise</u>
                   </h2>
-                  <p>{selectedEntry.exercise}</p>
+                  <div className="entry-row">
+                    <div className="entry-section">
+                      <h3>Duration</h3>
+                      <p>{selectedEntry.duration}</p>
+                    </div>
+                    <div className="entry-section">
+                      <h3>Type</h3>
+                      <p>{selectedEntry.exercisetype}</p>
+                    </div>
+                  </div>
                 </div>
+                <br /> <hr />
+                <br />
+                <div className="entry-section-group">
+                  <img src={symptomsIcon} alt="icon" className="icon" />
+                  <h2>
+                    • <u>Overall Well-being</u>
+                  </h2>
+                  <div className="entry-row">
+                    <div className="entry-section">
+                      <h3>Overall Well-being</h3>
+                      <p>{selectedEntry.wellbeing}</p>
+                    </div>
+                    <div className="entry-section">
+                      <h3>Sleep Quality</h3>
+                      <p>{selectedEntry.sleep}</p>
+                    </div>
+                  </div>
+                </div>
+                <br />
+                <div className="entry-section-group">
+                  <img src={symptomsIcon} alt="icon" className="icon" />
+                  <h2>
+                    • <u>Other Notes</u>
+                  </h2>
+                  <div className="entry-row">
+                    <div className="entry-section">
+                      <p>{selectedEntry.othernotes}</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div className="entry-footer">
+                <Link
+                  to={`/update-entry/${selectedEntry._id}`}
+                  className="update-entry-link"
+                >
+                  <FontAwesomeIcon icon={faPenToSquare} />
+                </Link>
               </div>
             </div>
           </div>

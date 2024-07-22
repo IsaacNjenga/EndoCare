@@ -13,7 +13,10 @@ const feedbackSchema = new mongoose.Schema(
     postedBy: { type: mongoose.Schema.Types.ObjectId, ref: "user" },
     diaryId: { type: String },
     doctorfirstname: { type: String },
+    doctorId: { type: String },
+    patientId: { type: String },
     doctorlastname: { type: String },
+    createdAt: { type: Date, default: Date.now },
   },
   { collection: "feedback" }
 );

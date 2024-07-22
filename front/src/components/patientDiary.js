@@ -14,7 +14,10 @@ import { UserContext } from "../App";
 import Swal from "sweetalert2";
 import withReactContent from "sweetalert2-react-content";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faTrash as faSolidTrash, faPenToSquare } from "@fortawesome/free-solid-svg-icons";
+import {
+  faTrash as faSolidTrash,
+  faPenToSquare,
+} from "@fortawesome/free-solid-svg-icons";
 
 const MySwal = withReactContent(Swal);
 
@@ -23,6 +26,22 @@ function PatientDiary() {
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(false);
   const [selectedEntry, setSelectedEntry] = useState(null);
+  const [selectedFeedbackEntry, setSelectedFeedbackEntry] = useState(null);
+  const [feedbackContent, setFeedbackContent] = useState(false);
+  const [values, setValues] = useState({
+    bloodSugarObservation: "",
+    bloodSugarRecommendation: "",
+    medicationFeedback: "",
+    mealsFeedback: "",
+    symptomsFeedback: "",
+    wellBeingObservation: "",
+    wellBeingRecommendation: "",
+    overallAssessment: "",
+    doctorfirstname: "",
+    doctorlastname: "",
+    diaryId: "",
+    doctorId: "",
+  });
 
   const fetchDiary = async () => {
     setLoading(true);
@@ -47,6 +66,43 @@ function PatientDiary() {
       console.error("Error fetching diary entries:", error);
     } finally {
       setLoading(false);
+    }
+  };
+
+  const fetchFeedback = async (diaryId) => {
+    try {
+      const result = await axios.get("feedback", {
+        headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
+      });
+      const fetchedFeedback = result.data.feedback.find(
+        (feedback) =>
+          feedback.patientId === user._id && feedback.diaryId === diaryId
+      );
+      if (fetchedFeedback) {
+        setValues({
+          bloodSugarObservation: fetchedFeedback.bloodSugarObservation || "",
+          bloodSugarRecommendation:
+            fetchedFeedback.bloodSugarRecommendation || "",
+          medicationFeedback: fetchedFeedback.medicationFeedback || "",
+          mealsFeedback: fetchedFeedback.mealsFeedback || "",
+          symptomsFeedback: fetchedFeedback.symptomsFeedback || "",
+          wellBeingObservation: fetchedFeedback.wellBeingObservation || "",
+          wellBeingRecommendation:
+            fetchedFeedback.wellBeingRecommendation || "",
+          overallAssessment: fetchedFeedback.overallAssessment || "",
+          doctorfirstname: fetchedFeedback.doctorfirstname || "",
+          doctorlastname: fetchedFeedback.doctorlastname || "",
+          diaryId: diaryId,
+          id: fetchedFeedback._id,
+          doctorId: fetchedFeedback.doctorId,
+          createdAt: fetchedFeedback.createdAt,
+        });
+        return true;
+      }
+      return false;
+    } catch (error) {
+      console.error("Error fetching feedback:", error);
+      return false;
     }
   };
 
@@ -101,6 +157,25 @@ function PatientDiary() {
     setSelectedEntry(null);
   };
 
+  const viewFeedback = async (feedbackEntry) => {
+    try {
+      const hasFeedback = await fetchFeedback(feedbackEntry._id);
+      if (!hasFeedback) {
+        setFeedbackContent("Feedback pending...");
+      } else {
+        setFeedbackContent(hasFeedback);
+      }
+      setSelectedFeedbackEntry(feedbackEntry);
+    } catch (error) {
+      console.error("Error fetching feedback:", error);
+      setFeedbackContent("Error fetching feedback. Please try again later.");
+    }
+  };
+
+  const closeFeedbackModal = () => {
+    setSelectedFeedbackEntry(null);
+  };
+
   return (
     <>
       {loading && <Loader />}
@@ -128,7 +203,14 @@ function PatientDiary() {
                     onClick={() => viewEntry(diaryTable)}
                     className="view-entry-btn"
                   >
-                    View 
+                    View Journal
+                  </button>{" "}
+                  |
+                  <button
+                    onClick={() => viewFeedback(diaryTable)}
+                    className="view-feedback-btn"
+                  >
+                    View Feedback
                   </button>
                 </div>
               </div>
@@ -137,7 +219,52 @@ function PatientDiary() {
         ) : (
           <div>No entries found.</div>
         )}
-      </div>
+      </div>{" "}
+      {selectedFeedbackEntry && (
+        <div className="modal-overlay" onClick={closeFeedbackModal}>
+          <div className="modal-content" onClick={(e) => e.stopPropagation()}>
+            <div className="close-btn-div">
+              <button className="close-btn" onClick={closeFeedbackModal}>
+                Close
+              </button>
+            </div>
+            <br />
+            {typeof feedbackContent === "string" ? (
+              <p>{feedbackContent}</p>
+            ) : (
+              <div className="diary-entry-details">
+                <div className="entry-header">
+                  {" "}
+                  <Link
+                    to={`/update-feedback/${selectedFeedbackEntry._id}`}
+                    className="update-entry-link"
+                  >
+                    <FontAwesomeIcon icon={faPenToSquare} />
+                  </Link>
+                </div>
+                <h2>
+                  {format(
+                    new Date(values.createdAt),
+                    "EEEE, MMM do, yyyy"
+                  )}
+                </h2>
+                <h2>Observation on the patient's Blood Sugar Levels</h2>
+                <p>{values.bloodSugarObservation}</p> <h2>Recommendation</h2>
+                <p>{values.bloodSugarRecommendation}</p> <h2>The Medication</h2>
+                <p>{values.medicationFeedback}</p> <h2>Patient Meals & Diet</h2>
+                <p>{values.mealsFeedback}</p>
+                <h2>Experienced Symptoms & Solution</h2>
+                <p>{values.symptomsFeedback}</p> <h2>Well-Being</h2>
+                <p>{values.wellBeingObservation}</p>{" "}
+                <h2>Recommendation for patient's well-being</h2>
+                <p>{values.wellBeingRecommendation}</p>{" "}
+                <h2>Overall Assessment for Patient</h2>
+                <p>{values.overallAssessment}</p> <h2></h2>
+              </div>
+            )}
+          </div>
+        </div>
+      )}
       {selectedEntry && (
         <div className="modal-overlay" onClick={closeModal}>
           <div className="modal-content" onClick={(e) => e.stopPropagation()}>
@@ -152,12 +279,14 @@ function PatientDiary() {
                 <Link
                   to={`/update-diary/${selectedEntry._id}`}
                   className="update-entry-link"
-                ><FontAwesomeIcon icon = {faPenToSquare}/>
+                >
+                  <FontAwesomeIcon icon={faPenToSquare} />
                 </Link>
                 <button
                   className="cancel-btn"
                   onClick={() => deleteRecord(selectedEntry._id)}
-                ><FontAwesomeIcon icon = {faSolidTrash}/>
+                >
+                  <FontAwesomeIcon icon={faSolidTrash} />
                 </button>
               </div>
               <div className="entry-content">
