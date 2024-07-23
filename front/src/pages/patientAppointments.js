@@ -120,7 +120,7 @@ function PatientAppointments() {
       selector: (row) => `${row.firstname} ${row.lastname}`,
       grow: 2,
     },
-    { name: "E-mail", selector: (row) => row.email, grow: 3 },
+    { name: "E-mail", selector: (row) => row.email, grow: 2 },
     { name: "Date", selector: (row) => row.date },
     { name: "Time", selector: (row) => row.time },
     { name: "Service", selector: (row) => row.service },
@@ -128,7 +128,7 @@ function PatientAppointments() {
       name: "Doctor",
       selector: (row) => `${row.doctorfirstname} ${row.doctorlastname}`,
     },
-    { name: "Doctor's E-mail", selector: (row) => row.doctoremail, grow: 3 },
+    { name: "Doctor's E-mail", selector: (row) => row.doctoremail, grow: 2 },
     {
       name: "",
       selector: (row) => (
@@ -138,7 +138,7 @@ function PatientAppointments() {
           </button>
         </>
       ),
-      grow: 5,
+      grow: 3,
     },
   ];
 
@@ -146,16 +146,17 @@ function PatientAppointments() {
     <>
       {loading && <Loader />}
       <Navbar />
+      <br />
       <div className="content">
         {user.role === "patient" ? (
-          <p>
+          <p style={{ color: "white" }}>
             Book an appointment{" "}
             <button className="appointment-btn">
               <Link to="/book-appointment">here</Link>
             </button>
           </p>
         ) : null}
-        <h1>Your appointments</h1>
+        <h1 style={{ color: "white" }}>Your appointments</h1>
         <div className="list">
           <DataTable
             columns={columns}

@@ -20,7 +20,6 @@ function Cortisol() {
   };
   return (
     <div className="cortisol-container">
-      <h1>Cortisol & Aldosterone Deficiency</h1>
       <button
         className="tablink"
         onClick={(e) => openPage("definition", e, "red")}
@@ -47,24 +46,62 @@ function Cortisol() {
       </button>
 
       <div id="definition" className="tabcontent">
-        <p>
-          Cortisol is a steroid hormone in the glucocorticoid class of hormones
-          and a stress hormone. When used as medication, it is known as
-          hydrocortisone. It is produced in many animals, mainly by the zona
-          fasciculata of the adrenal cortex in an adrenal gland. In other
-          tissues, it is produced in lower quantities. Addison's disease, also
-          called adrenal insufficiency, is an uncommon illness that occurs when
-          the body doesn't make enough of certain hormones. In Addison's
-          disease, the adrenal glands make too little cortisol and, often, too
-          little of another hormone, aldosterone. Addison's disease can affect
-          anyone and can be life-threatening. Treatment involves taking hormones
-          to replace those that are missing.
-        </p>
+        <section>
+          <h2 className="def-title">
+            Cortisol & Aldosterone Deficiency
+          </h2>
+          <p className="def-p">
+            Cortisol is a vital steroid hormone belonging to the glucocorticoid
+            class and is commonly referred to as a stress hormone due to its
+            role in the body's stress response. It is synthesized primarily in
+            the zona fasciculata of the adrenal cortex within the adrenal glands
+            and, to a lesser extent, in other tissues. When utilized as
+            medication, cortisol is known as hydrocortisone.
+          </p>
+          <br />
+          <p className="def-p">
+            Addison's disease, also known as adrenal insufficiency, is a rare
+            condition where the adrenal glands do not produce adequate amounts
+            of cortisol and often aldosterone. This insufficiency can lead to
+            significant health issues, as cortisol plays a critical role in
+            numerous bodily functions, including regulating metabolism, reducing
+            inflammation, and assisting with memory formulation.
+          </p>
+          <br />
+          <p className="def-p">
+            Aldosterone, another essential hormone produced by the adrenal
+            glands, helps regulate blood pressure by managing the balance of
+            sodium and potassium in the blood. A deficiency in aldosterone can
+            lead to low blood pressure, increased potassium levels, and an
+            imbalance in electrolytes.
+          </p>
+          <br />
+          <p className="def-p">
+            Addison's disease can impact individuals of any age and, if left
+            untreated, can become life-threatening. Symptoms often develop
+            gradually and can include fatigue, muscle weakness, weight loss, low
+            blood pressure, and skin darkening. In some cases, a sudden
+            worsening of symptoms, known as an Addisonian crisis, can occur,
+            necessitating immediate medical attention.
+          </p>
+          <br />
+          <p className="def-p">
+            Management and treatment of Addison's disease involve hormone
+            replacement therapy to correct the deficiencies in cortisol and
+            aldosterone. This typically includes taking oral corticosteroids
+            such as hydrocortisone or prednisone and mineralocorticoids like
+            fludrocortisone to replace aldosterone. Regular monitoring and
+            adjusting of medication dosages are essential to ensure effective
+            management of the condition.
+          </p>
+        </section>
       </div>
       <div id="meal-plan" className="tabcontent">
         <section>
           <h2>Meal Plan</h2>
-          <h3>General Guidelines</h3>
+          <h3>
+            <u>General Guidelines</u>
+          </h3>
           <ol>
             <li>
               Balanced Macronutrients: Ensure a balance of carbohydrates,
@@ -83,56 +120,7 @@ function Cortisol() {
               vitamins and minerals.
             </li>
           </ol>
-          <h3>Sample Daily Meal Plan</h3>
-          <ul>
-            <li>
-              <strong>Breakfast:</strong>
-              <ul>
-                <li>
-                  Smoothie with spinach, banana, almond milk, a scoop of protein
-                  powder, and a pinch of sea salt.
-                </li>
-                <li>Whole grain toast with avocado and a boiled egg.</li>
-              </ul>
-            </li>
-            <li>
-              <strong>Snack:</strong>
-              <ul>
-                <li>
-                  A small handful of mixed nuts (almonds, walnuts, cashews).
-                </li>
-                <li>A piece of fruit (e.g., an apple or pear).</li>
-              </ul>
-            </li>
-            <li>
-              <strong>Lunch:</strong>
-              <ul>
-                <li>
-                  Grilled chicken breast with a quinoa salad (mixed greens,
-                  cherry tomatoes, cucumbers, and a light vinaigrette).
-                </li>
-                <li>Steamed broccoli with a sprinkle of sea salt.</li>
-              </ul>
-            </li>
-            <li>
-              <strong>Snack:</strong> Greek yogurt with a sprinkle of chia seeds
-              and a few slices of strawberries.
-            </li>
-            <li>
-              <strong>Dinner:</strong>
-              <ul>
-                <li>
-                  Baked salmon with a side of roasted vegetables (bell peppers,
-                  zucchini, and carrots).
-                </li>
-                <li>A small serving of brown rice.</li>
-              </ul>
-            </li>
-            <li>
-              <strong>Evening Snack:</strong> Herbal tea with a small serving of
-              cottage cheese and a few berries.
-            </li>
-          </ul>
+
           <h3>Foods to Include</h3>
           <ul>
             <li>Proteins: Lean meats, fish, eggs, beans, and legumes.</li>
@@ -167,7 +155,9 @@ function Cortisol() {
       </div>
       <div id="workout-plan" className="tabcontent">
         <h2>Workout Plan</h2>
-        <h3>General Guidelines</h3>
+        <h3>
+          <u>General Guidelines</u>
+        </h3>
         <ol>
           <li>
             Moderate Exercise: Focus on moderate, consistent exercise rather
@@ -179,10 +169,14 @@ function Cortisol() {
             needed.
           </li>
         </ol>
-        <h3>Sample Weekly Workout Plan</h3>
+        <br />
+        <hr />
+        <h3>
+          <u>Sample Weekly Workout Plan</u>
+        </h3>
         <ul>
           <li>
-            <strong>Monday:</strong>
+            <strong>Mondays & Thursdays:</strong>
             <ul>
               <li>Cardio: 30 minutes of brisk walking.</li>
               <li>
@@ -192,7 +186,7 @@ function Cortisol() {
             </ul>
           </li>
           <li>
-            <strong>Tuesday:</strong>
+            <strong>Tuesdays & Fridays:</strong>
             <ul>
               <li>
                 Strength Training: Light upper body workout (resistance bands,
@@ -202,38 +196,8 @@ function Cortisol() {
             </ul>
           </li>
           <li>
-            <strong>Wednesday:</strong> Rest Day: Focus on light activities like
-            a leisurely walk or gentle stretching.
-          </li>
-          <li>
-            <strong>Thursday:</strong>
-            <ul>
-              <li>
-                Cardio: 30 minutes of low-intensity aerobic exercise (e.g.,
-                walking, tai chi).
-              </li>
-              <li>
-                Strength Training: Light lower body workout (squats, lunges,
-                bodyweight exercises).
-              </li>
-            </ul>
-          </li>
-          <li>
-            <strong>Friday:</strong>
-            <ul>
-              <li>Yoga/Stretching: 30 minutes of restorative yoga.</li>
-              <li>
-                Light Cardio: 20 minutes of cycling or elliptical machine.
-              </li>
-            </ul>
-          </li>
-          <li>
-            <strong>Saturday:</strong> Active Recovery: Engage in a favorite
-            low-impact activity, such as a nature walk or light dance class.
-          </li>
-          <li>
-            <strong>Sunday:</strong> Rest Day: Focus on relaxation and light
-            stretching or meditation.
+            <strong>Wednesdays, Saturdays & Sundays:</strong> Rest Day: Focus on
+            light activities like a leisurely walk or gentle stretching.
           </li>
         </ul>
       </div>
@@ -241,24 +205,58 @@ function Cortisol() {
         <h3>Tips for Success</h3>
         <ol>
           <li>
-            Stay Hydrated: Drink plenty of water throughout the day, and
-            consider electrolyte drinks if recommended by your healthcare
-            provider.
+            <strong>Stay Hydrated:</strong> Drink plenty of water throughout the
+            day to maintain optimal hydration. Consider incorporating
+            electrolyte drinks, especially if recommended by your healthcare
+            provider, to help balance sodium and potassium levels in the body.
           </li>
           <li>
-            Prioritize Sleep: Aim for 7-9 hours of quality sleep each night.
+            <strong>Prioritize Sleep:</strong> Aim for 7-9 hours of quality
+            sleep each night to support overall health and well-being. Establish
+            a consistent sleep routine and create a restful environment by
+            minimizing noise, light, and electronic distractions.
           </li>
           <li>
-            Manage Stress: Incorporate stress-reducing activities like
-            meditation, deep breathing exercises, or hobbies you enjoy.
+            <strong>Manage Stress:</strong> Incorporate stress-reducing
+            activities such as meditation, deep breathing exercises, yoga, or
+            hobbies that you enjoy. Chronic stress can exacerbate symptoms of
+            adrenal insufficiency, so finding effective ways to relax and unwind
+            is crucial.
           </li>
           <li>
-            Monitor Symptoms: Keep track of your energy levels, mood, and
-            overall well-being to adjust your plan as needed.
+            <strong>Monitor Symptoms:</strong> Keep track of your energy levels,
+            mood, and overall well-being in a journal or app. This can help you
+            identify patterns and make necessary adjustments to your treatment
+            plan. Regular monitoring can also provide valuable information for
+            your healthcare provider.
           </li>
           <li>
-            Seek Support: Consider working with a healthcare provider or
-            nutritionist specializing in adrenal health.
+            <strong>Seek Support:</strong> Consider working with a healthcare
+            provider or nutritionist specializing in adrenal health. They can
+            offer personalized advice and support tailored to your specific
+            needs. Joining support groups or communities with others
+            experiencing similar health challenges can also provide emotional
+            support and practical tips.
+          </li>
+          <li>
+            <strong>Balanced Diet:</strong> Follow a diet rich in nutrient-dense
+            foods, including lean proteins, whole grains, healthy fats, and
+            plenty of fruits and vegetables. Avoid processed foods, sugary
+            snacks, and excessive caffeine, which can negatively impact adrenal
+            health.
+          </li>
+          <li>
+            <strong>Educate Yourself:</strong> Stay informed about adrenal
+            insufficiency and its management. Understanding your condition can
+            empower you to make informed decisions about your health and
+            advocate for yourself in medical settings.
+          </li>
+          <li>
+            <strong>Emergency Preparedness:</strong> Be prepared for potential
+            adrenal crises by carrying an emergency kit that includes
+            corticosteroid injections and other necessary medications. Ensure
+            that family members, friends, and coworkers are aware of your
+            condition and know how to assist you in an emergency.
           </li>
         </ol>
       </div>

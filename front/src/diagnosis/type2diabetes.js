@@ -21,8 +21,6 @@ function Diabetes2() {
 
   return (
     <div className="diabetes-container">
-      <h1>Type 2 Diabetes</h1>
-
       <button
         className="tablink"
         onClick={(e) => openPage("definition", e, "red")}
@@ -49,192 +47,201 @@ function Diabetes2() {
       </button>
 
       <div id="definition" className="tabcontent">
-        <p>
-          Managing Type 2 Diabetes involves maintaining stable blood sugar
-          levels through a balanced diet, regular physical activity, and, if
-          necessary, medication. Here’s a comprehensive meal and workout plan to
-          help manage the condition:
-        </p>
+        <section>
+          <h2 className="def-title">Type 2 Diabetes</h2>
+          <p className="def-p">
+            Type 2 diabetes is a chronic condition that affects the way the body
+            processes blood sugar (glucose). Unlike Type 1 diabetes, the body
+            either resists the effects of insulin or doesn't produce enough
+            insulin to maintain normal glucose levels. It is the most common
+            form of diabetes, often linked to obesity and a sedentary lifestyle.
+          </p>
+          <br />
+          <p className="def-p">
+            Symptoms of Type 2 diabetes can develop slowly and may include
+            increased thirst, frequent urination, increased hunger, weight loss,
+            fatigue, blurred vision, slow-healing sores, and frequent
+            infections. Some people may experience no symptoms at all and may be
+            unaware they have the condition.
+          </p>
+          <br />
+          <p className="def-p">
+            Management involves lifestyle changes such as a healthy diet,
+            regular physical activity, and maintaining a healthy weight.
+            Monitoring blood sugar levels and taking medications as prescribed
+            are also essential. In some cases, insulin therapy may be needed.
+          </p>
+          <br />
+          <p className="def-p">
+            Type 2 diabetes can lead to serious health complications if not well
+            managed, including heart disease, stroke, kidney damage, eye damage,
+            nerve damage, and foot problems. Regular medical check-ups and
+            maintaining a comprehensive management plan are crucial to prevent
+            complications and maintain quality of life.
+          </p>
+        </section>
       </div>
       <div id="meal-plan" className="tabcontent">
-        <h2>Meal Plan</h2>
-        <h3>General Guidelines</h3>
-        <ol>
-          <li>Carbohydrate Control: Monitor and manage carbohydrate intake.</li>
-          <li>
-            Low Glycemic Index (GI): Opt for low-GI foods to maintain stable
-            blood sugar levels.
-          </li>
-          <li>
-            Balanced Macronutrients: Include a healthy mix of carbohydrates,
-            proteins, and fats.
-          </li>
-          <li>
-            Regular Meals and Snacks: Eat at regular intervals to prevent blood
-            sugar spikes and dips.
-          </li>
-        </ol>
-        <h3>Sample Daily Meal Plan</h3>
-        <ul>
-          <li>
-            <strong>Breakfast:</strong>
-            <ul>
-              <li>Oatmeal with a sprinkle of nuts and berries.</li>
-              <li>A boiled egg.</li>
-            </ul>
-          </li>
-          <li>
-            <strong>Snack:</strong> A small apple with a tablespoon of almond
-            butter.
-          </li>
-          <li>
-            <strong>Lunch:</strong>
-            <ul>
-              <li>
-                Grilled chicken breast with a quinoa salad (mixed greens, cherry
-                tomatoes, cucumbers, and a light vinaigrette).
-              </li>
-              <li>Steamed broccoli.</li>
-            </ul>
-          </li>
-          <li>
-            <strong>Snack:</strong> A handful of almonds and a piece of cheese.
-          </li>
-          <li>
-            <strong>Dinner:</strong>
-            <ul>
-              <li>
-                Baked salmon with a side of roasted vegetables (bell peppers,
-                zucchini, and carrots).
-              </li>
-              <li>A small serving of brown rice.</li>
-            </ul>
-          </li>
-          <li>
-            <strong>Evening Snack:</strong> Greek yogurt with a few slices of
-            strawberries.
-          </li>
-        </ul>
-        <h3>Foods to Include</h3>
-        <ul>
-          <li>Proteins: Lean meats, fish, eggs, beans, and legumes.</li>
-          <li>Carbohydrates: Whole grains, vegetables, fruits, and legumes.</li>
-          <li>Fats: Avocados, nuts, seeds, and olive oil.</li>
-          <li>Fiber: Vegetables, fruits, whole grains, and legumes.</li>
-          <li>
-            Low-GI Foods: Most vegetables, legumes, and some fruits like apples
-            and berries.
-          </li>
-        </ul>
-        <h3>Foods to Avoid</h3>
-        <ul>
-          <li>
-            Sugary Foods: Sodas, candies, pastries, and other high-sugar foods.
-          </li>
-          <li>Refined Carbohydrates: White bread, white rice, and pastries.</li>
-          <li>Trans Fats: Found in many processed foods.</li>
-          <li>High GI Foods: White bread, white rice, and potatoes.</li>
-        </ul>
+        <section>
+          <h2>Meal Plan</h2>
+          <h3>
+            <u>General Guidelines</u>
+          </h3>
+          <ol>
+            <li>
+              Balanced Macronutrients: Ensure a balance of carbohydrates,
+              proteins, and fats in each meal.
+            </li>
+            <li>
+              Frequent, Small Meals: Eat small, balanced meals every 3-4 hours
+              to maintain steady blood sugar and electrolyte levels.
+            </li>
+            <li>
+              Adequate Salt Intake: Ensure proper sodium intake to compensate
+              for aldosterone deficiency.
+            </li>
+            <li>
+              Nutrient-Dense Foods: Focus on whole, unprocessed foods rich in
+              vitamins and minerals.
+            </li>
+          </ol>
+
+          <h3>Foods to Include</h3>
+          <ul>
+            <li>Proteins: Lean meats, fish, eggs, beans, and legumes.</li>
+            <li>
+              Carbohydrates: Whole grains, vegetables, fruits, and legumes.
+            </li>
+            <li>Fats: Avocados, nuts, seeds, and olive oil.</li>
+            <li>Fiber: Vegetables, fruits, whole grains, and legumes.</li>
+            <li>
+              Sodium-Rich Foods: Incorporate enough sodium, such as through
+              lightly salted snacks or meals with sea salt.
+            </li>
+          </ul>
+          <h3>Foods to Avoid</h3>
+          <ul>
+            <li>
+              Sugary Foods: Sodas, candies, pastries, and other high-sugar
+              foods.
+            </li>
+            <li>
+              Refined Carbohydrates: White bread, white rice, and pastries.
+            </li>
+            <li>
+              Caffeine and Alcohol: Limit intake as they can exacerbate
+              symptoms.
+            </li>
+            <li>
+              Processed Foods: Foods high in unhealthy fats and additives.
+            </li>
+          </ul>
+        </section>
       </div>
       <div id="workout-plan" className="tabcontent">
-        {" "}
         <h2>Workout Plan</h2>
-        <h3>General Guidelines</h3>
+        <h3>
+          <u>General Guidelines</u>
+        </h3>
         <ol>
           <li>
-            Consistency: Aim for at least 150 minutes (about 2 and a half hours)
-            of moderate exercise per week.
+            Moderate Exercise: Focus on moderate, consistent exercise rather
+            than intense workouts.
           </li>
+          <li>Stress Reduction: Include activities that help reduce stress.</li>
           <li>
-            Mix of Cardio and Strength Training: Both are important for managing
-            diabetes and overall health.
-          </li>
-          <li>
-            Monitor Blood Sugar Levels: Check levels before, during, and after
-            exercise if needed.
+            Listen to Your Body: Avoid overexertion and prioritize rest when
+            needed.
           </li>
         </ol>
-        <h3>Sample Weekly Workout Plan</h3>
+        <br />
+        <hr />
+        <h3>
+          <u>Sample Weekly Workout Plan</u>
+        </h3>
         <ul>
           <li>
-            <strong>Monday:</strong>
+            <strong>Mondays & Thursdays:</strong>
             <ul>
-              <li>Cardio: 30 minutes of brisk walking or jogging.</li>
+              <li>Cardio: 30 minutes of brisk walking.</li>
               <li>
-                Strength Training: Upper body workout (push-ups, dumbbell
-                presses, tricep dips).
-              </li>
-            </ul>
-          </li>
-          <li>
-            <strong>Tuesday:</strong>
-            <ul>
-              <li>Cardio: 30 minutes of cycling or swimming.</li>
-              <li>
-                Yoga/Stretching: 20 minutes of yoga focusing on flexibility and
+                Yoga/Stretching: 20 minutes of gentle yoga focusing on
                 relaxation.
               </li>
             </ul>
           </li>
           <li>
-            <strong>Wednesday:</strong>
+            <strong>Tuesdays & Fridays:</strong>
             <ul>
               <li>
-                Cardio: 30 minutes of high-intensity interval training (HIIT).
+                Strength Training: Light upper body workout (resistance bands,
+                light weights, bodyweight exercises).
               </li>
-              <li>
-                Strength Training: Lower body workout (squats, lunges, leg
-                presses).
-              </li>
+              <li>Cardio: 20 minutes of swimming or cycling.</li>
             </ul>
           </li>
           <li>
-            <strong>Thursday:</strong> Rest Day: Light activity like walking or
-            gentle stretching.
-          </li>
-          <li>
-            <strong>Friday:</strong>
-            <ul>
-              <li>Cardio: 30 minutes of elliptical or stair climbing.</li>
-              <li>
-                Strength Training: Full body workout (combination of upper and
-                lower body exercises).
-              </li>
-            </ul>
-          </li>
-          <li>
-            <strong>Saturday:</strong>
-            <ul>
-              <li>Cardio: 45 minutes of a favorite sport or dance class.</li>
-              <li>
-                Yoga/Stretching: 20 minutes of deep stretching or restorative
-                yoga.
-              </li>
-            </ul>
-          </li>
-          <li>
-            <strong>Sunday:</strong> Active Recovery: Light activities like a
-            leisurely walk, swimming, or gentle yoga.
+            <strong>Wednesdays, Saturdays & Sundays:</strong> Rest Day: Focus on
+            light activities like a leisurely walk or gentle stretching.
           </li>
         </ul>
       </div>
       <div id="tips" className="tabcontent">
-        {" "}
         <h3>Tips for Success</h3>
         <ol>
-          <li>Stay Hydrated: Drink plenty of water throughout the day.</li>
-          <li>Sleep Well: Aim for 7-8 hours of quality sleep each night.</li>
           <li>
-            Monitor Blood Sugar Levels: Keep track of your levels regularly,
-            especially when trying new foods or exercises.
+            <strong>Stay Hydrated:</strong> Drink plenty of water throughout the
+            day to maintain optimal hydration. Consider incorporating
+            electrolyte drinks, especially if recommended by your healthcare
+            provider, to help balance sodium and potassium levels in the body.
           </li>
           <li>
-            Keep Emergency Snacks: Have fast-acting carbs like glucose tablets
-            or juice handy for hypoglycemic episodes.
+            <strong>Prioritize Sleep:</strong> Aim for 7-9 hours of quality
+            sleep each night to support overall health and well-being. Establish
+            a consistent sleep routine and create a restful environment by
+            minimizing noise, light, and electronic distractions.
           </li>
           <li>
-            Stay Positive: Focus on small, achievable goals and celebrate your
-            progress.
+            <strong>Manage Stress:</strong> Incorporate stress-reducing
+            activities such as meditation, deep breathing exercises, yoga, or
+            hobbies that you enjoy. Chronic stress can exacerbate symptoms of
+            adrenal insufficiency, so finding effective ways to relax and unwind
+            is crucial.
+          </li>
+          <li>
+            <strong>Monitor Symptoms:</strong> Keep track of your energy levels,
+            mood, and overall well-being in a journal or app. This can help you
+            identify patterns and make necessary adjustments to your treatment
+            plan. Regular monitoring can also provide valuable information for
+            your healthcare provider.
+          </li>
+          <li>
+            <strong>Seek Support:</strong> Consider working with a healthcare
+            provider or nutritionist specializing in adrenal health. They can
+            offer personalized advice and support tailored to your specific
+            needs. Joining support groups or communities with others
+            experiencing similar health challenges can also provide emotional
+            support and practical tips.
+          </li>
+          <li>
+            <strong>Balanced Diet:</strong> Follow a diet rich in nutrient-dense
+            foods, including lean proteins, whole grains, healthy fats, and
+            plenty of fruits and vegetables. Avoid processed foods, sugary
+            snacks, and excessive caffeine, which can negatively impact adrenal
+            health.
+          </li>
+          <li>
+            <strong>Educate Yourself:</strong> Stay informed about adrenal
+            insufficiency and its management. Understanding your condition can
+            empower you to make informed decisions about your health and
+            advocate for yourself in medical settings.
+          </li>
+          <li>
+            <strong>Emergency Preparedness:</strong> Be prepared for potential
+            adrenal crises by carrying an emergency kit that includes
+            corticosteroid injections and other necessary medications. Ensure
+            that family members, friends, and coworkers are aware of your
+            condition and know how to assist you in an emergency.
           </li>
         </ol>
       </div>

@@ -21,7 +21,6 @@ function AdrenalFatigue() {
 
   return (
     <div className="adrenal-container">
-      <h1>Adrenal Fatigue</h1>
       <button
         className="tablink"
         onClick={(e) => openPage("definition", e, "red")}
@@ -48,128 +47,104 @@ function AdrenalFatigue() {
       </button>
 
       <div id="definition" className="tabcontent">
-        <h3>Adrenal Fatigue</h3>
-        <p>
-          Adrenal fatigue is a term used to describe a group of symptoms related
-          to chronic stress and adrenal gland dysfunction. While not officially
-          recognized as a medical condition, the symptoms can be managed with
-          lifestyle changes, including a balanced diet and regular exercise.
-          Here’s a comprehensive meal and workout plan to support adrenal
-          health.
-        </p>
+        <section>
+          <h2 className="def-title">Adrenal Fatigue</h2>
+          <p className="def-p">
+            Adrenal fatigue is a term often used to describe a set of
+            nonspecific symptoms, such as body aches, fatigue, nervousness,
+            sleep disturbances, and digestive problems. It is believed to occur
+            when the adrenal glands function below the necessary level,
+            primarily due to chronic stress.
+          </p>
+          <br />
+          <p className="def-p">
+            Unlike Addison's disease, adrenal fatigue is not a recognized
+            medical diagnosis. It is hypothesized that long-term stress can
+            deplete the adrenal glands, leading to an imbalance in cortisol
+            levels. Symptoms may include tiredness, trouble sleeping, craving
+            salty or sweet snacks, and difficulty recovering from illness or
+            stress.
+          </p>
+          <br />
+          <p className="def-p">
+            Managing adrenal fatigue involves reducing stress, improving diet,
+            and incorporating lifestyle changes. This can include getting
+            adequate sleep, engaging in regular physical activity, practicing
+            relaxation techniques, and eating a balanced diet rich in whole
+            foods.
+          </p>
+          <br />
+          <p className="def-p">
+            It is important to consult with a healthcare provider for proper
+            evaluation and to rule out other underlying conditions. While
+            adrenal fatigue is not a medically recognized condition, addressing
+            stress and promoting overall health can improve well-being.
+          </p>
+        </section>
       </div>
 
       <div id="meal-plan" className="tabcontent">
-        <h2>Meal Plan</h2>
-        <h3>General Guidelines</h3>
-        <ol>
-          <li>
-            Balanced Macronutrients: Include a mix of carbohydrates, proteins,
-            and fats in each meal.
-          </li>
-          <li>
-            Frequent, Small Meals: Eat small, balanced meals every 3-4 hours to
-            maintain steady blood sugar levels.
-          </li>
-          <li>
-            Anti-Inflammatory Foods: Incorporate foods that reduce inflammation.
-          </li>
-          <li>
-            Nutrient-Dense Foods: Focus on whole, unprocessed foods rich in
-            vitamins and minerals.
-          </li>
-        </ol>
-        <h3>Sample Daily Meal Plan</h3>
-        <ul>
-          <li>
-            <strong>Breakfast:</strong>
-            <ul>
-              <li>
-                Smoothie with spinach, avocado, banana, almond milk, and a scoop
-                of protein powder.
-              </li>
-              <li>Whole grain toast with a thin spread of almond butter.</li>
-            </ul>
-          </li>
-          <li>
-            <strong>Snack:</strong>
-            <ul>
-              <li>
-                A small handful of mixed nuts (almonds, walnuts, cashews).
-              </li>
-              <li>A piece of fruit (e.g., an apple or pear).</li>
-            </ul>
-          </li>
-          <li>
-            <strong>Lunch:</strong>
-            <ul>
-              <li>
-                Grilled chicken breast with a quinoa salad (mixed greens, cherry
-                tomatoes, cucumbers, and a light vinaigrette).
-              </li>
-              <li>Steamed asparagus.</li>
-            </ul>
-          </li>
-          <li>
-            <strong>Snack:</strong>
-            <ul>
-              <li>
-                Greek yogurt with a sprinkle of chia seeds and a few slices of
-                strawberries.
-              </li>
-            </ul>
-          </li>
-          <li>
-            <strong>Dinner:</strong>
-            <ul>
-              <li>
-                Baked salmon with a side of roasted vegetables (broccoli, bell
-                peppers, and carrots).
-              </li>
-              <li>A small serving of brown rice.</li>
-            </ul>
-          </li>
-          <li>
-            <strong>Evening Snack:</strong>
-            <ul>
-              <li>
-                Herbal tea with a small serving of cottage cheese and a few
-                berries.
-              </li>
-            </ul>
-          </li>
-        </ul>
-        <h3>Foods to Include</h3>
-        <ul>
-          <li>Proteins: Lean meats, fish, eggs, beans, and legumes.</li>
-          <li>Carbohydrates: Whole grains, vegetables, fruits, and legumes.</li>
-          <li>Fats: Avocados, nuts, seeds, and olive oil.</li>
-          <li>Fiber: Vegetables, fruits, whole grains, and legumes.</li>
-          <li>
-            Anti-Inflammatory Foods: Berries, fatty fish, leafy greens, and
-            olive oil.
-          </li>
-          <li>
-            Adaptogenic Herbs: Ashwagandha, Rhodiola, and Holy Basil (consult
-            with a healthcare provider before use).
-          </li>
-        </ul>
-        <h3>Foods to Avoid</h3>
-        <ul>
-          <li>
-            Sugary Foods: Sodas, candies, pastries, and other high-sugar foods.
-          </li>
-          <li>Refined Carbohydrates: White bread, white rice, and pastries.</li>
-          <li>
-            Caffeine and Alcohol: Limit intake as they can exacerbate adrenal
-            fatigue.
-          </li>
-          <li>Processed Foods: Foods high in unhealthy fats and additives.</li>
-        </ul>
+        <section>
+          <h2>Meal Plan</h2>
+          <h3>
+            <u>General Guidelines</u>
+          </h3>
+          <ol>
+            <li>
+              Balanced Macronutrients: Ensure a balance of carbohydrates,
+              proteins, and fats in each meal.
+            </li>
+            <li>
+              Frequent, Small Meals: Eat small, balanced meals every 3-4 hours
+              to maintain steady blood sugar and electrolyte levels.
+            </li>
+            <li>
+              Adequate Salt Intake: Ensure proper sodium intake to compensate
+              for aldosterone deficiency.
+            </li>
+            <li>
+              Nutrient-Dense Foods: Focus on whole, unprocessed foods rich in
+              vitamins and minerals.
+            </li>
+          </ol>
+
+          <h3>Foods to Include</h3>
+          <ul>
+            <li>Proteins: Lean meats, fish, eggs, beans, and legumes.</li>
+            <li>
+              Carbohydrates: Whole grains, vegetables, fruits, and legumes.
+            </li>
+            <li>Fats: Avocados, nuts, seeds, and olive oil.</li>
+            <li>Fiber: Vegetables, fruits, whole grains, and legumes.</li>
+            <li>
+              Sodium-Rich Foods: Incorporate enough sodium, such as through
+              lightly salted snacks or meals with sea salt.
+            </li>
+          </ul>
+          <h3>Foods to Avoid</h3>
+          <ul>
+            <li>
+              Sugary Foods: Sodas, candies, pastries, and other high-sugar
+              foods.
+            </li>
+            <li>
+              Refined Carbohydrates: White bread, white rice, and pastries.
+            </li>
+            <li>
+              Caffeine and Alcohol: Limit intake as they can exacerbate
+              symptoms.
+            </li>
+            <li>
+              Processed Foods: Foods high in unhealthy fats and additives.
+            </li>
+          </ul>
+        </section>
       </div>
       <div id="workout-plan" className="tabcontent">
         <h2>Workout Plan</h2>
-        <h3>General Guidelines</h3>
+        <h3>
+          <u>General Guidelines</u>
+        </h3>
         <ol>
           <li>
             Moderate Exercise: Focus on moderate, consistent exercise rather
@@ -181,10 +156,14 @@ function AdrenalFatigue() {
             needed.
           </li>
         </ol>
-        <h3>Sample Weekly Workout Plan</h3>
+        <br />
+        <hr />
+        <h3>
+          <u>Sample Weekly Workout Plan</u>
+        </h3>
         <ul>
           <li>
-            <strong>Monday:</strong>
+            <strong>Mondays & Thursdays:</strong>
             <ul>
               <li>Cardio: 30 minutes of brisk walking.</li>
               <li>
@@ -194,7 +173,7 @@ function AdrenalFatigue() {
             </ul>
           </li>
           <li>
-            <strong>Tuesday:</strong>
+            <strong>Tuesdays & Fridays:</strong>
             <ul>
               <li>
                 Strength Training: Light upper body workout (resistance bands,
@@ -204,60 +183,67 @@ function AdrenalFatigue() {
             </ul>
           </li>
           <li>
-            <strong>Wednesday:</strong> Rest Day: Focus on light activities like
-            a leisurely walk or gentle stretching.
-          </li>
-          <li>
-            <strong>Thursday:</strong>
-            <ul>
-              <li>
-                Cardio: 30 minutes of low-intensity aerobic exercise (e.g.,
-                walking, tai chi).
-              </li>
-              <li>
-                Strength Training: Light lower body workout (squats, lunges,
-                bodyweight exercises).
-              </li>
-            </ul>
-          </li>
-          <li>
-            <strong>Friday:</strong>
-            <ul>
-              <li>Yoga/Stretching: 30 minutes of restorative yoga.</li>
-              <li>
-                Light Cardio: 20 minutes of cycling or elliptical machine.
-              </li>
-            </ul>
-          </li>
-          <li>
-            <strong>Saturday:</strong> Active Recovery: Engage in a favorite
-            low-impact activity, such as a nature walk or light dance class.
-          </li>
-          <li>
-            <strong>Sunday:</strong> Rest Day: Focus on relaxation and light
-            stretching or meditation.
+            <strong>Wednesdays, Saturdays & Sundays:</strong> Rest Day: Focus on
+            light activities like a leisurely walk or gentle stretching.
           </li>
         </ul>
       </div>
       <div id="tips" className="tabcontent">
         <h3>Tips for Success</h3>
         <ol>
-          <li>Stay Hydrated: Drink plenty of water throughout the day.</li>
           <li>
-            Prioritize Sleep: Aim for 7-9 hours of quality sleep each night.
+            <strong>Stay Hydrated:</strong> Drink plenty of water throughout the
+            day to maintain optimal hydration. Consider incorporating
+            electrolyte drinks, especially if recommended by your healthcare
+            provider, to help balance sodium and potassium levels in the body.
           </li>
           <li>
-            Manage Stress: Incorporate stress-reducing activities like
-            meditation, deep breathing exercises, or hobbies you enjoy.
+            <strong>Prioritize Sleep:</strong> Aim for 7-9 hours of quality
+            sleep each night to support overall health and well-being. Establish
+            a consistent sleep routine and create a restful environment by
+            minimizing noise, light, and electronic distractions.
           </li>
           <li>
-            Monitor Symptoms: Keep track of your energy levels, mood, and
-            overall well-being to adjust your plan as needed.
+            <strong>Manage Stress:</strong> Incorporate stress-reducing
+            activities such as meditation, deep breathing exercises, yoga, or
+            hobbies that you enjoy. Chronic stress can exacerbate symptoms of
+            adrenal insufficiency, so finding effective ways to relax and unwind
+            is crucial.
           </li>
           <li>
-            Seek Support: Consider working with a healthcare professional,
-            nutritionist, or personal trainer to tailor the plan to your
-            individual needs.
+            <strong>Monitor Symptoms:</strong> Keep track of your energy levels,
+            mood, and overall well-being in a journal or app. This can help you
+            identify patterns and make necessary adjustments to your treatment
+            plan. Regular monitoring can also provide valuable information for
+            your healthcare provider.
+          </li>
+          <li>
+            <strong>Seek Support:</strong> Consider working with a healthcare
+            provider or nutritionist specializing in adrenal health. They can
+            offer personalized advice and support tailored to your specific
+            needs. Joining support groups or communities with others
+            experiencing similar health challenges can also provide emotional
+            support and practical tips.
+          </li>
+          <li>
+            <strong>Balanced Diet:</strong> Follow a diet rich in nutrient-dense
+            foods, including lean proteins, whole grains, healthy fats, and
+            plenty of fruits and vegetables. Avoid processed foods, sugary
+            snacks, and excessive caffeine, which can negatively impact adrenal
+            health.
+          </li>
+          <li>
+            <strong>Educate Yourself:</strong> Stay informed about adrenal
+            insufficiency and its management. Understanding your condition can
+            empower you to make informed decisions about your health and
+            advocate for yourself in medical settings.
+          </li>
+          <li>
+            <strong>Emergency Preparedness:</strong> Be prepared for potential
+            adrenal crises by carrying an emergency kit that includes
+            corticosteroid injections and other necessary medications. Ensure
+            that family members, friends, and coworkers are aware of your
+            condition and know how to assist you in an emergency.
           </li>
         </ol>
       </div>
