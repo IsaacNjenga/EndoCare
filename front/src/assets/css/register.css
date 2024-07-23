@@ -1,6 +1,119 @@
+/* Container for the entire form */
 .body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
   background-image: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)),
     url("../../consult.jpg");
   background-repeat: no-repeat;
   background-size: cover;
+  font-family: Arial, sans-serif;
+}
+
+/* Container for the form */
+.form-container {
+  background: rgba(255, 255, 255, 0.9);
+  padding: 30px;
+  border-radius: 10px;
+  box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.5);
+  width: 100%;
+  max-width: 400px;
+}
+
+/* General form styling */
+.form {
+  display: flex;
+  flex-direction: column;
+}
+
+/* Form header */
+.form h2 {
+  margin-bottom: 20px;
+  color: #333;
+  text-align: center;
+}
+
+/* Form group for input fields */
+.form-group {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 15px;
+}
+
+/* Label styling */
+.form-label {
+  margin-bottom: 5px;
+  color: #333;
+}
+
+/* Input field styling */
+.form-control {
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 16px;
+  outline: none;
+}
+
+/* Focus effect for input fields */
+.form-control:focus {
+  border-color: #007bff;
+}
+
+/* Role options styling */
+.role-options {
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+/* Radio input styling */
+.form-radio {
+  margin-right: 5px;
+}
+
+.form-radio-label {
+  margin-right: 20px;
+}
+
+/* Error message styling */
+.error {
+  color: red;
+  font-size: 14px;
+  margin-top: 5px;
+}
+
+/* Submit button styling */
+.form-btn {
+  padding: 10px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+  margin-top: 10px;
+}
+
+.form-btn:hover {
+  background-color: #0056b3;
+}
+
+/* Link to login page */
+.login-link {
+  color: #007bff;
+  text-decoration: none;
+}
+
+.login-link:hover {
+  text-decoration: underline;
+}
+
+/* Loader styling */
+.loader {
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }

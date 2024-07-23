@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import "../assets/css/form.css";
 import { Link, useNavigate } from "react-router-dom";
 import Validation from "../components/validation";
 import axios from "axios";
@@ -15,7 +14,7 @@ function Register() {
   const [serverErrors, setServerErrors] = useState([]);
 
   const handleChange = (e) => {
-    setValues({ ...values, [e.target.name]: e.target.value });
+    setValues({ ...values, [e.target.name]: e.target.value || e.target.id });
   };
 
   const handleSubmit = (e) => {
@@ -53,6 +52,7 @@ function Register() {
     }
   };
 
+
   return (
     <>
       {loading && <Loader />}
@@ -62,7 +62,7 @@ function Register() {
             <h2>Sign Up</h2>
             <div className="form-group">
               <label htmlFor="name" className="form-label">
-                Name:
+                <strong>Name:</strong>
               </label>
               <input
                 type="text"
@@ -72,8 +72,10 @@ function Register() {
                 onChange={handleChange}
               />
               {errors.name && <span className="error">{errors.name}</span>}
+            </div>
+            <div className="form-group">
               <label htmlFor="email" className="form-label">
-                E-mail:
+              <strong>E-mail:</strong>
               </label>
               <input
                 type="email"
@@ -84,22 +86,41 @@ function Register() {
                 onChange={handleChange}
               />
               {errors.email && <span className="error">{errors.email}</span>}
+            </div>
+            <div className="form-group role-options">
               <label htmlFor="role" className="form-label">
-                Role:
+              <strong>Role:</strong>
               </label>
-              <select
-                name="role"
-                className="form-control"
-                onChange={handleChange}
-              >
-                <option value="" disabled>
-                  Choose
-                </option>
-                <option value="doctor">Doctor</option>
-                <option value="patient">Patient</option>
-              </select>
+              <div>
+                <input
+                  type="radio"
+                  name="role"
+                  value="doctor"
+                  id="doctor"
+                  onChange={handleChange}
+                  className="form-radio"
+                />
+                <label htmlFor="doctor" className="form-radio-label">
+                  Doctor
+                </label>
+              </div>
+              <div>
+                <input
+                  type="radio"
+                  name="role"
+                  value="patient"
+                  id="patient"
+                  onChange={handleChange}
+                  className="form-radio"
+                />
+                <label htmlFor="patient" className="form-radio-label">
+                  Patient
+                </label>
+              </div>
+            </div>
+            <div className="form-group">
               <label htmlFor="password" className="form-label">
-                Password:
+              <strong>Password:</strong>
               </label>
               <input
                 type="password"
@@ -118,7 +139,7 @@ function Register() {
                   {error.msg}
                 </p>
               ))}
-            <button className="form-btn">Sign up!</button>
+            <button type = "submit" className="form-btn">Sign up!</button>
             <p>
               Already have an account?{" "}
               <Link to="/login" className="login-link">

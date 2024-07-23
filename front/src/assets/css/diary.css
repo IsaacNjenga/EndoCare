@@ -1,21 +1,25 @@
 body {
   font-family: "Roboto", sans-serif;
-  background: #f0f0f0;
   margin: 0;
-  padding: 0;
+  height: 100vh;
+  padding: 0; background-image: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)),
+  url("../images/journal.jpg");  
+  background-repeat: no-repeat;
+  background-size: cover;
 }
 
 .diary-container {
-  max-width: 1200px;
+  max-width: 1300px;
   margin: 20px auto;
   padding: 0 20px;
+  border-radius: 14px;
 }
 
 .header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding-bottom: 20px;
+  padding-bottom: 25px;
 }
 
 .add-entry-link {
@@ -48,9 +52,9 @@ body {
 }
 
 .diary-card {
-  background: #fff;
+  background: #ffffffe8;
   border-radius: 10px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.247);
   padding: 20px;
   width: 130%;
   flex: 1 1 calc(33.333% - 20px);

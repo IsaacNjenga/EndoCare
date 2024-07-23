@@ -9,8 +9,7 @@ function Diary() {
 
   return (
     <>
-      {user.role === "patient" ? <PatientDiary /> : <DoctorDiary />}
-      
+      {user.role === "patient" ? <PatientDiary /> : <DoctorDiary />}      
     </>
   );
 }

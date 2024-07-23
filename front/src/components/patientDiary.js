@@ -208,248 +208,252 @@ function PatientDiary() {
     <>
       {loading && <Loader />}
       <Navbar />
-      <div className="diary-container">
-        <div className="header">
-          <h1>Your Health Journal</h1>
-          <Link to="/add-diary" className="add-entry-link">
-            Add an entry
-          </Link>
-        </div>
-        {data.length > 0 ? (
-          <div className="diary-grid">
-            {data.map((diaryTable, index) => (
-              <div key={index} className="diary-card">
-                <div className="entry-header">
-                  <h3>
-                    {format(
-                      new Date(diaryTable.createdAt),
-                      "EEEE, MMM do, yyyy"
-                    )}
-                  </h3>{" "}
-                  |
-                  <button
-                    onClick={() => viewEntry(diaryTable)}
-                    className="view-entry-btn"
-                  >
-                    View Journal
-                  </button>{" "}
-                  |
-                  <button
-                    onClick={() => viewFeedback(diaryTable)}
-                    className="view-feedback-btn"
-                  >
-                    View Feedback
-                  </button>
-                </div>
-              </div>
-            ))}
+        <div className="diary-container">
+          <div className="header">
+            <h1>Your Health Journal</h1>
+            <Link to="/add-diary" className="add-entry-link">
+              Add an entry
+            </Link>
           </div>
-        ) : (
-          <div>No entries found.</div>
-        )}
-      </div>{" "}
-      {selectedFeedbackEntry && (
-        <div className="modal-overlay" onClick={closeFeedbackModal}>
-          <div className="modal-content" onClick={(e) => e.stopPropagation()}>
-            <div className="close-btn-div">
-              <button className="close-btn" onClick={closeFeedbackModal}>
-                Close
-              </button>
-            </div>
-            <br />
-            {typeof feedbackContent === "string" ? (
-              <p>{feedbackContent}</p>
-            ) : (
-              <div className="feedback-entry-details">
-                <div className="feedback-header"></div>
-                <h2>
-                  {format(new Date(values.createdAt), "EEEE, MMM do, yyyy")}
-                </h2>
-                <h2>Observation from your Blood Sugar Levels</h2>
-                <p>{values.bloodSugarObservation}</p>
-                <h2>Recommendation</h2>
-                <p>{values.bloodSugarRecommendation}</p>
-                <hr />
-                <h2>The Medication</h2>
-                <p>{values.medicationFeedback}</p>
-                <hr />
-                <h2>Patient Meals & Diet</h2>
-                <p>{values.mealsFeedback}</p>
-                <h2>Experienced Symptoms & Solution</h2>
-                <p>{values.symptomsFeedback}</p>
-                <hr />
-                <h2>Well-Being</h2>
-                <p>{values.wellBeingObservation}</p>{" "}
-                <h2>Recommendation for your well-being</h2>
-                <p>{values.wellBeingRecommendation}</p>{" "}
-                <br/><hr/>
-                <h2>Overall Assessment & Next Steps</h2>
-                <p>{values.overallAssessment}</p>
-                <br /><hr/>
-                <div>
-                  <p><u>Don't hesitate to reach out</u></p>
-                  <p>
-                    Dr. {values.doctorfirstname} {values.doctorlastname} - {doctorProfile.specialization}
-                  </p>
-                  <p>Email: {doctorProfile?.email || "N/A"}</p>
-                  <p>Contact: {doctorProfile?.phone || "N/A"}</p>
-                </div>
-                <div>
-                  <p>
-                    Need more clarification? {" "}
-                    <button className="appointment-btn">
-                      <Link to="/book-appointment">Book an appointment</Link>
+          {data.length > 0 ? (
+            <div className="diary-grid">
+              {data.map((diaryTable, index) => (
+                <div key={index} className="diary-card">
+                  <div className="entry-header">
+                    <h3>
+                      {format(
+                        new Date(diaryTable.createdAt),
+                        "EEEE, MMM do, yyyy"
+                      )}
+                    </h3>{" "}
+                    |
+                    <button
+                      onClick={() => viewEntry(diaryTable)}
+                      className="view-entry-btn"
+                    >
+                      View Journal
+                    </button>{" "}
+                    |
+                    <button
+                      onClick={() => viewFeedback(diaryTable)}
+                      className="view-feedback-btn"
+                    >
+                      View Feedback
                     </button>
-                  </p>
+                  </div>
                 </div>
-              </div>
-            )}
-          </div>
-        </div>
-      )}
-      {selectedEntry && (
-        <div className="modal-overlay" onClick={closeModal}>
-          <div className="modal-content" onClick={(e) => e.stopPropagation()}>
-            <div className="close-btn-div">
-              <button className="close-btn" onClick={closeModal}>
-                Close
-              </button>
+              ))}
             </div>
-            <br />
-            <div className="diary-entry-details">
-              <div className="entry-header">
-                <Link
-                  to={`/update-diary/${selectedEntry._id}`}
-                  className="update-entry-link"
-                >
-                  <FontAwesomeIcon icon={faPenToSquare} />
-                </Link>
-                <button
-                  className="cancel-btn"
-                  onClick={() => deleteRecord(selectedEntry._id)}
-                >
-                  <FontAwesomeIcon icon={faSolidTrash} />
+          ) : (
+            <div>No entries found.</div>
+          )}
+        </div>{" "}
+        {selectedFeedbackEntry && (
+          <div className="modal-overlay" onClick={closeFeedbackModal}>
+            <div className="modal-content" onClick={(e) => e.stopPropagation()}>
+              <div className="close-btn-div">
+                <button className="close-btn" onClick={closeFeedbackModal}>
+                  Close
                 </button>
               </div>
-              <div className="entry-content">
-                <h2>
-                  {format(
-                    new Date(selectedEntry.createdAt),
-                    "EEEE, MMM do, yyyy"
-                  )}
-                </h2>
-                <br />
-                <hr />
-                <br />
-                <div className="entry-section-group">
-                  <img src={bloodSugarIcon} alt="icon" className="icon" />
+              <br />
+              {typeof feedbackContent === "string" ? (
+                <p>{feedbackContent}</p>
+              ) : (
+                <div className="feedback-entry-details">
+                  <div className="feedback-header"></div>
                   <h2>
-                    • <u>Blood Sugar Levels</u>
+                    {format(new Date(values.createdAt), "EEEE, MMM do, yyyy")}
                   </h2>
-                  <div className="entry-row">
-                    <div className="entry-section">
-                      <h3>Fasting</h3>
-                      <p>{selectedEntry.fasting}mg/dL</p>
-                    </div>
-                    <div className="entry-section">
-                      <h3>Pre-Lunch</h3>
-                      <p>{selectedEntry.prelunch}mg/dL</p>
-                    </div>
-                    <div className="entry-section">
-                      <h3>Post-Lunch</h3>
-                      <p>{selectedEntry.postlunch}mg/dL</p>
-                    </div>
-                    <div className="entry-section">
-                      <h3>Night</h3>
-                      <p>{selectedEntry.night}mg/dL</p>
-                    </div>
+                  <h2>Observation from your Blood Sugar Levels</h2>
+                  <p>{values.bloodSugarObservation}</p>
+                  <h2>Recommendation</h2>
+                  <p>{values.bloodSugarRecommendation}</p>
+                  <hr />
+                  <h2>The Medication</h2>
+                  <p>{values.medicationFeedback}</p>
+                  <hr />
+                  <h2>Patient Meals & Diet</h2>
+                  <p>{values.mealsFeedback}</p>
+                  <h2>Experienced Symptoms & Solution</h2>
+                  <p>{values.symptomsFeedback}</p>
+                  <hr />
+                  <h2>Well-Being</h2>
+                  <p>{values.wellBeingObservation}</p>{" "}
+                  <h2>Recommendation for your well-being</h2>
+                  <p>{values.wellBeingRecommendation}</p> <br />
+                  <hr />
+                  <h2>Overall Assessment & Next Steps</h2>
+                  <p>{values.overallAssessment}</p>
+                  <br />
+                  <hr />
+                  <div>
+                    <p>
+                      <u>Don't hesitate to reach out</u>
+                    </p>
+                    <p>
+                      Dr. {values.doctorfirstname} {values.doctorlastname} -{" "}
+                      {doctorProfile.specialization}
+                    </p>
+                    <p>Email: {doctorProfile?.email || "N/A"}</p>
+                    <p>Contact: {doctorProfile?.phone || "N/A"}</p>
+                  </div>
+                  <div>
+                    <p>
+                      Need more clarification?{" "}
+                      <button className="appointment-btn">
+                        <Link to="/book-appointment">Book an appointment</Link>
+                      </button>
+                    </p>
                   </div>
                 </div>
-                <br /> <hr />
-                <br />
-                <div className="entry-section-group">
-                  <img src={medicationIcon} alt="icon" className="icon" />
+              )}
+            </div>
+          </div>
+        )}
+        {selectedEntry && (
+          <div className="modal-overlay" onClick={closeModal}>
+            <div className="modal-content" onClick={(e) => e.stopPropagation()}>
+              <div className="close-btn-div">
+                <button className="close-btn" onClick={closeModal}>
+                  Close
+                </button>
+              </div>
+              <br />
+              <div className="diary-entry-details">
+                <div className="entry-header">
+                  <Link
+                    to={`/update-diary/${selectedEntry._id}`}
+                    className="update-entry-link"
+                  >
+                    <FontAwesomeIcon icon={faPenToSquare} />
+                  </Link>
+                  <button
+                    className="cancel-btn"
+                    onClick={() => deleteRecord(selectedEntry._id)}
+                  >
+                    <FontAwesomeIcon icon={faSolidTrash} />
+                  </button>
+                </div>
+                <div className="entry-content">
                   <h2>
-                    • <u>Medication</u>
+                    {format(
+                      new Date(selectedEntry.createdAt),
+                      "EEEE, MMM do, yyyy"
+                    )}
                   </h2>
-                  <div className="entry-row">
-                    <div className="entry-section">
-                      <h3>Morning</h3>
-                      <p>{selectedEntry.morning}</p>
-                    </div>
-                    <div className="entry-section">
-                      <h3>Evening</h3>
-                      <p>{selectedEntry.evening}</p>
+                  <br />
+                  <hr />
+                  <br />
+                  <div className="entry-section-group">
+                    <img src={bloodSugarIcon} alt="icon" className="icon" />
+                    <h2>
+                      • <u>Blood Sugar Levels</u>
+                    </h2>
+                    <div className="entry-row">
+                      <div className="entry-section">
+                        <h3>Fasting</h3>
+                        <p>{selectedEntry.fasting}mg/dL</p>
+                      </div>
+                      <div className="entry-section">
+                        <h3>Pre-Lunch</h3>
+                        <p>{selectedEntry.prelunch}mg/dL</p>
+                      </div>
+                      <div className="entry-section">
+                        <h3>Post-Lunch</h3>
+                        <p>{selectedEntry.postlunch}mg/dL</p>
+                      </div>
+                      <div className="entry-section">
+                        <h3>Night</h3>
+                        <p>{selectedEntry.night}mg/dL</p>
+                      </div>
                     </div>
                   </div>
-                </div>
-                <br /> <hr />
-                <br />
-                <div className="entry-section-group">
-                  <img src={dietIcon} alt="icon" className="icon" />
-                  <h2>
-                    • <u>Meals</u>
-                  </h2>
-                  <div className="entry-row">
-                    <div className="entry-section">
-                      <h3>Breakfast</h3>
-                      <p>{selectedEntry.breakfast}</p>
-                    </div>
-                    <div className="entry-section">
-                      <h3>Lunch</h3>
-                      <p>{selectedEntry.lunch}</p>
-                    </div>
-                    <div className="entry-section">
-                      <h3>Snack</h3>
-                      <p>{selectedEntry.snack}</p>
-                    </div>
-                    <div className="entry-section">
-                      <h3>Dinner</h3>
-                      <p>{selectedEntry.dinner}</p>
+                  <br /> <hr />
+                  <br />
+                  <div className="entry-section-group">
+                    <img src={medicationIcon} alt="icon" className="icon" />
+                    <h2>
+                      • <u>Medication</u>
+                    </h2>
+                    <div className="entry-row">
+                      <div className="entry-section">
+                        <h3>Morning</h3>
+                        <p>{selectedEntry.morning}</p>
+                      </div>
+                      <div className="entry-section">
+                        <h3>Evening</h3>
+                        <p>{selectedEntry.evening}</p>
+                      </div>
                     </div>
                   </div>
-                </div>
-                <br /> <hr />
-                <br />
-                <div className="entry-section-group">
-                  <img src={symptomsIcon} alt="icon" className="icon" />
-                  <h2>
-                    • <u>Symptoms Today</u>
-                  </h2>
-                  <div className="entry-row">
-                    <div className="entry-section">
-                      <h3>Symptoms</h3>
-                      <p>{selectedEntry.symptoms}</p>
+                  <br /> <hr />
+                  <br />
+                  <div className="entry-section-group">
+                    <img src={dietIcon} alt="icon" className="icon" />
+                    <h2>
+                      • <u>Meals</u>
+                    </h2>
+                    <div className="entry-row">
+                      <div className="entry-section">
+                        <h3>Breakfast</h3>
+                        <p>{selectedEntry.breakfast}</p>
+                      </div>
+                      <div className="entry-section">
+                        <h3>Lunch</h3>
+                        <p>{selectedEntry.lunch}</p>
+                      </div>
+                      <div className="entry-section">
+                        <h3>Snack</h3>
+                        <p>{selectedEntry.snack}</p>
+                      </div>
+                      <div className="entry-section">
+                        <h3>Dinner</h3>
+                        <p>{selectedEntry.dinner}</p>
+                      </div>
                     </div>
                   </div>
-                </div>
-                <br /> <hr />
-                <br />
-                <div className="entry-section-group">
-                  <img src={exerciseIcon} alt="icon" className="icon" />
-                  <h2>
-                    • <u>Well-Being & Physical Health</u>
-                  </h2>
-                  <div className="entry-row">
-                    <div className="entry-section">
-                      <h3>Exercise</h3>
-                      <p>{selectedEntry.exercise}</p>
+                  <br /> <hr />
+                  <br />
+                  <div className="entry-section-group">
+                    <img src={symptomsIcon} alt="icon" className="icon" />
+                    <h2>
+                      • <u>Symptoms Today</u>
+                    </h2>
+                    <div className="entry-row">
+                      <div className="entry-section">
+                        <h3>Symptoms</h3>
+                        <p>{selectedEntry.symptoms}</p>
+                      </div>
                     </div>
-                    <div className="entry-section">
-                      <h3>Mood</h3>
-                      <p>{selectedEntry.mood}</p>
-                    </div>
-                    <div className="entry-section">
-                      <h3>Stress</h3>
-                      <p>{selectedEntry.stress}</p>
+                  </div>
+                  <br /> <hr />
+                  <br />
+                  <div className="entry-section-group">
+                    <img src={exerciseIcon} alt="icon" className="icon" />
+                    <h2>
+                      • <u>Well-Being & Physical Health</u>
+                    </h2>
+                    <div className="entry-row">
+                      <div className="entry-section">
+                        <h3>Exercise</h3>
+                        <p>{selectedEntry.exercise}</p>
+                      </div>
+                      <div className="entry-section">
+                        <h3>Mood</h3>
+                        <p>{selectedEntry.mood}</p>
+                      </div>
+                      <div className="entry-section">
+                        <h3>Stress</h3>
+                        <p>{selectedEntry.stress}</p>
+                      </div>
                     </div>
                   </div>
                 </div>
               </div>
             </div>
           </div>
-        </div>
-      )}
+        )}
     </>
   );
 }

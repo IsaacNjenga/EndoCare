@@ -2,6 +2,7 @@ import React, { useContext, useEffect, useState } from "react";
 import Navbar from "../components/navbar";
 import { UserContext } from "../App";
 import axios from "axios";
+//import "../assets/css/resources.css";
 import Pcos from "../diagnosis/pcos";
 import Loader from "../components/loader";
 import Diabetes1 from "../diagnosis/type1diabetes";
@@ -65,15 +66,17 @@ function Resources() {
   }
 
   return (
-    <div>
+    <>
       <Navbar />
-      <h1>Patient's Diagnosis: {data.illness}</h1>
-      {data.illness === "Type-2 Diabetes" && <Diabetes2 />}
-      {data.illness === "Type-1 Diabetes" && <Diabetes1 />}
-      {data.illness === "Adrenal Fatigue" && <AdrenalFatigue />}
-      {data.illness === "Polycystic Ovary Syndrome (PCOS)" && <Pcos />}
-      {data.illness === "Cortisol & Aldosterone Deficiency" && <Cortisol />}
-    </div>
+      <div>
+        <h1 style = {{color:"white"}}>Patient's Diagnosis: {data.illness}</h1>
+        {data.illness === "Type-2 Diabetes" && <Diabetes2 />}
+        {data.illness === "Type-1 Diabetes" && <Diabetes1 />}
+        {data.illness === "Adrenal Fatigue" && <AdrenalFatigue />}
+        {data.illness === "Polycystic Ovary Syndrome (PCOS)" && <Pcos />}
+        {data.illness === "Cortisol & Aldosterone Deficiency" && <Cortisol />}
+      </div>
+    </>
   );
 }
 

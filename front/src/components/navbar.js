@@ -81,7 +81,7 @@ export default function Navbar() {
           <>
             <Link to="/register" className="navbar-link">
               <img src={signupIcon} alt="user" className="navbar-user-icon" />
-              Register
+              Sign Up
             </Link>
             <Link to="/login" className="navbar-link">
               <img src={loginIcon} alt="user" className="navbar-user-icon" />
