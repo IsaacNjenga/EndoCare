@@ -69,7 +69,12 @@ function Resources() {
     <>
       <Navbar />
       <div>
-        <h1 style = {{color:"white"}}>What you need to know about {data.illness}</h1>
+        <br />
+        <br />
+        <h1 style={{ color: "white" }}>
+          What you need to know about {data.illness}
+        </h1>
+        <br />
         {data.illness === "Type-2 Diabetes" && <Diabetes2 />}
         {data.illness === "Type-1 Diabetes" && <Diabetes1 />}
         {data.illness === "Adrenal Fatigue" && <AdrenalFatigue />}

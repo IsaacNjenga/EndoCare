@@ -2,7 +2,7 @@
   padding: 20px;
   line-height: 1.6;
   font-family: "Arial", sans-serif; /* Change font family */
-  background-color: #f0f4f8ba; /* Light background for better contrast */
+  background-color: #f3f3f300; /* Light background for better contrast */
   border-radius: 10px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
@@ -15,13 +15,13 @@
 }
 
 h2 {
-  color: #2c3e50; /* Darker shade for headings */
+  color: #000000; /* Darker shade for headings */
   font-size: 24px;
   margin-top: 20px;
 }
 
 h3 {
-  color: #34495e; /* Darker shade for subheadings */
+  color: #020202; /* Darker shade for subheadings */
   font-size: 20px;
   margin-top: 15px;
 }
@@ -38,7 +38,7 @@ strong {
 }
 
 .tablink {
-  background-color: #3498db; /* Primary color for tabs */
+  background-color: #1580c7; /* Primary color for tabs */
   color: white;
   border: none;
   outline: none;
@@ -56,7 +56,7 @@ strong {
 }
 
 .tabcontent {
-  color: #333; /* Darker text for better readability */
+  color: #c8baba; /* Darker text for better readability */
   display: none;
   padding: 20px;
   height: 100%;
@@ -67,8 +67,7 @@ strong {
 }
 
 #definition {
-  display: block;
-  background-color: #ffffff;
+  background-color: #ffffff8f;
 }
 
 .def-p {
@@ -76,13 +75,13 @@ strong {
 }
 
 #meal-plan {
-  background-color: #ffffff; /* Light green background */
+  background-color: #ffffffbd; /* Light green background */
 }
 #workout-plan {
-  background-color: #ffffff; /* Light blue background */
+  background-color: #ffffffba; /* Light blue background */
 }
 #tips {
-  background-color: #ffffff; /* Light orange background */
+  background-color: #ffffffbb; /* Light orange background */
 }
 
 /* Additional styling for ordered and unordered lists */

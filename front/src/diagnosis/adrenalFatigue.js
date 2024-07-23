@@ -47,6 +47,7 @@ function AdrenalFatigue() {
       </button>
 
       <div id="definition" className="tabcontent">
+        <br />
         <section>
           <h2 className="def-title">Adrenal Fatigue</h2>
           <p className="def-p">
@@ -84,6 +85,7 @@ function AdrenalFatigue() {
       </div>
 
       <div id="meal-plan" className="tabcontent">
+        <br />
         <section>
           <h2>Meal Plan</h2>
           <h3>
@@ -141,6 +143,7 @@ function AdrenalFatigue() {
         </section>
       </div>
       <div id="workout-plan" className="tabcontent">
+        <br />
         <h2>Workout Plan</h2>
         <h3>
           <u>General Guidelines</u>
@@ -189,6 +192,7 @@ function AdrenalFatigue() {
         </ul>
       </div>
       <div id="tips" className="tabcontent">
+        <br />
         <h3>Tips for Success</h3>
         <ol>
           <li>

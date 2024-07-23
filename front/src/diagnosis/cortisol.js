@@ -46,10 +46,9 @@ function Cortisol() {
       </button>
 
       <div id="definition" className="tabcontent">
+        <br />
         <section>
-          <h2 className="def-title">
-            Cortisol & Aldosterone Deficiency
-          </h2>
+          <h2 className="def-title">Cortisol & Aldosterone Deficiency</h2>
           <p className="def-p">
             Cortisol is a vital steroid hormone belonging to the glucocorticoid
             class and is commonly referred to as a stress hormone due to its
@@ -97,6 +96,7 @@ function Cortisol() {
         </section>
       </div>
       <div id="meal-plan" className="tabcontent">
+        <br />
         <section>
           <h2>Meal Plan</h2>
           <h3>

@@ -47,6 +47,7 @@ function Diabetes1() {
       </button>
 
       <div id="definition" className="tabcontent">
+        <br />
         <section>
           <h2 className="def-title">Type 1 Diabetes</h2>
           <p className="def-p">
@@ -81,6 +82,7 @@ function Diabetes1() {
         </section>
       </div>
       <div id="meal-plan" className="tabcontent">
+        <br />
         <section>
           <h2>Meal Plan</h2>
           <h3>
@@ -138,6 +140,7 @@ function Diabetes1() {
         </section>
       </div>
       <div id="workout-plan" className="tabcontent">
+        <br />
         <h2>Workout Plan</h2>
         <h3>
           <u>General Guidelines</u>
@@ -186,6 +189,7 @@ function Diabetes1() {
         </ul>
       </div>
       <div id="tips" className="tabcontent">
+        <br />
         <h3>Tips for Success</h3>
         <ol>
           <li>

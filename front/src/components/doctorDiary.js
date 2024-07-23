@@ -8,7 +8,7 @@ import medicationIcon from "../assets/icons/medication.png";
 import exerciseIcon from "../assets/icons/exercise.png";
 import dietIcon from "../assets/icons/diet.png";
 import axios from "axios";
-import { format } from "date-fns";
+import { format, parseISO } from "date-fns";
 import Loader from "./loader";
 import { UserContext } from "../App";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -52,7 +52,10 @@ function DoctorDiary() {
           (diary) => diary.doctorId === user._id
         );
         if (fetchedDiary) {
-          setData(fetchedDiary);
+          const sortedDiary = fetchedDiary.sort((a, b) => {
+            return new Date(b.createdAt) - new Date(a.createdAt);
+          });
+          setData(sortedDiary);
         }
       }
     } catch (error) {
@@ -61,6 +64,21 @@ function DoctorDiary() {
       setLoading(false);
     }
   };
+
+  const groupEntriesByDate = (diaries) => {
+    return diaries.reduce((acc, diary) => {
+      const date = format(parseISO(diary.createdAt), "yyyy-MM-dd");
+      acc[date] = acc[date] || [];
+      acc[date].push(diary);
+      return acc;
+    }, {});
+  };
+
+  const groupedEntries = groupEntriesByDate(data);
+
+  const sortedEntriesDates = Object.keys(groupedEntries).sort(
+    (a, b) => new Date(b) - new Date(a)
+  );
 
   const fetchFeedback = async (diaryId) => {
     try {
@@ -88,7 +106,7 @@ function DoctorDiary() {
           diaryId: diaryId,
           id: fetchedFeedback._id,
           doctorId: fetchedFeedback.doctorId,
-          createdAt:fetchedFeedback.createdAt
+          createdAt: fetchedFeedback.createdAt,
         });
         return true;
       }
@@ -144,34 +162,35 @@ function DoctorDiary() {
         </div>
         {data.length > 0 ? (
           <div className="diary-grid">
-            {data.map((diaryTable, index) => (
-              <div key={index} className="diary-card">
-                <div className="entry-header">
-                  <h3>
-                    {format(
-                      new Date(diaryTable.createdAt),
-                      "EEEE, MMM do, yyyy"
-                    )}
-                  </h3>{" "}
-                  <h3>
-                    Patient: {diaryTable.firstname} {diaryTable.lastname}
-                  </h3>
-                  <button
-                    onClick={() => viewEntry(diaryTable)}
-                    className="view-entry-btn"
-                  >
-                    View Journal
-                  </button>{" "}
-                  |
-                  <button
-                    onClick={() => viewFeedback(diaryTable)}
-                    className="view-feedback-btn"
-                  >
-                    View Feedback
-                  </button>
-                </div>
+            {sortedEntriesDates.map((date) => (
+              <div key={date} className="diary-date-group">
+                <h2><u>{format(new Date(date), "EEEE, MMM do, yyyy")}</u></h2>
+                <br />
+                {groupedEntries[date].map((diaryTable) => (
+                  <div key={diaryTable._id} className="diary-card">
+                    <div className="entry-header">
+                      <h3>
+                        Patient: {diaryTable.firstname} {diaryTable.lastname}
+                      </h3>
+                      <button
+                        onClick={() => viewEntry(diaryTable)}
+                        className="view-entry-btn"
+                      >
+                        View Journal
+                      </button>{" "}
+                      |
+                      <button
+                        onClick={() => viewFeedback(diaryTable)}
+                        className="view-feedback-btn"
+                      >
+                        View Feedback
+                      </button>
+                    </div>
+                  </div>
+                ))}
               </div>
             ))}
+            <br />
           </div>
         ) : (
           <div>No entries found.</div>
@@ -200,10 +219,7 @@ function DoctorDiary() {
                   </Link>
                 </div>
                 <h2>
-                  {format(
-                    new Date(values.createdAt),
-                    "EEEE, MMM do, yyyy"
-                  )}
+                  {format(new Date(values.createdAt), "EEEE, MMM do, yyyy")}
                 </h2>
                 <h2>Observation on the patient's Blood Sugar Levels</h2>
                 <p>{values.bloodSugarObservation}</p> <h2>Recommendation</h2>
@@ -222,7 +238,7 @@ function DoctorDiary() {
           </div>
         </div>
       )}
-      {selectedEntry && (
+       {selectedEntry && (
         <div className="modal-overlay" onClick={closeModal}>
           <div className="modal-content" onClick={(e) => e.stopPropagation()}>
             <div className="close-btn-div">
@@ -232,22 +248,13 @@ function DoctorDiary() {
             </div>
             <br />
             <div className="diary-entry-details">
-              <div className="entry-header">
-                {feedbackContent ? (
-                  <Link
-                    to={`/update-feedback/${selectedEntry._id}`}
-                    className="update-entry-link"
-                  >
-                    <FontAwesomeIcon icon={faPenToSquare} />
-                  </Link>
-                ) : (
-                  <Link
-                    to={`/doctors-feedback/${selectedEntry._id}`}
-                    className="update-entry-link"
-                  >
-                    Give Feedback
-                  </Link>
-                )}{" "}
+            <div className="entry-header">
+                <Link
+                  to={`/update-entry/${selectedEntry._id}`}
+                  className="update-entry-link"
+                >
+                  <FontAwesomeIcon icon={faPenToSquare} />
+                </Link>
               </div>
               <div className="entry-content">
                 <h2>
@@ -266,32 +273,20 @@ function DoctorDiary() {
                   </h2>
                   <div className="entry-row">
                     <div className="entry-section">
-                      <h3>Before Breakfast</h3>
-                      <p>{selectedEntry.bloodsugarfasting}</p>
+                      <h3>Fasting</h3>
+                      <p>{selectedEntry.fasting}mg/dL</p>
                     </div>
                     <div className="entry-section">
-                      <h3>After Breakfast</h3>
-                      <p>{selectedEntry.afterbreakfast}</p>
+                      <h3>Pre-Lunch</h3>
+                      <p>{selectedEntry.prelunch}mg/dL</p>
                     </div>
                     <div className="entry-section">
-                      <h3>Before Lunch</h3>
-                      <p>{selectedEntry.beforelunch}</p>
+                      <h3>Post-Lunch</h3>
+                      <p>{selectedEntry.postlunch}mg/dL</p>
                     </div>
                     <div className="entry-section">
-                      <h3>After Lunch</h3>
-                      <p>{selectedEntry.afterlunch}</p>
-                    </div>
-                    <div className="entry-section">
-                      <h3>Before Dinner</h3>
-                      <p>{selectedEntry.beforedinner}</p>
-                    </div>
-                    <div className="entry-section">
-                      <h3>After Dinner</h3>
-                      <p>{selectedEntry.afterdinner}</p>
-                    </div>
-                    <div className="entry-section">
-                      <h3>Other</h3>
-                      <p>{selectedEntry.other}</p>
+                      <h3>Night</h3>
+                      <p>{selectedEntry.night}mg/dL</p>
                     </div>
                   </div>
                 </div>
@@ -305,19 +300,11 @@ function DoctorDiary() {
                   <div className="entry-row">
                     <div className="entry-section">
                       <h3>Morning</h3>
-                      <p>{selectedEntry.morningdose}</p>
-                    </div>
-                    <div className="entry-section">
-                      <h3>Afternoon</h3>
-                      <p>{selectedEntry.afternoon}</p>
+                      <p>{selectedEntry.morning}</p>
                     </div>
                     <div className="entry-section">
                       <h3>Evening</h3>
                       <p>{selectedEntry.evening}</p>
-                    </div>
-                    <div className="entry-section">
-                      <h3>Night</h3>
-                      <p>{selectedEntry.nightdose}</p>
                     </div>
                   </div>
                 </div>
@@ -326,7 +313,7 @@ function DoctorDiary() {
                 <div className="entry-section-group">
                   <img src={dietIcon} alt="icon" className="icon" />
                   <h2>
-                    • <u>Diet</u>
+                    • <u>Meals</u>
                   </h2>
                   <div className="entry-row">
                     <div className="entry-section">
@@ -338,12 +325,12 @@ function DoctorDiary() {
                       <p>{selectedEntry.lunch}</p>
                     </div>
                     <div className="entry-section">
-                      <h3>Dinner</h3>
-                      <p>{selectedEntry.dinner}</p>
-                    </div>
-                    <div className="entry-section">
                       <h3>Snack</h3>
                       <p>{selectedEntry.snack}</p>
+                    </div>
+                    <div className="entry-section">
+                      <h3>Dinner</h3>
+                      <p>{selectedEntry.dinner}</p>
                     </div>
                   </div>
                 </div>
@@ -352,10 +339,11 @@ function DoctorDiary() {
                 <div className="entry-section-group">
                   <img src={symptomsIcon} alt="icon" className="icon" />
                   <h2>
-                    • <u>Symptoms</u>
+                    • <u>Symptoms Today</u>
                   </h2>
                   <div className="entry-row">
                     <div className="entry-section">
+                      <h3>Symptoms</h3>
                       <p>{selectedEntry.symptoms}</p>
                     </div>
                   </div>
@@ -365,57 +353,23 @@ function DoctorDiary() {
                 <div className="entry-section-group">
                   <img src={exerciseIcon} alt="icon" className="icon" />
                   <h2>
-                    • <u>Exercise</u>
+                    • <u>Well-Being & Physical Health</u>
                   </h2>
                   <div className="entry-row">
                     <div className="entry-section">
-                      <h3>Duration</h3>
-                      <p>{selectedEntry.duration}</p>
+                      <h3>Exercise</h3>
+                      <p>{selectedEntry.exercise}</p>
                     </div>
                     <div className="entry-section">
-                      <h3>Type</h3>
-                      <p>{selectedEntry.exercisetype}</p>
+                      <h3>Mood</h3>
+                      <p>{selectedEntry.mood}</p>
+                    </div>
+                    <div className="entry-section">
+                      <h3>Stress</h3>
+                      <p>{selectedEntry.stress}</p>
                     </div>
                   </div>
                 </div>
-                <br /> <hr />
-                <br />
-                <div className="entry-section-group">
-                  <img src={symptomsIcon} alt="icon" className="icon" />
-                  <h2>
-                    • <u>Overall Well-being</u>
-                  </h2>
-                  <div className="entry-row">
-                    <div className="entry-section">
-                      <h3>Overall Well-being</h3>
-                      <p>{selectedEntry.wellbeing}</p>
-                    </div>
-                    <div className="entry-section">
-                      <h3>Sleep Quality</h3>
-                      <p>{selectedEntry.sleep}</p>
-                    </div>
-                  </div>
-                </div>
-                <br />
-                <div className="entry-section-group">
-                  <img src={symptomsIcon} alt="icon" className="icon" />
-                  <h2>
-                    • <u>Other Notes</u>
-                  </h2>
-                  <div className="entry-row">
-                    <div className="entry-section">
-                      <p>{selectedEntry.othernotes}</p>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div className="entry-footer">
-                <Link
-                  to={`/update-entry/${selectedEntry._id}`}
-                  className="update-entry-link"
-                >
-                  <FontAwesomeIcon icon={faPenToSquare} />
-                </Link>
               </div>
             </div>
           </div>
