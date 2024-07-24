@@ -1,0 +1,88 @@
+/* landingPage.css */
+
+body {
+    font-family: 'Arial', sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f5f5f500;
+  }
+  
+  .landing-page {
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: #ffffff00;
+    height: 100vh;
+  }
+  
+  .intro-container {
+    max-width: 1100px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    padding: 40px;
+    background-color: #ffffffaf;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+  }
+  
+  .text-content {
+    flex-basis: 60%;
+    padding: 20px;
+  }
+  
+  .text-content h1 {
+    font-size: 2.9rem;
+    color: #333333;
+    margin-bottom: 20px;
+  }
+  
+  .text-content p {
+    font-size: 1.9rem;
+    color: #525050;
+    margin-bottom: 20px;
+  }
+  
+  .text-content ul {
+    list-style-type: disc;
+    padding-left: 20px;
+    margin-bottom: 20px;
+    color: #1f1e1e;
+  }
+  
+  .text-content li {
+    font-size: 1.4rem;
+    margin-bottom: 10px;
+    color: #1f1e1e;
+  }
+  
+  .appointment-btn {
+    padding: 10px 20px;
+    font-size: 1rem;
+    color: #ffffff;
+    background-color: #007bff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  .appointment-btn:hover {
+    background-color: #0056b3;
+  }
+  
+  .image-content {
+    flex-basis: 35%;
+    padding: 20px;
+    display: flex;
+    justify-content: center;
+  }
+  
+  .image-content img {
+    width: 100%;
+    height: auto;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  
