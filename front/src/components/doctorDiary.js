@@ -158,14 +158,15 @@ function DoctorDiary() {
       <Navbar />
       <div className="diary-container">
         <div className="header">
-          <h1>Your Patients' Health Journals</h1>
+          <h1 style={{ color: "white" }}>Your Patients' Health Journals</h1>
         </div>
         {data.length > 0 ? (
           <div className="diary-grid">
             {sortedEntriesDates.map((date) => (
               <div key={date} className="diary-date-group">
-                <h2><u>{format(new Date(date), "EEEE, MMM do, yyyy")}</u></h2>
-                <br />
+                <h2 style={{ color: "white" }}>
+                  <u>{format(new Date(date), "EEEE, MMM do, yyyy")}</u>
+                </h2>
                 {groupedEntries[date].map((diaryTable) => (
                   <div key={diaryTable._id} className="diary-card">
                     <div className="entry-header">
@@ -215,30 +216,48 @@ function DoctorDiary() {
                     to={`/update-feedback/${selectedFeedbackEntry._id}`}
                     className="update-entry-link"
                   >
-                    <FontAwesomeIcon icon={faPenToSquare} />
+                    Edit <FontAwesomeIcon icon={faPenToSquare} />
                   </Link>
                 </div>
+                <br />
                 <h2>
-                  {format(new Date(values.createdAt), "EEEE, MMM do, yyyy")}
-                </h2>
-                <h2>Observation on the patient's Blood Sugar Levels</h2>
-                <p>{values.bloodSugarObservation}</p> <h2>Recommendation</h2>
-                <p>{values.bloodSugarRecommendation}</p> <h2>The Medication</h2>
-                <p>{values.medicationFeedback}</p> <h2>Patient Meals & Diet</h2>
+                  <u>
+                    {format(new Date(values.createdAt), "EEEE, MMM do, yyyy")}
+                  </u>
+                </h2> <br />
+                <hr />
+                <h2>Blood Sugar Levels</h2>
+                <h2>• Observations</h2>
+                <p>{values.bloodSugarObservation}</p>
+                <h2>• Recommendation</h2>
+                <p>{values.bloodSugarRecommendation}</p>
+                <hr />
+                <h2>• Medication</h2>
+                <p>{values.medicationFeedback}</p>
+                <br />
+                <hr />
+                <h2>• Patient Meals & Diet</h2>
                 <p>{values.mealsFeedback}</p>
-                <h2>Experienced Symptoms & Solution</h2>
-                <p>{values.symptomsFeedback}</p> <h2>Well-Being</h2>
-                <p>{values.wellBeingObservation}</p>{" "}
-                <h2>Recommendation for patient's well-being</h2>
-                <p>{values.wellBeingRecommendation}</p>{" "}
-                <h2>Overall Assessment for Patient</h2>
-                <p>{values.overallAssessment}</p> <h2></h2>
+                <h2>• Experienced Symptoms & Solutions</h2>
+                <p>{values.symptomsFeedback}</p>
+                <br />
+                <hr />
+                <h2>Well-Being & Mental Health</h2>
+                <h2>• Observations</h2>
+                <p>{values.wellBeingObservation}</p> <h2>• Recommendation</h2>
+                <p>{values.wellBeingRecommendation}</p> <br />
+                <hr />
+                <h2>• Overall Assessment & Next Steps</h2>
+                <p>{values.overallAssessment}</p>
+                <br />
+                <hr />
+                <br />
               </div>
             )}
           </div>
         </div>
       )}
-       {selectedEntry && (
+      {selectedEntry && (
         <div className="modal-overlay" onClick={closeModal}>
           <div className="modal-content" onClick={(e) => e.stopPropagation()}>
             <div className="close-btn-div">
@@ -248,13 +267,22 @@ function DoctorDiary() {
             </div>
             <br />
             <div className="diary-entry-details">
-            <div className="entry-header">
-                <Link
-                  to={`/update-entry/${selectedEntry._id}`}
-                  className="update-entry-link"
-                >
-                  <FontAwesomeIcon icon={faPenToSquare} />
-                </Link>
+              <div className="entry-header">
+              {feedbackContent ? (
+                  <Link
+                    to={`/update-feedback/${selectedEntry._id}`}
+                    className="update-entry-link"
+                  >
+                    Edit <FontAwesomeIcon icon={faPenToSquare} />
+                  </Link>
+                ) : (
+                  <Link
+                    to={`/doctors-feedback/${selectedEntry._id}`}
+                    className="update-entry-link"
+                  >
+                    Give Feedback
+                  </Link>
+                )}
               </div>
               <div className="entry-content">
                 <h2>

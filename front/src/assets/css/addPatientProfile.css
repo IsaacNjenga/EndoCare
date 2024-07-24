@@ -1,35 +1,40 @@
-/* addPatientProfile.css */
 
-body {
-  font-family: Arial, sans-serif;
-  background-color: #f8f9fa;
-}
 
-.form-container {
+.profile-form-container {
   display: flex;
   justify-content: center;
   align-items: center;
   min-height: 100vh;
-  background-color: #f8f9fa;
+  width: 100%; /* Ensure the container takes the full width */
   padding: 20px;
-  max-width: 1000px;
+  box-sizing: border-box;
 }
 
 form {
-  background: #ffffff;
-  padding: 40px;
+  background: #ffffffa3;
+  padding: 45px;
   border-radius: 10px;
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
   width: 100%;
-  max-width: 800px;
+  max-width: 750px;
   transition: transform 0.2s ease-in-out;
+  box-sizing: border-box;
+  margin: 0 auto; /* Center the form horizontally */
 }
 
+form h2 {
+  color: #007bff;
+  margin-bottom: 10px;
+  font-size: 1.5rem;
+  border-bottom: 2px solid #007bff;
+  padding-bottom: 5px;
+}
 
 .form-group {
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
+  margin-bottom: 10px;
 }
 
 .form-group > div {
@@ -37,22 +42,25 @@ form {
   margin-bottom: 20px;
 }
 
-label {
+.input-group label {
   display: block;
-  margin-bottom: 10px;
+  margin-bottom: 5px;
   font-weight: 600;
   color: #333;
   font-size: 1rem;
 }
 
 input[type="text"],
-select {
+select,
+input[type="email"],
+input[type="tel"] {
   width: 100%;
   padding: 12px;
   margin-top: 5px;
   border: 1px solid #ced4da;
   border-radius: 5px;
   transition: border-color 0.2s ease-in-out;
+  box-sizing: border-box;
 }
 
 input:focus,
@@ -64,24 +72,16 @@ select:focus {
 
 .gender-options {
   display: flex;
+  align-items: center;
   margin-top: 5px;
 }
 
 .gender-options > div {
-  margin-right: 10px;
+  margin-right: 5px;
 }
 
-.form-radio-label {
-  cursor: pointer;
-  padding: 8px 18px;
-  border-radius: 5px;
-  background-color: #c0b8b8bc;
-  transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out;
-}
-
-input[type="radio"]:checked + .form-radio-label {
-  background-color: #007bff;
-  color: white;
+.gender-options label {
+  margin-left: 5px;
 }
 
 button[type="submit"] {
@@ -94,7 +94,7 @@ button[type="submit"] {
   font-size: 1rem;
   cursor: pointer;
   transition: background-color 0.2s ease-in-out;
-  margin-top: 10px;
+  margin-top: 20px;
 }
 
 button[type="submit"]:hover {

@@ -1,13 +1,14 @@
 .diary-container {
   padding: 20px;
   font-family: Arial, sans-serif;
-  background-color: #fafafa;
+  background-color: #fafafa14;
+  max-width: 1000px;
 }
 
 .diary-form {
-  max-width: 800px;
+  max-width: 850px;
   margin: 0 auto;
-  background-color: #fff;
+  background-color: #ffffff85;
   padding: 20px;
   border-radius: 10px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);

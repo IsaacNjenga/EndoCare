@@ -1,12 +1,13 @@
 import React from "react";
 import Navbar from "../components/navbar";
 import "../assets/css/dashboard.css";
+import AddDoctorProfile from "./addDoctorProfile";
 
 function Dashboard() {
 
   return (
     <>
-      <Navbar />
+      <Navbar /><AddDoctorProfile/>
       <div className="dashboard">
         <div className="contact-container">
           <h2>Welcome to Your Health Dashboard</h2>

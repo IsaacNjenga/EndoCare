@@ -96,11 +96,18 @@ function UpdateDoctorProfile() {
       });
   }, [user._id]);
 
+  const options = [
+    "Diabetes Specialist",
+    "Adrenal Disease Specialist",
+    "PCOS Specialist",
+    "Endocrinologist",
+  ];
+
   return (
     <>
       {loading && <Loader />}
       <Navbar />
-      <div className="form-container">
+      <div className="profile-form-container">
         <form onSubmit={handleSubmit}>
           <div className="form-group">
             <div>
@@ -127,12 +134,12 @@ function UpdateDoctorProfile() {
             <div className="gender-options">
               <div>
                 <input
-                  type="radio"
-                  name="gender"
-                  id="male"
-                  value={values.gender || ""}
-                  onChange={handleChange}
-                  className="form-radio"
+                 type="radio"
+                 id="male"
+                 name="gender"
+                 value="Male"
+                 checked={values.gender === "Male"}
+                 onChange={handleChange}
                 />
                 <label htmlFor="male" className="form-radio-label">
                   Male
@@ -140,12 +147,12 @@ function UpdateDoctorProfile() {
               </div>
               <div>
                 <input
-                  type="radio"
-                  name="gender"
-                  value={values.gender || ""}
-                  id="female"
-                  onChange={handleChange}
-                  className="form-radio"
+                   type="radio"
+                   id="female"
+                   name="gender"
+                   value="Female"
+                   checked={values.gender === "Female"}
+                   onChange={handleChange}
                 />
                 <label htmlFor="female" className="form-radio-label">
                   Female
@@ -184,13 +191,21 @@ function UpdateDoctorProfile() {
             </div>
             <div>
               <label htmlFor="specialization">Specialization</label>
-              <input
-                type="text"
-                placeholder="Enter your specialization"
+              <select
                 name="specialization"
                 onChange={handleChange}
                 value={values.specialization || ""}
-              />
+                className="form-input"
+              >
+                <option value="" disabled>
+                  Select Your Specialization
+                </option>
+                {options.map((option, index) => (
+                  <option key={index} value={option}>
+                    {option}
+                  </option>
+                ))}
+              </select>
             </div>
           </div>
           <button type="submit">Save</button>

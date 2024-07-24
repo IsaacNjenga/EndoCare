@@ -73,59 +73,68 @@ function PatientProfile() {
 
   return (
     <>
-      {loading && <Loader />}
-      <Navbar />
-      <div className="profile-container">
-        <h1>Patient Profile</h1>
-        {data.length > 0 ? (
-          data.map((profile, index) => (
-            <div className="profile-card" key={index}>
-              <p>
-                <strong>First Name:</strong> {profile.firstname}
-              </p>
-              <p>
-                <strong>Last Name:</strong> {profile.lastname}
-              </p>
-              <p>
-                <strong>Gender:</strong> {profile.gender}
-              </p>
-              <p>
-                <strong>Email:</strong> {profile.email}
-              </p>
-              <p>
-                <strong>Phone:</strong> {profile.phone}
-              </p>
-              <p>
-                <strong>Address:</strong> {profile.address}
-              </p>
-              <p>
-                <strong>Diagnosis:</strong> {profile.illness}
-              </p>
-              <p>
-                <strong>Assigned Doctor:</strong> {profile.doctorfirstname}{" "}
-                {profile.doctorlastname} - {profile.doctoremail}
-              </p>
-              <div className="links">
-                <Link
-                  className="edit-link"
-                  to={`/update-patient-profile/${profile.patientId}`}
-                >
-                  Edit your profile
-                </Link>
-                <Link
-                  className="delete-link"
-                  onClick={() => deleteRecord(profile.patientId)}
-                >
-                  Delete your profile
-                </Link>
+    {loading && <Loader />}
+    <Navbar />
+    <div className="profile-container">
+      <h1>Patient Profile</h1>
+      {data.length > 0 ? (
+        data.map((profile, index) => (
+          <div className="profile-card" key={index}>
+            <div className="profile-details">
+              <div className="profile-section">
+                <h2>Personal Information</h2>
+                <p>
+                  <strong>First Name:</strong> {profile.firstname}
+                </p>
+                <p>
+                  <strong>Last Name:</strong> {profile.lastname}
+                </p>
+                <p>
+                  <strong>Gender:</strong> {profile.gender}
+                </p>
+                <p>
+                  <strong>Email:</strong> {profile.email}
+                </p>
+                <p>
+                  <strong>Phone:</strong> {profile.phone}
+                </p>
+                <p>
+                  <strong>Address:</strong> {profile.address}
+                </p>
+              </div>
+              <div className="profile-section">
+                <h2>Medical Information</h2>
+                <p>
+                  <strong>Diagnosis:</strong> {profile.illness}
+                </p>
+                <p>
+                  <strong>Assigned Doctor:</strong> {profile.doctorfirstname}{" "}
+                  {profile.doctorlastname} - {profile.doctoremail}
+                </p>
               </div>
             </div>
-          ))
-        ) : (
-          <AddPatientProfile />
-        )}
-      </div>
-    </>
+            <div className="links">
+              <Link
+                className="edit-link"
+                to={`/update-patient-profile/${profile.patientId}`}
+              >
+                Edit your profile
+              </Link>
+              <Link
+                className="delete-link"
+                onClick={() => deleteRecord(profile.patientId)}
+              >
+                Delete your profile
+              </Link>
+            </div>
+          </div>
+        ))
+      ) : (
+        <AddPatientProfile />
+      )}
+    </div>
+  </>
+  
   );
 }
 

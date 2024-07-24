@@ -1,0 +1,66 @@
+.profile-container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #ffffff;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  }
+  
+  .profile-container h1 {
+    text-align: center;
+    margin-bottom: 20px;
+    color: #333;
+  }
+  
+  .profile-card {
+    background-color: #fff;
+    padding: 20px;
+    margin-bottom: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  }
+  
+  .profile-card p {
+    margin: 10px 0;
+    font-size: 16px;
+    color: #555;
+  }
+  
+  .profile-card strong {
+    color: #333;
+  }
+  
+  .links {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+  }
+  
+  .edit-link,
+  .delete-link {
+    padding: 10px 15px;
+    text-decoration: none;
+    border-radius: 5px;
+    font-size: 14px;
+    transition: background-color 0.3s;
+  }
+  
+  .edit-link {
+    background-color: #4caf50;
+    color: white;
+  }
+  
+  .edit-link:hover {
+    background-color: #45a049;
+  }
+  
+  .delete-link {
+    background-color: #f44336;
+    color: white;
+  }
+  
+  .delete-link:hover {
+    background-color: #e53935;
+  }
+  

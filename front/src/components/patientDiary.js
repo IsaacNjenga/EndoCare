@@ -228,43 +228,44 @@ function PatientDiary() {
       <Navbar />
       <div className="diary-container">
         <div className="header">
-          <h1>Your Health Journal</h1>
+          <h1 style={{ color: "white" }}>Your Health Journal</h1>
           <Link to="/add-diary" className="add-entry-link">
             Add an entry
           </Link>
         </div>
         {data.length > 0 ? (
-           <div className="diary-grid">
-           {sortedEntriesDates.map((date) => (
-             <div key={date} className="diary-date-group">
-               <h2><u>{format(new Date(date), "EEEE, MMM do, yyyy")}</u></h2>
-               <br />
-               {groupedEntries[date].map((diaryTable) => (
-                 <div key={diaryTable._id} className="diary-card">
-                   <div className="entry-header">
-                     <h3>
-                       {diaryTable.firstname} {diaryTable.lastname}
-                     </h3>
-                     <button
-                       onClick={() => viewEntry(diaryTable)}
-                       className="view-entry-btn"
-                     >
-                       View Journal
-                     </button>{" "}
-                     |
-                     <button
-                       onClick={() => viewFeedback(diaryTable)}
-                       className="view-feedback-btn"
-                     >
-                       View Feedback
-                     </button>
-                   </div>
-                 </div>
-               ))}
-             </div>
-           ))}
-           <br />
-         </div>
+          <div className="diary-grid">
+            {sortedEntriesDates.map((date) => (
+              <div key={date} className="diary-date-group">
+                <h2 style={{ color: "white" }}>
+                  <u>{format(new Date(date), "EEEE, MMM do, yyyy")}</u>
+                </h2>
+                {groupedEntries[date].map((diaryTable) => (
+                  <div key={diaryTable._id} className="diary-card">
+                    <div className="entry-header">
+                      <h3>
+                        {diaryTable.firstname} {diaryTable.lastname}
+                      </h3>
+                      <button
+                        onClick={() => viewEntry(diaryTable)}
+                        className="view-entry-btn"
+                      >
+                        View Journal
+                      </button>{" "}
+                      |
+                      <button
+                        onClick={() => viewFeedback(diaryTable)}
+                        className="view-feedback-btn"
+                      >
+                        View Feedback
+                      </button>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            ))}
+            <br />
+          </div>
         ) : (
           <div>No entries found.</div>
         )}
@@ -284,10 +285,12 @@ function PatientDiary() {
               <div className="feedback-entry-details">
                 <div className="feedback-header"></div>
                 <h2>
-                 <u>{format(new Date(values.createdAt), "EEEE, MMM do, yyyy")}</u> 
+                  <u>
+                    {format(new Date(values.createdAt), "EEEE, MMM do, yyyy")}
+                  </u>
                 </h2>
-                <br/>
-                <hr/>
+                <br />
+                <hr />
                 <h2>Blood Sugar Levels</h2>
                 <h2>• Observations</h2>
                 <p>{values.bloodSugarObservation}</p>
@@ -295,24 +298,25 @@ function PatientDiary() {
                 <p>{values.bloodSugarRecommendation}</p>
                 <hr />
                 <h2>• Medication</h2>
-                <p>{values.medicationFeedback}</p><br/>
+                <p>{values.medicationFeedback}</p>
+                <br />
                 <hr />
                 <h2>• Patient Meals & Diet</h2>
                 <p>{values.mealsFeedback}</p>
                 <h2>• Experienced Symptoms & Solutions</h2>
-                <p>{values.symptomsFeedback}</p><br/>
+                <p>{values.symptomsFeedback}</p>
+                <br />
                 <hr />
                 <h2>Well-Being & Mental Health</h2>
                 <h2>• Observations</h2>
-                <p>{values.wellBeingObservation}</p>{" "}
-                <h2>• Recommendation</h2>
+                <p>{values.wellBeingObservation}</p> <h2>• Recommendation</h2>
                 <p>{values.wellBeingRecommendation}</p> <br />
                 <hr />
                 <h2>• Overall Assessment & Next Steps</h2>
                 <p>{values.overallAssessment}</p>
                 <br />
                 <hr />
-                <br/>
+                <br />
                 <div>
                   <p>
                     <u>Don't hesitate to reach out</u>

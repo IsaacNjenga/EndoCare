@@ -1,11 +1,9 @@
 body {
   font-family: "Roboto", sans-serif;
   margin: 0;
-  height: 100vh;
   padding: 0;
-  background-image: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)),
-    url("../images/journal.jpg");
-  background-repeat: no-repeat;
+  height: 100vh;
+  background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url("../images/journal.jpg") no-repeat center center fixed;
   background-size: cover;
   color: #fff;
 }
@@ -64,6 +62,7 @@ body {
 .diary-date-group h2 {
   margin-bottom: 10px;
   font-size: 1.5em;
+  color: #333;
 }
 
 .diary-card {
@@ -72,7 +71,7 @@ body {
   border-radius: 10px;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   padding: 20px;
-  width: calc(100% - 40px);
+  width: calc(100% - 80px);
   margin-bottom: 20px;
 }
 
@@ -81,8 +80,9 @@ body {
   justify-content: space-between;
   align-items: center;
 }
+
 .view-feedback-btn {
-  background: #176b27;
+  background: #089922;
   color: #fff;
   border: none;
   padding: 10px;
@@ -91,6 +91,7 @@ body {
   transition: background-color 0.3s ease;
   margin-left: 10px;
 }
+
 .view-entry-btn {
   background: #007bff;
   color: #fff;
@@ -102,10 +103,12 @@ body {
   margin-left: 10px;
 }
 
-.view-entry-btn:hover,
-.view-feedback-btn:hover {
+.view-entry-btn:hover{
   background-color: #0056b3;
 }
+
+
+.view-feedback-btn:hover {background-color: red;}
 
 .modal-overlay {
   position: fixed;
@@ -124,12 +127,12 @@ body {
   background: #fff;
   padding: 20px;
   border-radius: 10px;
-  width: 100%; /* Set width to 100% */
-  max-width: 800px; /* Max-width for larger screens */
+  width: 90%;
+  max-width: 800px;
   position: relative;
-  box-sizing: border-box; /* Ensure padding is included in width calculation */
-  max-height: 98%; /* Set max height */
-  overflow-y: auto; /* Enable vertical scrolling */
+  box-sizing: border-box;
+  max-height: 90vh;
+  overflow-y: auto;
 }
 
 .close-btn-div {
@@ -138,8 +141,6 @@ body {
 }
 
 .close-btn {
-  top: 10px;
-  right: 10px;
   background: #dc3545;
   color: #fff;
   border: none;

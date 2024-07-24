@@ -90,7 +90,8 @@ function AddPatientProfile() {
       ...provided,
       display: "flex",
       alignItems: "center",
-      width: "800px",
+      width: "600px",
+      color: "black",
     }),
   };
 
@@ -102,11 +103,9 @@ function AddPatientProfile() {
   return (
     <>
       {loading && <Loader />}
-      <div className="form-container">
+      <div className="profile-form-container">
         <form onSubmit={handleSubmit}>
           <h2>Patient's Profile</h2>
-          <br />
-          <hr />
           <br />
           <div className="form-group">
             <div>
@@ -185,7 +184,8 @@ function AddPatientProfile() {
                 onChange={handleChange}
               />
             </div>
-
+            <h2>Medical Information</h2>
+            <br/>
             <div>
               <div>
                 <label htmlFor="illness">Condition</label>

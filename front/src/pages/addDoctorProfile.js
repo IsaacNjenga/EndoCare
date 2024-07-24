@@ -39,12 +39,20 @@ function AddDoctorProfile() {
       });
   };
 
+  const options = [
+    "Diabetes Specialist",
+    "Adrenal Disease Specialist",
+    "PCOS Specialist",
+    "Endocrinologist",
+  ];
+
   return (
     <>
       {loading && <Loader />}
-      <div className="container">
-        <h2 className="title">Set Up Your Profile</h2>
-        <form onSubmit={handleSubmit} className="form">
+      <div className="profile-form-container">
+        <form onSubmit={handleSubmit}>
+          <h2>Personal Information</h2>
+          <br />
           <label htmlFor="firstname" className="form-label">
             First Name
           </label>
@@ -127,13 +135,21 @@ function AddDoctorProfile() {
           <label htmlFor="specialization" className="form-label">
             Specialization
           </label>
-          <input
-            type="text"
-            placeholder="Enter your current specialization"
+          <select
             name="specialization"
             onChange={handleChange}
             className="form-input"
-          />
+          >
+            <option value="" disabled>
+              Select Your Specialization
+            </option>
+            {options.map((option, index) => (
+              <option key={index} value={option}>
+                {option}
+              </option>
+            ))}
+          </select>
+
           <button type="submit" className="form-button">
             Save
           </button>

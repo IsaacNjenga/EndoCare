@@ -122,11 +122,11 @@ function AddDiary() {
                   <strong>Gender:</strong> {profile.gender}
                 </p>
                 <p>
-                  <strong>Diagnosis:</strong>
+                  <strong>Diagnosis: </strong>
                   {profile.illness}
                 </p>
                 <p>
-                  <strong>Assigned Doctor:</strong>
+                  <strong>Assigned Doctor: </strong>
                   {profile.doctorfirstname} {profile.doctorlastname}
                 </p>
               </div>
@@ -135,7 +135,7 @@ function AddDiary() {
             <hr />
             <br />
             <h1 className="section-title">Daily Log</h1>
-
+            <br />
             <div className="form-group">
               <label htmlFor="glucose-level">
                 <img src={bloodSugarIcon} alt="icon" className="icon" />
@@ -272,15 +272,6 @@ function AddDiary() {
                   <u>first Monday</u>
                 </b>{" "}
                 of the month
-              </p>
-            </div>
-            <div className="form-group">
-              <label>Counselling Session</label>
-              <p>
-                Your next session scheduled for{" "}
-                <u>
-                  <b> July 15, 2024</b>
-                </u>
               </p>
             </div>
           </div>

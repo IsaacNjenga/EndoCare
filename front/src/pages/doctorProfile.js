@@ -1,8 +1,8 @@
 import React, { useContext, useEffect, useState } from "react";
 import Navbar from "../components/navbar";
 import axios from "axios";
-import { Link,useNavigate } from "react-router-dom";
-import "../assets/css/profile.css";
+import { Link, useNavigate } from "react-router-dom";
+import "../assets/css/doctorProfile.css";
 import AddDoctorProfile from "./addDoctorProfile";
 import { UserContext } from "../App";
 import Loader from "../components/loader";
@@ -10,7 +10,8 @@ import Swal from "sweetalert2";
 import withReactContent from "sweetalert2-react-content";
 const MySwal = withReactContent(Swal);
 
-function DoctorProfile() { const navigate = useNavigate();
+function DoctorProfile() {
+  const navigate = useNavigate();
   const { user } = useContext(UserContext);
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(false);
@@ -79,7 +80,8 @@ function DoctorProfile() { const navigate = useNavigate();
       {loading && <Loader />}
       <Navbar />
       <div className="profile-container">
-        <h1>Doctor Profile</h1>
+        <h2>My Profile</h2>
+        <br />
         {data.length > 0 ? (
           data.map((profile, index) => (
             <div className="profile-card" key={index}>
@@ -102,20 +104,20 @@ function DoctorProfile() { const navigate = useNavigate();
                 <strong>Address:</strong> {profile.address}
               </p>
               <p>
-                <strong>specialization:</strong> {profile.specialization}
+                <strong>Specialization:</strong> {profile.specialization}
               </p>
               <div className="links">
                 <Link
                   className="edit-link"
-                  to={`/update-patient-profile/${profile.doctorId}`}
+                  to={`/update-doctor-profile/${profile.doctorId}`}
                 >
-                  Edit your profile
+                  Edit Profile
                 </Link>
                 <Link
                   className="delete-link"
                   onClick={() => deleteRecord(profile.doctorId)}
                 >
-                  Delete your profile
+                  Delete Profile
                 </Link>
               </div>
             </div>

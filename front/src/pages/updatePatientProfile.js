@@ -55,7 +55,7 @@ function UpdatePatientProfile() {
   const handleChange = (e) => {
     setValues({ ...values, [e.target.name]: e.target.value });
   };
-  
+
   const handleDoctorSelection = (selectedOption) => {
     const selectedDoctor = doctors.find(
       (doctor) => doctor.doctorId === selectedOption.value
@@ -71,7 +71,7 @@ function UpdatePatientProfile() {
       }));
     }
   };
-  
+
   const handleSubmit = (e) => {
     e.preventDefault();
     setLoading(true);
@@ -156,6 +156,7 @@ function UpdatePatientProfile() {
       display: "flex",
       alignItems: "center",
       width: "600px",
+      color: "black",
     }),
   };
 
@@ -168,8 +169,10 @@ function UpdatePatientProfile() {
     <>
       {loading && <Loader />}
       <Navbar />
-      <div className="form-container">
-        <form onSubmit={handleSubmit} className="update-patient-form">
+      <br />
+      <div className="profile-form-container">
+        <form onSubmit={handleSubmit}>
+          <h2>Personal Information</h2>
           <div className="form-group">
             <div className="input-group">
               <label htmlFor="firstname">First Name</label>
@@ -253,6 +256,10 @@ function UpdatePatientProfile() {
                 required
               />
             </div>
+          </div>
+          <h2>Medical Information</h2>
+          <br />
+          <div className="form-group">
             <div className="input-group">
               <label htmlFor="illness">Illness</label>
               <select
@@ -260,7 +267,6 @@ function UpdatePatientProfile() {
                 name="illness"
                 value={values.illness}
                 onChange={handleChange}
-                required
               >
                 <option value="" disabled>
                   Select Condition
