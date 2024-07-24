@@ -56,16 +56,7 @@ function Cortisol() {
             the zona fasciculata of the adrenal cortex within the adrenal glands
             and, to a lesser extent, in other tissues. When utilized as
             medication, cortisol is known as hydrocortisone.
-          </p>
-          <br />
-          <p className="def-p">
-            Addison's disease, also known as adrenal insufficiency, is a rare
-            condition where the adrenal glands do not produce adequate amounts
-            of cortisol and often aldosterone. This insufficiency can lead to
-            significant health issues, as cortisol plays a critical role in
-            numerous bodily functions, including regulating metabolism, reducing
-            inflammation, and assisting with memory formulation.
-          </p>
+          </p>         
           <br />
           <p className="def-p">
             Aldosterone, another essential hormone produced by the adrenal

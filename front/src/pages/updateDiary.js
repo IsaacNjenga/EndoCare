@@ -15,7 +15,6 @@ import { UserContext } from "../App";
 
 function UpdateDiary() {
   const { id } = useParams();
-  console.log(id);
   const { user } = useContext(UserContext);
   const navigate = useNavigate();
   const [currentDateTime, setCurrentDateTime] = useState(new Date());

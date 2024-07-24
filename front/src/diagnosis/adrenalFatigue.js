@@ -56,16 +56,7 @@ function AdrenalFatigue() {
             sleep disturbances, and digestive problems. It is believed to occur
             when the adrenal glands function below the necessary level,
             primarily due to chronic stress.
-          </p>
-          <br />
-          <p className="def-p">
-            Unlike Addison's disease, adrenal fatigue is not a recognized
-            medical diagnosis. It is hypothesized that long-term stress can
-            deplete the adrenal glands, leading to an imbalance in cortisol
-            levels. Symptoms may include tiredness, trouble sleeping, craving
-            salty or sweet snacks, and difficulty recovering from illness or
-            stress.
-          </p>
+          </p>              
           <br />
           <p className="def-p">
             Managing adrenal fatigue involves reducing stress, improving diet,

@@ -22,6 +22,7 @@ function UpdatePatientProfile() {
     gender: "",
     address: "",
     illness: "",
+    doctorId: "",
   });
 
   const options = [
@@ -124,6 +125,7 @@ function UpdatePatientProfile() {
               phone: fetchedPatient.phone,
               address: fetchedPatient.address,
               illness: fetchedPatient.illness,
+              doctorId: fetchedPatient.doctorId
             });
           } else {
             toast.error("Patient not found", {

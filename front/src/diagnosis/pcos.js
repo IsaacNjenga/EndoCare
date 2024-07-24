@@ -60,27 +60,14 @@ function Pcos() {
           </p>
           <br />
           <p className="def-p">
-            The exact cause of PCOS is unknown, but factors like excess insulin,
-            low-grade inflammation, and genetics play a significant role.
-            Symptoms include irregular menstrual cycles, excess facial and body
-            hair (hirsutism), severe acne, and obesity.
-          </p>
-          <br />
-          <p className="def-p">
             PCOS is a leading cause of infertility in women. It can also
             contribute to long-term health problems such as type 2 diabetes and
             heart disease. Managing PCOS involves lifestyle changes like weight
             loss, diet, and exercise, and medications to regulate menstrual
-            cycles, reduce androgen levels, and manage symptoms.
-          </p>
-          <br />
-          <p className="def-p">
-            Treatment options may include birth control pills to regulate
-            hormones, metformin to address insulin resistance, fertility
-            treatments if pregnancy is desired, and other medications to manage
-            specific symptoms. Early diagnosis and treatment can help manage the
-            symptoms and reduce the risk of complications.
-          </p>
+            cycles, reduce androgen levels, and manage symptoms. Early diagnosis
+            and treatment can help manage the symptoms and reduce the risk of
+            complications.
+          </p>         
         </section>
       </div>
 

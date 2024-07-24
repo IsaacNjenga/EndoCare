@@ -1,14 +1,14 @@
 import React from "react";
 import Navbar from "../components/navbar";
 import "../assets/css/home.css";
+import logo from "../assets/images/logo.png";
 
 function Home() {
   return (
     <>
       <Navbar />
       <div className="home">
-        <h1 className="home-title">ENDOCARE</h1>
-        <p className="home-description">With you every step of the way</p>
+        <img src = {logo} alt = "logo"/>
       </div>
     </>
   );

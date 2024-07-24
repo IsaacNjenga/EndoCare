@@ -4,8 +4,9 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  height: 90vh;
-  background-image: url("../../consult.jpg");
+  height: 100vh;
+  background: linear-gradient(rgba(79, 134, 217, 0.7), rgba(235, 88, 55, 0.7)),
+    url("../../consult.jpg") no-repeat center center fixed;
   background-repeat: no-repeat;
   background-size: 100%;
   padding-inline: 30px;

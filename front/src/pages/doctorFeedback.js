@@ -116,7 +116,7 @@ function DoctorFeedback() {
       <Navbar />
       <div className="doctor-feedback">
         <div className="container">
-          <h1 className="title">Doctor Feedback</h1>
+          <h1 className="title">Doctor's Feedback</h1>
           <form onSubmit={handleSubmit} className="feedback-form">
             {data.map((content, index) => (
               <div key={index} className="entry">
@@ -134,10 +134,13 @@ function DoctorFeedback() {
                   <div className="section-content">
                     <h3>Fasting</h3>
                     <p>{content.fasting}mg/dL</p>
+                    <br />
                     <h3>Pre-Lunch</h3>
                     <p>{content.prelunch}mg/dL</p>
+                    <br />
                     <h3>Post-Lunch</h3>
                     <p>{content.postlunch}mg/dL</p>
+                    <br />
                     <h3>Night</h3>
                     <p>{content.night}mg/dL</p>
                   </div>
@@ -159,8 +162,10 @@ function DoctorFeedback() {
                   <div className="section-content">
                     <h3>Morning</h3>
                     <p>{content.morning}</p>
+                    <br />
                     <h3>Evening</h3>
                     <p>{content.evening}</p>
+                    <br />
                   </div>
                   <div className="feedback-section">
                     <h3>Feedback</h3>
@@ -175,10 +180,13 @@ function DoctorFeedback() {
                   <div className="section-content">
                     <h3>Breakfast</h3>
                     <p>{content.breakfast}</p>
+                    <br />
                     <h3>Lunch</h3>
                     <p>{content.lunch}</p>
+                    <br />
                     <h3>Snack</h3>
                     <p>{content.snack}</p>
+                    <br />
                     <h3>Dinner</h3>
                     <p>{content.dinner}</p>
                   </div>
@@ -203,8 +211,10 @@ function DoctorFeedback() {
                   <div className="section-content">
                     <h3>Exercise</h3>
                     <p>{content.exercise}</p>
+                    <br />
                     <h3>Mood</h3>
                     <p>{content.mood}</p>
+                    <br />
                     <h3>Stress</h3>
                     <p>{content.stress}</p>
                   </div>
@@ -223,7 +233,7 @@ function DoctorFeedback() {
                 </div>
                 <div className="entry-section">
                   <h2>Overall Assessment & Next Steps</h2>
-                  <textarea name="overallAssessment" onChange={handleChange} />
+                  <textarea name="overallAssessment" onChange={handleChange} className="textarea"/>
                 </div>
               </div>
             ))}

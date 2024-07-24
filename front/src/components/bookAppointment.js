@@ -110,6 +110,7 @@ function BookAppointment() {
       display: "flex",
       alignItems: "center",
       width: "600px",
+      color: "black",
     }),
   };
 
@@ -122,43 +123,52 @@ function BookAppointment() {
     <>
       {loading && <Loader />}
       <Navbar />
-      <h2 className="form-title">Book an Appointment</h2> <br />
-      <div className="form-container">
+      <br />
+      <div className="appointment-form-container">
         <form onSubmit={handleSubmit} className="appointment-form">
+          <h2 className="form-title">Book an Appointment</h2>
           {profile.map((person, index) => (
-            <div key={index}>
-              {" "}
-              <div className="form-group">
-                <label htmlFor="firstname">First Name:</label>
-                <p>{person.firstname}</p>
-              </div>{" "}
-              <div className="form-group">
-                <label htmlFor="lastname">Last Name:</label>
-                <p>{person.lastname}</p>
-              </div>{" "}
-              <div className="form-group">
-                <label htmlFor="gender">Gender:</label>
-                <p>{person.gender}</p>
+            <div key={index} className="patient-info">
+              <div className="name">
+                <div className="form-group">
+                  <label htmlFor="firstname">First Name:</label>
+                  <p>{person.firstname}</p>
+                </div>
+                <div className="form-group">
+                  <label htmlFor="lastname">Last Name:</label>
+                  <p>{person.lastname}</p>
+                </div>
+                <div className="form-group">
+                  <label htmlFor="gender">Gender:</label>
+                  <p>{person.gender}</p>
+                </div>
               </div>
-              <div className="form-group">
-                <label htmlFor="email">E-mail Address:</label>
-                <p>{user.email}</p>
+              <br />
+              <hr />
+              <br />
+              <div className="details">
+                <div className="form-group">
+                  <label htmlFor="email">E-mail Address:</label>
+                  <p>{user.email}</p>
+                </div>
+                <div className="form-group">
+                  <label htmlFor="phone">Phone Number:</label>
+                  <p>{person.phone}</p>
+                </div>
+                <div className="form-group">
+                  <label htmlFor="address">Address:</label>
+                  <p>{person.address}</p>
+                </div>
               </div>
-              <div className="form-group">
-                <label htmlFor="phone">Phone Number:</label>
-                <p>{person.phone}</p>
-              </div>
-              <div className="form-group">
-                <label htmlFor="address">Address:</label>
-                <p>{person.address}</p>
-              </div>
-              <div className="form-group">
-                <label htmlFor="illness">Diagnosis:</label>
-                <p>{person.illness}</p>
+              <br />
+              <div className="details">
+                <div className="form-group">
+                  <label htmlFor="illness">Diagnosis:</label>
+                  <p>{person.illness}</p>
+                </div>
               </div>
             </div>
           ))}
-
           <div className="form-group">
             <label htmlFor="date">Set Appointment Date</label>
             <input

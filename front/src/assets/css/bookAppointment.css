@@ -1,8 +1,8 @@
-.form-container {
-  max-width: 600px;
+.appointment-form-container {
+  max-width: 850px;
   margin: 0 auto;
   padding: 20px;
-  background-color: #f9f9f9;
+  background-color: #f9f9f95d;
   border-radius: 10px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
@@ -16,7 +16,19 @@
 
 .appointment-form {
   display: flex;
+  padding: 30px;
   flex-direction: column;
+  background-color: #ffffff96;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.patient-info {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 20px;
+  border-bottom: 1px solid #ddd;
+  padding-bottom: 20px;
 }
 
 .form-group {
@@ -30,12 +42,15 @@
   color: #555;
 }
 
-.form-group input {
+.form-group input,
+.form-group textarea,
+.Select__control {
   width: 100%;
   padding: 10px;
   border: 1px solid #ddd;
   border-radius: 5px;
   font-size: 16px;
+  background-color: #f9f9f9;
 }
 
 .submit-button {
@@ -51,4 +66,14 @@
 
 .submit-button:hover {
   background-color: #0056b3;
+}
+
+.name {
+  display: flex;
+  justify-content: space-around;
+}
+
+.details {
+  display: flex;
+  justify-content: space-between;
 }

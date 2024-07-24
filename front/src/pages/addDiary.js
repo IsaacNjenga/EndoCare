@@ -72,7 +72,7 @@ function AddDiary() {
       lastname,
       illness: diagnosis,
     };
-
+    console.log(valuesData);
     axios
       .post("addEntry", valuesData, {
         headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
