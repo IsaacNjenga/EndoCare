@@ -23,25 +23,25 @@ function Diabetes1() {
     <div className="diabetes-container">
       <button
         className="tablink"
-        onClick={(e) => openPage("definition", e, "red")}
+        onClick={(e) => openPage("definition", e, "grey")}
       >
         Overview
       </button>
       <button
         className="tablink"
-        onClick={(e) => openPage("meal-plan", e, "green")}
+        onClick={(e) => openPage("meal-plan", e, "grey")}
       >
         Meal plan
       </button>
       <button
         className="tablink"
-        onClick={(e) => openPage("workout-plan", e, "blue")}
+        onClick={(e) => openPage("workout-plan", e, "grey")}
       >
         Workout plan
       </button>
       <button
         className="tablink"
-        onClick={(e) => openPage("tips", e, "orange")}
+        onClick={(e) => openPage("tips", e, "grey")}
       >
         Tips for success
       </button>
@@ -64,13 +64,6 @@ function Diabetes1() {
             but genetic factors and exposure to viruses may play a role. Common
             symptoms include increased thirst, frequent urination, extreme
             hunger, unintended weight loss, fatigue, and blurred vision.
-          </p>
-          <br />
-          <p className="def-p">
-            Management of Type 1 diabetes involves lifelong insulin therapy,
-            blood sugar monitoring, a healthy diet, and regular exercise.
-            Patients need to check their blood glucose levels multiple times a
-            day and administer insulin through injections or an insulin pump.
           </p>
           <br />
           <p className="def-p">

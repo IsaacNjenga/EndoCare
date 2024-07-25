@@ -22,25 +22,25 @@ function Cortisol() {
     <div className="cortisol-container">
       <button
         className="tablink"
-        onClick={(e) => openPage("definition", e, "red")}
+        onClick={(e) => openPage("definition", e, "grey")}
       >
         Overview
       </button>
       <button
         className="tablink"
-        onClick={(e) => openPage("meal-plan", e, "green")}
+        onClick={(e) => openPage("meal-plan", e, "grey")}
       >
         Meal plan
       </button>
       <button
         className="tablink"
-        onClick={(e) => openPage("workout-plan", e, "blue")}
+        onClick={(e) => openPage("workout-plan", e, "grey")}
       >
         Workout plan
       </button>
       <button
         className="tablink"
-        onClick={(e) => openPage("tips", e, "orange")}
+        onClick={(e) => openPage("tips", e, "grey")}
       >
         Tips for success
       </button>
@@ -70,19 +70,7 @@ function Cortisol() {
             Addison's disease can impact individuals of any age and, if left
             untreated, can become life-threatening. Symptoms often develop
             gradually and can include fatigue, muscle weakness, weight loss, low
-            blood pressure, and skin darkening. In some cases, a sudden
-            worsening of symptoms, known as an Addisonian crisis, can occur,
-            necessitating immediate medical attention.
-          </p>
-          <br />
-          <p className="def-p">
-            Management and treatment of Addison's disease involve hormone
-            replacement therapy to correct the deficiencies in cortisol and
-            aldosterone. This typically includes taking oral corticosteroids
-            such as hydrocortisone or prednisone and mineralocorticoids like
-            fludrocortisone to replace aldosterone. Regular monitoring and
-            adjusting of medication dosages are essential to ensure effective
-            management of the condition.
+            blood pressure, and skin darkening.
           </p>
         </section>
       </div>

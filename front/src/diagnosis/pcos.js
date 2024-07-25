@@ -23,25 +23,25 @@ function Pcos() {
     <div className="pcos-container">
       <button
         className="tablink"
-        onClick={(e) => openPage("definition", e, "red")}
+        onClick={(e) => openPage("definition", e, "grey")}
       >
         Overview
       </button>
       <button
         className="tablink"
-        onClick={(e) => openPage("meal-plan", e, "green")}
+        onClick={(e) => openPage("meal-plan", e, "grey")}
       >
         Meal plan
       </button>
       <button
         className="tablink"
-        onClick={(e) => openPage("workout-plan", e, "blue")}
+        onClick={(e) => openPage("workout-plan", e, "grey")}
       >
         Workout plan
       </button>
       <button
         className="tablink"
-        onClick={(e) => openPage("tips", e, "orange")}
+        onClick={(e) => openPage("tips", e, "grey")}
       >
         Tips for success
       </button>

@@ -9,7 +9,6 @@ import journalIcon from "../assets/icons/journal.png";
 import loginIcon from "../assets/icons/login.png";
 import resourcesIcon from "../assets/icons/resources.png";
 import signupIcon from "../assets/icons/signup.png";
-import diabetesIcon from "../assets/icons/diabetes.png";
 
 export default function Navbar() {
   const { user } = useContext(UserContext);
@@ -18,11 +17,7 @@ export default function Navbar() {
       <div className="navbar-left">
         <Link to="/" className="navbar-brand">
           <div className="navbar-brand-container">
-            <img
-              src={diabetesIcon}
-              alt="img-diabetes"
-              className="navbar-icon"
-            />
+           
             <span className="navbar-title">ENDOCARE</span>
           </div>
         </Link>

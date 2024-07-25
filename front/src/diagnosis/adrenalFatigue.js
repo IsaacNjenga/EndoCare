@@ -23,26 +23,23 @@ function AdrenalFatigue() {
     <div className="adrenal-container">
       <button
         className="tablink"
-        onClick={(e) => openPage("definition", e, "red")}
+        onClick={(e) => openPage("definition", e, "grey")}
       >
         Overview
       </button>
       <button
         className="tablink"
-        onClick={(e) => openPage("meal-plan", e, "green")}
+        onClick={(e) => openPage("meal-plan", e, "grey")}
       >
         Meal plan
       </button>
       <button
         className="tablink"
-        onClick={(e) => openPage("workout-plan", e, "blue")}
+        onClick={(e) => openPage("workout-plan", e, "grey")}
       >
         Workout plan
       </button>
-      <button
-        className="tablink"
-        onClick={(e) => openPage("tips", e, "orange")}
-      >
+      <button className="tablink" onClick={(e) => openPage("tips", e, "grey")}>
         Tips for success
       </button>
 
@@ -56,7 +53,7 @@ function AdrenalFatigue() {
             sleep disturbances, and digestive problems. It is believed to occur
             when the adrenal glands function below the necessary level,
             primarily due to chronic stress.
-          </p>              
+          </p>
           <br />
           <p className="def-p">
             Managing adrenal fatigue involves reducing stress, improving diet,
@@ -67,10 +64,9 @@ function AdrenalFatigue() {
           </p>
           <br />
           <p className="def-p">
-            It is important to consult with a healthcare provider for proper
-            evaluation and to rule out other underlying conditions. While
-            adrenal fatigue is not a medically recognized condition, addressing
-            stress and promoting overall health can improve well-being.
+            While adrenal fatigue is not a medically recognized condition,
+            addressing stress and promoting overall health can improve
+            well-being.
           </p>
         </section>
       </div>

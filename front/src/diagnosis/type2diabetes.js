@@ -23,31 +23,28 @@ function Diabetes2() {
     <div className="diabetes-container">
       <button
         className="tablink"
-        onClick={(e) => openPage("definition", e, "red")}
+        onClick={(e) => openPage("definition", e, "grey")}
       >
         Overview
       </button>
       <button
         className="tablink"
-        onClick={(e) => openPage("meal-plan", e, "green")}
+        onClick={(e) => openPage("meal-plan", e, "grey")}
       >
         Meal plan
       </button>
       <button
         className="tablink"
-        onClick={(e) => openPage("workout-plan", e, "blue")}
+        onClick={(e) => openPage("workout-plan", e, "grey")}
       >
         Workout plan
       </button>
-      <button
-        className="tablink"
-        onClick={(e) => openPage("tips", e, "orange")}
-      >
+      <button className="tablink" onClick={(e) => openPage("tips", e, "grey")}>
         Tips for success
       </button>
 
       <div id="definition" className="tabcontent">
-        <br/>
+        <br />
         <section>
           <h2 className="def-title">Type 2 Diabetes</h2>
           <p className="def-p">
@@ -67,13 +64,6 @@ function Diabetes2() {
           </p>
           <br />
           <p className="def-p">
-            Management involves lifestyle changes such as a healthy diet,
-            regular physical activity, and maintaining a healthy weight.
-            Monitoring blood sugar levels and taking medications as prescribed
-            are also essential. In some cases, insulin therapy may be needed.
-          </p>
-          <br />
-          <p className="def-p">
             Type 2 diabetes can lead to serious health complications if not well
             managed, including heart disease, stroke, kidney damage, eye damage,
             nerve damage, and foot problems. Regular medical check-ups and
@@ -82,7 +72,9 @@ function Diabetes2() {
           </p>
         </section>
       </div>
-      <div id="meal-plan" className="tabcontent"> <br/>
+      <div id="meal-plan" className="tabcontent">
+        {" "}
+        <br />
         <section>
           <h2>Meal Plan</h2>
           <h3>
@@ -139,7 +131,9 @@ function Diabetes2() {
           </ul>
         </section>
       </div>
-      <div id="workout-plan" className="tabcontent"> <br/>
+      <div id="workout-plan" className="tabcontent">
+        {" "}
+        <br />
         <h2>Workout Plan</h2>
         <h3>
           <u>General Guidelines</u>
@@ -187,7 +181,9 @@ function Diabetes2() {
           </li>
         </ul>
       </div>
-      <div id="tips" className="tabcontent"> <br/>
+      <div id="tips" className="tabcontent">
+        {" "}
+        <br />
         <h3>Tips for Success</h3>
         <ol>
           <li>
