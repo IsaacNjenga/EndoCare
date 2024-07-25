@@ -1,6 +1,6 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import Navbar from "../components/navbar";
-import { UserContext } from "../App";
+//import { UserContext } from "../App";
 import axios from "axios";
 //import "../assets/css/resources.css";
 import Pcos from "../diagnosis/pcos";
@@ -11,9 +11,9 @@ import Cortisol from "../diagnosis/cortisol";
 import AdrenalFatigue from "../diagnosis/adrenalFatigue";
 
 function Resources() {
-  const { user } = useContext(UserContext);
+  //const { user } = useContext(UserContext);
   const [data, setData] = useState(null);
-  const [doctorData, setDoctorData] = useState(null);
+  //const [doctorData, setDoctorData] = useState(null);
   const [loading, setLoading] = useState(true);
 
   const fetchProfile = async () => {
@@ -30,7 +30,7 @@ function Resources() {
     }
   };
 
-  const fetchDoctorProfile = async () => {
+  /*const fetchDoctorProfile = async () => {
     setLoading(true);
     try {
       const response = await axios.get("doctors", {
@@ -41,15 +41,15 @@ function Resources() {
       );
       setDoctorData(fetchedProfile);
     } catch (error) {
-      console.error("Error fetching patient profile:", error);
+      console.error("Error fetching doctor profile:", error);
     } finally {
       setLoading(false);
     }
-  };
+  };*/
 
   useEffect(() => {
     fetchProfile();
-    fetchDoctorProfile();
+    //fetchDoctorProfile();
   }, []);
 
   if (loading) {

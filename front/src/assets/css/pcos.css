@@ -1,5 +1,5 @@
 .pcos-container {
-  padding: 20px;
+  padding: 25px;
   line-height: 1.6;
   font-family: "Arial", sans-serif; /* Change font family */
   background-color: #f3f3f300; /* Light background for better contrast */
@@ -52,7 +52,7 @@ strong {
 }
 
 .tablink:hover {
-  background-color: #2980b9; /* Slightly darker on hover */
+  background-color: #062031; /* Slightly darker on hover */
 }
 
 .tabcontent {
@@ -67,7 +67,16 @@ strong {
 }
 
 #definition {
-  background-color: #ffffff8f;
+  background-color: #ffffffbd;
+  height: 75vh;
+  background-image: linear-gradient(
+      rgba(244, 238, 238, 0.7),
+      rgba(205, 172, 172, 0.7)
+    ),
+    url("../images/overview.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
 }
 
 .def-p {
@@ -76,12 +85,36 @@ strong {
 
 #meal-plan {
   background-color: #ffffffbd; /* Light green background */
+  background-image: linear-gradient(
+      rgba(244, 238, 238, 0.7),
+      rgba(205, 172, 172, 0.7)
+    ),
+    url("../images/meal.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
 }
 #workout-plan {
   background-color: #ffffffba; /* Light blue background */
+  background-image: linear-gradient(
+      rgba(244, 238, 238, 0.7),
+      rgba(205, 172, 172, 0.7)
+    ),
+    url("../images/yoga.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
 }
 #tips {
   background-color: #ffffffbb; /* Light orange background */
+  background-image: linear-gradient(
+      rgba(244, 230, 230, 0.7),
+      rgba(226, 215, 215, 0.7)
+    ),
+    url("../images/tips.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
 }
 
 /* Additional styling for ordered and unordered lists */

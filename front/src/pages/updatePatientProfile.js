@@ -87,7 +87,7 @@ function UpdatePatientProfile() {
             position: "top-right",
             autoClose: 2000,
           });
-          navigate("/profile");
+          navigate("/resources");
         }
       })
       .catch((err) => {

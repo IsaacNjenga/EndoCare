@@ -70,7 +70,6 @@ function Pcos() {
           </p>         
         </section>
       </div>
-
       <div id="meal-plan" className="tabcontent">
         <br />
         <section>
