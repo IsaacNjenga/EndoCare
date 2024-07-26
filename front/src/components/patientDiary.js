@@ -233,6 +233,8 @@ function PatientDiary() {
             Add an entry
           </Link>
         </div>
+        <hr/>
+        <br/>
         {data.length > 0 ? (
           <div className="diary-grid">
             {sortedEntriesDates.map((date) => (

@@ -8,6 +8,7 @@ function PatientLandingPage() {
     <>
       <Navbar />
       <div className="dashboard">
+        <br/>
         <h1 className="dashboard-title">Welcome to EndoCare</h1>
         <div className="contact-container">
           <div className="welcome-container">

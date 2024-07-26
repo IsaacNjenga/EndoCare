@@ -7,11 +7,7 @@ import DoctorDiary from "./doctorDiary";
 function Diary() {
   const { user } = useContext(UserContext);
 
-  return (
-    <>
-      {user.role === "patient" ? <PatientDiary /> : <DoctorDiary />}      
-    </>
-  );
+  return <>{user.role === "patient" ? <PatientDiary /> : <DoctorDiary />} </>;
 }
 
 export default Diary;
